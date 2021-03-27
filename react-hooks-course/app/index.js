@@ -17,15 +17,6 @@ function App() {
     setTheme(theme => (theme === 'light' ? 'dark' : 'light'))
   }
 
-  // state = {
-  //   theme: 'light',
-  //   toggleTheme: () => {
-  //     this.setState(({ theme }) => ({
-  //       theme: theme === 'light' ? 'dark' : 'light'
-  //     }))
-  //   }
-  // }
-
   return (
     <Router>
       <ThemeContext.Provider value={{ theme }}>
