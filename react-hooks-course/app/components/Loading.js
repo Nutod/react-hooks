@@ -18,22 +18,17 @@ export default function Loading({ text = 'Loading', speed = 300 }) {
 
   React.useEffect(() => {
     intervalId.current = window.setInterval(() => {
-      content === text + '...'
-        ? setContent(text)
-        : setContent(content => content + '.')
+      setContent(content => content + '.')
     }, speed)
 
     return () => window.clearInterval(intervalId.current)
   }, [])
 
-  // componentDidMount () {
-
-  //   this.interval = window.setInterval(() => {
-  //     this.state.content === text + '...'
-  //       ? this.setState({ content: text })
-  //       : this.setState(({ content }) => ({ content: content + '.' }))
-  //   }, speed)
-  // }
+  React.useEffect(() => {
+    if (content === text + '...') {
+      setContent(text)
+    }
+  }, [content])
 
   return <p style={styles.content}>{content}</p>
 }

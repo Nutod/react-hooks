@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ThemeConsumer, useTheme } from '../contexts/theme'
+import { useTheme } from '../contexts/theme'
 
 export default function Card({
   header,
