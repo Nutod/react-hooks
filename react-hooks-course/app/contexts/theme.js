@@ -5,7 +5,6 @@ const { Consumer, Provider } = React.createContext()
 export const ThemeContext = React.createContext()
 
 export function ThemeContextProvider({ children }) {
-  const value = {}
   return <ThemeContext.Provider>{children}</ThemeContext.Provider>
 }
 
