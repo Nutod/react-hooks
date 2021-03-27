@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeConsumer, useTheme } from '../contexts/theme'
+import { useTheme } from '../contexts/theme'
 import { NavLink } from 'react-router-dom'
 
 const activeStyle = {
