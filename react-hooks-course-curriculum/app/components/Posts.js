@@ -20,7 +20,6 @@ export default function Posts({ type }) {
 
     fetchMainPosts(type)
       .then(posts => {
-        console.log(posts)
         setPosts(posts)
         setLoading(false)
         setError(null)
