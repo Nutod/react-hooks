@@ -17,9 +17,11 @@ function App() {
     setTheme(theme => (theme === 'light' ? 'dark' : 'light'))
   }
 
+  const value = { theme, toggleTheme }
+
   return (
     <Router>
-      <ThemeProvider value={{ theme, toggleTheme }}>
+      <ThemeProvider value={value}>
         <div className={theme}>
           <div className="container">
             <Nav />
