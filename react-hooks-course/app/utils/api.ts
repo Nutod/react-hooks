@@ -34,7 +34,15 @@ function getProfile(username: string): Promise<Profile> {
 }
 
 export interface Repo {
+  name: string
+  owner: {
+    login: string
+    avatar_url: string
+  }
+  html_url: string
   stargazers_count: number
+  forks: string
+  open_issues: string
 }
 
 function getRepos(username: string): Promise<Repo[]> {

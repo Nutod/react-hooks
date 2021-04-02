@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fetchPopularRepos } from '../utils/api'
+import { fetchPopularRepos, Repo } from '../utils/api'
 import {
   FaUser,
   FaStar,
@@ -11,8 +11,23 @@ import Card from './Card'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
 
-function LangaugesNav({ selected, onUpdateLanguage }) {
-  const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
+type Languages = 'All' | 'JavaScript' | 'Ruby' | 'Java' | 'CSS' | 'Python'
+
+function LanguagesNav({
+  selected,
+  onUpdateLanguage,
+}: {
+  selected: Languages
+  onUpdateLanguage: (param: Languages) => void
+}) {
+  const languages: Languages[] = [
+    'All',
+    'JavaScript',
+    'Ruby',
+    'Java',
+    'CSS',
+    'Python',
+  ]
 
   return (
     <ul className="flex-center">
@@ -20,7 +35,9 @@ function LangaugesNav({ selected, onUpdateLanguage }) {
         <li key={language}>
           <button
             className="btn-clear nav-link"
-            style={language === selected ? { color: 'rgb(187, 46, 31)' } : null}
+            style={
+              language === selected ? { color: 'rgb(187, 46, 31)' } : undefined
+            }
             onClick={() => onUpdateLanguage(language)}
           >
             {language}
@@ -31,12 +48,12 @@ function LangaugesNav({ selected, onUpdateLanguage }) {
   )
 }
 
-LangaugesNav.propTypes = {
+LanguagesNav.propTypes = {
   selected: PropTypes.string.isRequired,
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-function ReposGrid({ repos }) {
+function ReposGrid({ repos }: { repos: Repo[] }) {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
@@ -91,15 +108,17 @@ ReposGrid.propTypes = {
 }
 
 export default function Popular() {
-  const [selectedLanguage, setSelectedLanguage] = React.useState('All')
-  const [repos, setRepos] = React.useState({})
-  const [error, setError] = React.useState(null)
+  const [selectedLanguage, setSelectedLanguage] = React.useState<Languages>(
+    'All'
+  )
+  const [repos, setRepos] = React.useState<{ [index: string]: Repo[] }>({})
+  const [error, setError] = React.useState<null | string>(null)
 
   React.useEffect(() => {
     updateLanguage(selectedLanguage)
   }, [])
 
-  const updateLanguage = selectedLanguage => {
+  const updateLanguage = (selectedLanguage: Languages) => {
     setSelectedLanguage(selectedLanguage)
     setError(null)
 
@@ -122,7 +141,7 @@ export default function Popular() {
 
   return (
     <React.Fragment>
-      <LangaugesNav
+      <LanguagesNav
         selected={selectedLanguage}
         onUpdateLanguage={updateLanguage}
       />
