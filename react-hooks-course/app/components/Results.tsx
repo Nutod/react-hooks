@@ -1,5 +1,5 @@
 import React from 'react'
-import { battle } from '../utils/api'
+import { battle, Profile, Player } from '../utils/api'
 import {
   FaCompass,
   FaBriefcase,
@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-function ProfileList({ profile }) {
+function ProfileList({ profile }: { profile: Profile }) {
   return (
     <ul className="card-list">
       <li>
@@ -54,16 +54,20 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-export default function Results({ location }) {
-  const [winner, setWinner] = React.useState(null)
-  const [loser, setLoser] = React.useState(null)
+export default function Results({
+  location,
+}: {
+  location: { search: string }
+}) {
+  const [winner, setWinner] = React.useState<undefined | Player>()
+  const [loser, setLoser] = React.useState<undefined | Player>()
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     const { playerOne, playerTwo } = queryString.parse(location.search)
 
-    battle([playerOne, playerTwo])
+    battle([playerOne, playerTwo] as [string, string])
       .then(players => {
         setWinner(players[0])
         setLoser(players[1])
@@ -76,7 +80,7 @@ export default function Results({ location }) {
       })
   }, [])
 
-  if (loading === true) {
+  if (loading === true || !winner || !loser) {
     return <Loading text="Battling" />
   }
 

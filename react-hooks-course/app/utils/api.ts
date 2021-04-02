@@ -10,8 +10,15 @@ function getErrorMsg(message: string, username: string) {
   return message
 }
 
-interface Profile {
+export interface Profile {
   followers: number
+  name: string
+  location: string
+  company: string
+  following: number
+  avatar_url: string
+  html_url: string
+  login: string
 }
 
 function getProfile(username: string): Promise<Profile> {
@@ -26,7 +33,7 @@ function getProfile(username: string): Promise<Profile> {
     })
 }
 
-interface Repo {
+export interface Repo {
   stargazers_count: number
 }
 
@@ -64,8 +71,9 @@ function getUserData(player: string) {
   )
 }
 
-interface Player {
+export interface Player {
   score: number
+  profile: Profile
 }
 
 function sortPlayers(players: Player[]) {
