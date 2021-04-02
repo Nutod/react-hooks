@@ -1,10 +1,6 @@
 import React from 'react'
 
-interface ThemeInterface {
-  theme: string
-}
-
-export const ThemeContext = React.createContext<null | ThemeInterface>({
+export const ThemeContext = React.createContext<{ theme: string }>({
   theme: 'light',
 })
 
