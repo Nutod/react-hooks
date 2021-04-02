@@ -10,7 +10,11 @@ function getErrorMsg(message: string, username: string) {
   return message
 }
 
-function getProfile(username: string) {
+interface Profile {
+  followers: number
+}
+
+function getProfile(username: string): Promise<Profile> {
   return fetch(`https://api.github.com/users/${username}${params}`)
     .then(res => res.json())
     .then(profile => {
@@ -22,7 +26,11 @@ function getProfile(username: string) {
     })
 }
 
-function getRepos(username: string) {
+interface Repo {
+  stargazers_count: number
+}
+
+function getRepos(username: string): Promise<Repo[]> {
   return fetch(
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   )
@@ -36,23 +44,18 @@ function getRepos(username: string) {
     })
 }
 
-interface Repo {
-
-}
-
-function getStarCount(repos: any) {
+function getStarCount(repos: Repo[]) {
   return repos.reduce(
-    (count: number, { stargazers_count }: { stargazers_count: number }) =>
-      count + stargazers_count,
+    (count: number, { stargazers_count }) => count + stargazers_count,
     0
   )
 }
 
-function calculateScore(followers: number, repos: any) {
+function calculateScore(followers: number, repos: Repo[]) {
   return followers * 3 + getStarCount(repos)
 }
 
-function getUserData(player: any) {
+function getUserData(player: string) {
   return Promise.all([getProfile(player), getRepos(player)]).then(
     ([profile, repos]) => ({
       profile,
@@ -65,7 +68,7 @@ interface Player {
   score: number
 }
 
-function sortPlayers(players: any) {
+function sortPlayers(players: Player[]) {
   return players.sort((a, b) => b.score - a.score)
 }
 
@@ -88,6 +91,6 @@ export function fetchPopularRepos(language: string) {
         throw new Error(data.message)
       }
 
-      return data.items
+      return data.items as Repo[]
     })
 }
