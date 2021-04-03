@@ -10,7 +10,13 @@ function getErrorMsg(message: string, username: string) {
   return message
 }
 
-interface Profile {}
+export interface Profile {
+  name: string
+  location: string
+  company: string
+  followers: number
+  following: number
+}
 
 // return type here is Profile
 function getProfile(username: string) {
@@ -39,7 +45,7 @@ function getRepos(username: string) {
     })
 }
 
-interface Repo {
+export interface Repo {
   stargazers_count: number
 }
 
@@ -63,7 +69,7 @@ function getUserData(player: string) {
   )
 }
 
-interface Player {
+export interface Player {
   profile: Profile
   score: number
 }

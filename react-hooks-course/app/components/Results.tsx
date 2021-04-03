@@ -1,5 +1,5 @@
-import React from 'react'
-import { battle } from '../utils/api'
+import React, { Dispatch, SetStateAction } from 'react'
+import { battle, Profile } from '../utils/api'
 import {
   FaCompass,
   FaBriefcase,
@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-function ProfileList({ profile }) {
+function ProfileList({ profile }: { profile: Profile }) {
   return (
     <ul className="card-list">
       <li>
@@ -80,13 +80,22 @@ function ResultsReducer(state, action) {
 }
 
 // Module Context
-const setInitialResults = dispatch => dispatch({ type: 'init' })
-const setResultsData = (dispatch, payload) =>
-  dispatch({ type: 'data', payload })
-const setResultsError = (dispatch, message) =>
-  dispatch({ type: 'error', message })
+const setInitialResults = (dispatch: Dispatch<SetStateAction<object>>) =>
+  dispatch({ type: 'init' })
+const setResultsData = (
+  dispatch: Dispatch<SetStateAction<object>>,
+  payload: [string, string]
+) => dispatch({ type: 'data', payload })
+const setResultsError = (
+  dispatch: Dispatch<SetStateAction<object>>,
+  message: string
+) => dispatch({ type: 'error', message })
 
-export default function Results({ location }) {
+export default function Results({
+  location,
+}: {
+  location: { search: string }
+}) {
   const [{ winner, loser, error, loading }, dispatch] = React.useReducer(
     ResultsReducer,
     {
@@ -100,7 +109,7 @@ export default function Results({ location }) {
   const { playerOne, playerTwo } = queryString.parse(location.search)
 
   React.useEffect(() => {
-    battle([playerOne, playerTwo])
+    battle([playerOne, playerTwo] as [string, string])
       .then(players => {
         setResultsData(dispatch, players)
       })
