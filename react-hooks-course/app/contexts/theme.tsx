@@ -1,8 +1,15 @@
 import React, { ReactNode } from 'react'
 
-export const ThemeContext = React.createContext({
+interface Theme {
+  theme: string
+  toggleTheme: () => void
+}
+
+export const ThemeContext = React.createContext<Theme>({
   theme: 'light',
+  toggleTheme() {},
 })
+
 ThemeContext.displayName = 'ThemeContext'
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
