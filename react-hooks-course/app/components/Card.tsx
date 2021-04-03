@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import { useTheme } from '../contexts/theme'
 
@@ -9,6 +9,13 @@ export default function Card({
   href,
   name,
   children,
+}: {
+  header: string
+  subheader: string
+  avatar: string
+  href: string
+  name: string
+  children: ReactNode
 }) {
   const { theme } = useTheme()
 
