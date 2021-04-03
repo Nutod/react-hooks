@@ -8,6 +8,7 @@ const activeStyle = {
 
 export default function Nav() {
   const { theme, toggleTheme } = useTheme()
+
   return (
     <nav className="row space-between">
       <ul className="row nav">
