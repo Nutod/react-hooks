@@ -2,7 +2,7 @@ import React from 'react'
 
 const { Consumer, Provider } = React.createContext()
 
-const ThemeContext = React.createContext()
+export const ThemeContext = React.createContext()
 ThemeContext.displayName = 'ThemeContext'
 
 export function ThemeContextProvider({ children }) {
