@@ -1,12 +1,17 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchUser, fetchPosts, Post, User } from '../utils/api'
+import {
+  fetchUser,
+  fetchPosts,
+  Post,
+  User as UserInterface,
+} from '../utils/api'
 import Loading from './Loading'
 import { formatDate } from '../utils/helpers'
 import PostsList from './PostsList'
 
 export default function User({ location }: { location: { search: string } }) {
-  const [user, setUser] = React.useState<null | User>(null)
+  const [user, setUser] = React.useState<null | UserInterface>(null)
   const [loadingUser, setLoadingUser] = React.useState(true)
   const [posts, setPosts] = React.useState<null | Post[]>(null)
   const [loadingPosts, setLoadingPosts] = React.useState(true)

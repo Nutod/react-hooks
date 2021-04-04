@@ -11,6 +11,8 @@ export interface Post {
   by: string
   time: number
   descendants: string
+  kids: []
+  text: string
 }
 
 export interface User {
@@ -40,7 +42,12 @@ export function fetchItem(id: string): Promise<Post> {
   return fetch(`${api}/item/${id}${json}`).then(res => res.json())
 }
 
-type Comment = {}
+export interface Comment {
+  id: number
+  by: string
+  time: number
+  text: string
+}
 
 export function fetchComments(ids: string[]) {
   return Promise.all(ids.map(fetchItem)).then(comments =>

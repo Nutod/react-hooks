@@ -1,7 +1,8 @@
 import React from 'react'
 import PostMetaInfo from './PostMetaInfo'
+import { Comment as CommentInterface } from '../utils/api'
 
-export default function Comment({ comment }) {
+export default function Comment({ comment }: { comment: CommentInterface }) {
   return (
     <div className="comment">
       <PostMetaInfo
