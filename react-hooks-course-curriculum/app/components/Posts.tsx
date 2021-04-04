@@ -66,7 +66,3 @@ export default class Posts extends React.Component<PostProps, PostState> {
     return <PostsList posts={posts} />
   }
 }
-
-Posts.propTypes = {
-  type: PropTypes.oneOf(['top', 'new']),
-}
