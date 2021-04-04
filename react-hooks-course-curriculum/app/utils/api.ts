@@ -13,6 +13,13 @@ export interface Post {
   descendants: string
 }
 
+export interface User {
+  id: number
+  created: number
+  karma: string
+  about: string
+}
+
 function removeDead(posts: Post[]) {
   return posts.filter(Boolean).filter(({ dead }) => dead !== true)
 }

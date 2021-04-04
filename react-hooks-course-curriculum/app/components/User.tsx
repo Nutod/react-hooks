@@ -1,21 +1,21 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchUser, fetchPosts } from '../utils/api'
+import { fetchUser, fetchPosts, Post, User } from '../utils/api'
 import Loading from './Loading'
 import { formatDate } from '../utils/helpers'
 import PostsList from './PostsList'
 
-export default function User({ location }) {
-  const [user, setUser] = React.useState(null)
+export default function User({ location }: { location: { search: string } }) {
+  const [user, setUser] = React.useState<null | User>(null)
   const [loadingUser, setLoadingUser] = React.useState(true)
-  const [posts, setPosts] = React.useState(null)
+  const [posts, setPosts] = React.useState<null | Post[]>(null)
   const [loadingPosts, setLoadingPosts] = React.useState(true)
   const [error, setError] = React.useState(null)
 
   const { id } = queryString.parse(location.search)
 
   React.useEffect(() => {
-    fetchUser(id)
+    fetchUser(id as string)
       .then(user => {
         setUser(user)
         setLoadingUser(false)
@@ -36,6 +36,10 @@ export default function User({ location }) {
 
   if (error) {
     return <p className="center-text error">{error}</p>
+  }
+
+  if (!user) {
+    return null
   }
 
   return (
