@@ -5,12 +5,12 @@ export interface Post {
   dead: boolean
   deleted: boolean
   type: string
-  id: string
+  id: number
   title: string
   url: string
   by: string
-  time: string
-  descendants: number
+  time: number
+  descendants: string
 }
 
 function removeDead(posts: Post[]) {
