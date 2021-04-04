@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-export const ThemeContext = React.createContext()
+export const ThemeContext = React.createContext<{
+  theme: string
+  toggleTheme: () => void
+}>({
+  theme: 'light',
+  toggleTheme() {},
+})
 ThemeContext.displayName = 'ThemeContext'
 
-export function ThemeContextProvider({ children }) {
+export function ThemeContextProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = React.useState('light')
 
   const toggleTheme = () => {
@@ -25,8 +31,3 @@ export function useTheme() {
 
   return context
 }
-
-const { Consumer, Provider } = React.createContext()
-
-export const ThemeConsumer = Consumer
-export const ThemeProvider = Provider
