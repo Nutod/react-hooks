@@ -1,52 +1,60 @@
 const api = `https://hacker-news.firebaseio.com/v0`
 const json = '.json?print=pretty'
 
-function removeDead (posts) {
+export interface Post {
+  dead: boolean
+  deleted: boolean
+  type: string
+}
+
+function removeDead(posts: Post[]) {
   return posts.filter(Boolean).filter(({ dead }) => dead !== true)
 }
 
-function removeDeleted (posts) {
+function removeDeleted(posts: Post[]) {
   return posts.filter(({ deleted }) => deleted !== true)
 }
 
-function onlyComments (posts) {
+function onlyComments(posts: Post[]) {
   return posts.filter(({ type }) => type === 'comment')
 }
 
-function onlyPosts (posts) {
+function onlyPosts(posts: Post[]) {
   return posts.filter(({ type }) => type === 'story')
 }
 
-export function fetchItem (id) {
-  return fetch(`${api}/item/${id}${json}`)
-    .then((res) => res.json())
+export function fetchItem(id: string): Promise<Post> {
+  return fetch(`${api}/item/${id}${json}`).then(res => res.json())
 }
 
-export function fetchComments (ids) {
-  return Promise.all(ids.map(fetchItem))
-    .then((comments) => removeDeleted(onlyComments(removeDead(comments))))
+type Comment = {}
+
+export function fetchComments(ids: string[]) {
+  return Promise.all(ids.map(fetchItem)).then(comments =>
+    removeDeleted(onlyComments(removeDead(comments)))
+  )
 }
 
-export function fetchMainPosts (type) {
+export function fetchMainPosts(type: string) {
   return fetch(`${api}/${type}stories${json}`)
-    .then((res) => res.json())
-    .then((ids) => {
+    .then(res => res.json())
+    .then(ids => {
       if (!ids) {
         throw new Error(`There was an error fetching the ${type} posts.`)
       }
 
       return ids.slice(0, 50)
     })
-    .then((ids) => Promise.all(ids.map(fetchItem)))
-    .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+    .then(ids => Promise.all(ids.map(fetchItem)))
+    .then(posts => removeDeleted(onlyPosts(removeDead(posts))))
 }
 
-export function fetchUser (id) {
-  return fetch(`${api}/user/${id}${json}`)
-    .then((res) => res.json())
+export function fetchUser(id: string) {
+  return fetch(`${api}/user/${id}${json}`).then(res => res.json())
 }
 
-export function fetchPosts (ids) {
-  return Promise.all(ids.map(fetchItem))
-    .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+export function fetchPosts(ids: string[]) {
+  return Promise.all(ids.map(fetchItem)).then(posts =>
+    removeDeleted(onlyPosts(removeDead(posts)))
+  )
 }
