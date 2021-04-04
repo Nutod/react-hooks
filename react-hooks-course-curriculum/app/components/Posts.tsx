@@ -1,11 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fetchMainPosts } from '../utils/api'
+import { fetchMainPosts, Post } from '../utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
 
-export default class Posts extends React.Component {
-  state = {
+type PostType = 'top' | 'new'
+interface PostProps {
+  type: PostType
+}
+
+interface PostState {
+  posts: null | Post[]
+  error: null
+  loading: boolean
+}
+
+export default class Posts extends React.Component<PostProps, PostState> {
+  state: PostState = {
     posts: null,
     error: null,
     loading: true,
@@ -13,28 +24,33 @@ export default class Posts extends React.Component {
   componentDidMount() {
     this.handleFetch()
   }
-  componentDidUpdate(prevProps) {
+
+  componentDidUpdate(prevProps: PostProps) {
     if (prevProps.type !== this.props.type) {
       this.handleFetch()
     }
   }
-  handleFetch () {
+  handleFetch() {
     this.setState({
       posts: null,
       error: null,
-      loading: true
+      loading: true,
     })
 
     fetchMainPosts(this.props.type)
-      .then((posts) => this.setState({
-        posts,
-        loading: false,
-        error: null
-      }))
-      .catch(({ message }) => this.setState({
-        error: message,
-        loading: false
-      }))
+      .then(posts =>
+        this.setState({
+          posts,
+          loading: false,
+          error: null,
+        })
+      )
+      .catch(({ message }) =>
+        this.setState({
+          error: message,
+          loading: false,
+        })
+      )
   }
   render() {
     const { posts, error, loading } = this.state
@@ -44,7 +60,7 @@ export default class Posts extends React.Component {
     }
 
     if (error) {
-      return <p className='center-text error'>{error}</p>
+      return <p className="center-text error">{error}</p>
     }
 
     return <PostsList posts={posts} />
@@ -52,5 +68,5 @@ export default class Posts extends React.Component {
 }
 
 Posts.propTypes = {
-  type: PropTypes.oneOf(['top', 'new'])
+  type: PropTypes.oneOf(['top', 'new']),
 }
