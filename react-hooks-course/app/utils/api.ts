@@ -1,3 +1,5 @@
+import { Languages } from '../components/Popular'
+
 const id = 'YOUR_CLIENT_ID'
 const sec = 'YOUR_SECRET_ID'
 const params = `?client_id=${id}&client_secret=${sec}`
@@ -16,6 +18,9 @@ export interface Profile {
   company: string
   followers: number
   following: number
+  avatar_url: string
+  html_url: string
+  login: string
 }
 
 // return type here is Profile
@@ -46,7 +51,16 @@ function getRepos(username: string) {
 }
 
 export interface Repo {
+  selectedLanguage: Languages
   stargazers_count: number
+  name: string
+  owner: {
+    login: string
+    avatar_url: string
+  }
+  html_url: string
+  forks: string
+  open_issues: string
 }
 
 function getStarCount(repos: Repo[]) {

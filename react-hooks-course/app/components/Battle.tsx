@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEvent, ChangeEvent } from 'react'
 import {
   FaUserFriends,
   FaFighterJet,
@@ -41,17 +41,23 @@ function Instructions() {
   )
 }
 
-function PlayerInput({ onSubmit, label }) {
+function PlayerInput({
+  onSubmit,
+  label,
+}: {
+  onSubmit: (username: string) => void
+  label: string
+}) {
   const [username, setUsername] = React.useState('')
   const { theme } = useTheme()
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     onSubmit(username)
   }
 
-  const handleChange = event => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value)
   }
 
@@ -87,7 +93,15 @@ PlayerInput.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-function PlayerPreview({ username, onReset, label }) {
+function PlayerPreview({
+  username,
+  onReset,
+  label,
+}: {
+  username: string
+  onReset: () => void
+  label: string
+}) {
   const { theme } = useTheme()
 
   return (
@@ -119,8 +133,8 @@ PlayerPreview.propTypes = {
 }
 
 export default function Battle() {
-  const [playerOne, setPlayerOne] = React.useState(null)
-  const [playerTwo, setPlayerTwo] = React.useState(null)
+  const [playerOne, setPlayerOne] = React.useState<string | null>(null)
+  const [playerTwo, setPlayerTwo] = React.useState<string | null>(null)
 
   return (
     <React.Fragment>
