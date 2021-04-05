@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { battle, Profile } from '../utils/api'
+import { battle, Player, Profile } from '../utils/api'
 import {
   FaCompass,
   FaBriefcase,
@@ -54,7 +54,30 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-function ResultsReducer(state, action) {
+interface ResultsState {
+  winner: null | {}
+  loser: null | {}
+  loading: boolean
+  error: null | string
+}
+
+type InitialResults = {
+  type: 'init'
+}
+
+type ResultsData = {
+  type: 'data'
+  payload: Player[]
+}
+
+type ResultsError = {
+  type: 'error'
+  message: string
+}
+
+type ActionTypes = InitialResults | ResultsData | ResultsError
+
+function ResultsReducer(state: ResultsState, action: ActionTypes) {
   switch (action.type) {
     case 'init':
       return { ...state, winner: null, loser: null, loading: true, error: null }
@@ -80,16 +103,12 @@ function ResultsReducer(state, action) {
 }
 
 // Module Context
-const setInitialResults = (dispatch: Dispatch<SetStateAction<object>>) =>
+const setInitialResults = (dispatch: Dispatch<ActionTypes>) =>
   dispatch({ type: 'init' })
-const setResultsData = (
-  dispatch: Dispatch<SetStateAction<object>>,
-  payload: [string, string]
-) => dispatch({ type: 'data', payload })
-const setResultsError = (
-  dispatch: Dispatch<SetStateAction<object>>,
-  message: string
-) => dispatch({ type: 'error', message })
+const setResultsData = (dispatch: Dispatch<ActionTypes>, payload: Player[]) =>
+  dispatch({ type: 'data', payload })
+const setResultsError = (dispatch: Dispatch<ActionTypes>, message: string) =>
+  dispatch({ type: 'error', message })
 
 export default function Results({
   location,
@@ -124,6 +143,10 @@ export default function Results({
 
   if (error) {
     return <p className="center-text error">{error}</p>
+  }
+
+  if (!winner || !loser) {
+    return null
   }
 
   return (
