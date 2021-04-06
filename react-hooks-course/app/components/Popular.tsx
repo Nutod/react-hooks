@@ -58,7 +58,11 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-function ReposGrid({ repos }: { repos: Repo[] }) {
+function ReposGrid({ repos }: { repos: Repo[] | undefined }) {
+  if (!repos) {
+    return null
+  }
+
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
@@ -116,7 +120,9 @@ export default function Popular() {
   const [selectedLanguage, setSelectedLanguage] = React.useState<Languages>(
     'All'
   )
-  const [repos, setRepos] = React.useState<Repo | {}>({})
+  const [repos, setRepos] = React.useState<
+    Partial<{ [language in Languages]: Repo[] }>
+  >({})
   const [error, setError] = React.useState<{ error: string } | null>(null)
 
   React.useEffect(() => {
