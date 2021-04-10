@@ -31,19 +31,6 @@ export default function Loading({ text = 'Loading', speed = 300 }) {
     }
   }, [content])
 
-  // componentDidMount () {
-  //   const { speed, text } = this.props
-
-  //   this.interval = window.setInterval(() => {
-  //     this.state.content === text + '...'
-  //       ? this.setState({ content: text })
-  //       : this.setState(({ content }) => ({ content: content + '.' }))
-  //   }, speed)
-  // }
-  // componentWillUnmount () {
-  //   window.clearInterval(this.interval)
-  // }
-
   return <p style={styles.content}>{content}</p>
 }
 
