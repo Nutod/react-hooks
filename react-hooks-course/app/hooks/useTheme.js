@@ -11,3 +11,5 @@ function useTheme() {
 
   return { theme, toggleTheme }
 }
+
+export const [ThemeContextProvider, useThemeContext] = constate(useTheme)
