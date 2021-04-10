@@ -12,12 +12,10 @@ const Results = React.lazy(() => import('./components/Results'))
 function App() {
   const { theme } = useThemeContext()
 
-  console.log(theme)
-
   return (
     <Router>
       <ThemeProvider value={{}}>
-        <div className="light">
+        <div className={theme}>
           <div className="container">
             <Nav />
 
