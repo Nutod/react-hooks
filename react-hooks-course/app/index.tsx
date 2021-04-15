@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './app'
-import { ThemeContextProvider, useThemeContext } from './hooks/useTheme'
+import { ThemeContextProvider } from './hooks/useTheme'
 
 import './index.css'
 
