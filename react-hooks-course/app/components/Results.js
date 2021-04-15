@@ -5,7 +5,6 @@ import {
   FaBriefcase,
   FaUsers,
   FaUserFriends,
-  FaCode,
   FaUser,
 } from 'react-icons/fa'
 import Card from './Card'
@@ -96,19 +95,9 @@ export default function Results({ location }) {
     battle([playerOne, playerTwo])
       .then(players => {
         dispatch({ type: 'data', payload: players })
-        // this.setState({
-        //   winner: players[0],
-        //   loser: players[1],
-        //   error: null,
-        //   loading: false,
-        // })
       })
       .catch(({ message }) => {
         dispatch({ type: 'error', error: message })
-        // this.setState({
-        //   error: message,
-        //   loading: false,
-        // })
       })
   }, [])
 
