@@ -1,5 +1,4 @@
 import React from 'react'
-import { ThemeConsumer } from '../contexts/theme'
 import { NavLink } from 'react-router-dom'
 import { useThemeContext } from '../hooks/useTheme'
 
@@ -9,7 +8,7 @@ const activeStyle = {
 
 export default function Nav() {
   const { theme, toggleTheme } = useThemeContext()
-  
+
   return (
     <nav className="row space-between">
       <ul className="row nav">

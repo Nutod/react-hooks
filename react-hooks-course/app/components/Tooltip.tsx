@@ -6,7 +6,7 @@ const styles = {
   container: {
     position: 'relative',
     display: 'flex',
-  },
+  } as React.CSSProperties,
   tooltip: {
     boxSizing: 'border-box',
     position: 'absolute',
@@ -21,7 +21,7 @@ const styles = {
     color: '#fff',
     textAlign: 'center',
     fontSize: '14px',
-  },
+  } as React.CSSProperties,
 }
 
 export default function Tooltip({ text, children }) {
