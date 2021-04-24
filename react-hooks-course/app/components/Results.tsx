@@ -1,5 +1,5 @@
 import React from 'react'
-import { battle } from '../utils/api'
+import { battle, Profile, Player } from '../utils/api'
 import {
   FaCompass,
   FaBriefcase,
@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-function ProfileList({ profile }) {
+function ProfileList({ profile }: { profile: Profile }) {
   return (
     <ul className="card-list">
       <li>
@@ -54,34 +54,46 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-const initialResultsState = {
-  winner: null,
-  loser: null,
-  error: null,
-  loading: true,
+type ResultsState = {
+  winner: Player | null
+  loser: Player | null
+  error: null | string
+  loading: boolean
 }
 
-function ResultsReducer(state = initialResultsState, action) {
+type SuccessAction = {
+  type: 'success'
+  winner: Player
+  loser: Player
+}
+
+type ErrorAction = {
+  type: 'error'
+  message: string
+}
+
+type ActionTypes = SuccessAction | ErrorAction
+
+function ResultsReducer(
+  state: ResultsState,
+  action: ActionTypes
+): ResultsState {
   switch (action.type) {
-    case 'results':
-      return {
-        ...state,
-        winner: action.payload[0],
-        loser: action.payload[1],
-        error: null,
-        loading: false,
-      }
+    case 'success':
+      return { ...state, winner: action.winner, loser: action.loser }
     case 'error':
-      return { ...state, loading: false, error: action.payload }
+      return { ...state, error: action.message }
+
     default:
       return state
   }
 }
 
-const setResults = (dispatch, payload) => dispatch({ type: 'results', payload })
-const setError = (dispatch, payload) => dispatch({ type: 'error', payload })
-
-export default function Results({ location }) {
+export default function Results({
+  location,
+}: {
+  location: { search: string }
+}) {
   const [{ winner, loading, loser, error }, dispatch] = React.useReducer(
     ResultsReducer,
     {
@@ -95,16 +107,16 @@ export default function Results({ location }) {
   React.useEffect(() => {
     const { playerOne, playerTwo } = queryString.parse(location.search)
 
-    battle([playerOne, playerTwo])
+    battle([playerOne, playerTwo] as [string, string])
       .then(players => {
-        setResults(dispatch, players)
+        dispatch({ type: 'success', winner: players[0], loser: players[1] })
       })
       .catch(({ message }) => {
-        setError(dispatch, message)
+        dispatch({ type: 'error', message })
       })
   }, [])
 
-  if (loading === true) {
+  if (loading === true || !winner || !loser) {
     return <Loading text="Battling" />
   }
 
