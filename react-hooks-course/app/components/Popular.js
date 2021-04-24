@@ -100,34 +100,26 @@ export default function Popular() {
   }, [])
 
   const updateLanguage = selectedLanguage => {
-    this.setState({
-      selectedLanguage,
-      error: null,
-    })
+    setSelectedLanguage(selectedLanguage)
+    setError(null)
 
-    if (!this.state.repos[selectedLanguage]) {
+    if (!repos[selectedLanguage]) {
       fetchPopularRepos(selectedLanguage)
         .then(data => {
-          this.setState(({ repos }) => ({
-            repos: {
-              ...repos,
-              [selectedLanguage]: data,
-            },
+          setRepos(repos => ({
+            ...repos,
+            [selectedLanguage]: data,
           }))
         })
         .catch(() => {
           console.warn('Error fetching repos: ', error)
 
-          this.setState({
-            error: `There was an error fetching the repositories.`,
-          })
+          setError(`There was an error fetching the repositories.`)
         })
     }
   }
 
   const isLoading = () => {
-    const { selectedLanguage, repos, error } = this.state
-
     return !repos[selectedLanguage] && error === null
   }
 
@@ -135,10 +127,10 @@ export default function Popular() {
     <React.Fragment>
       <LangaugesNav
         selected={selectedLanguage}
-        onUpdateLanguage={this.updateLanguage}
+        onUpdateLanguage={updateLanguage}
       />
 
-      {this.isLoading() && <Loading text="Fetching Repos" />}
+      {isLoading() && <Loading text="Fetching Repos" />}
 
       {error && <p className="center-text error">{error}</p>}
 
