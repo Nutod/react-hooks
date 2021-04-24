@@ -11,5 +11,5 @@ export default function useHover() {
     []
   )
 
-  return [hovering, handlers]
+  return [hovering, handlers] as const
 }
