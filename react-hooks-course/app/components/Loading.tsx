@@ -12,9 +12,15 @@ const styles = {
   } as React.CSSProperties,
 }
 
-export default function Loading({ text, speed }) {
+export default function Loading({
+  text,
+  speed,
+}: {
+  text: string
+  speed: number
+}) {
   const [content, setContent] = React.useState(text)
-  const intervalId = React.useRef(null)
+  const intervalId = React.useRef<number>()
 
   React.useEffect(() => {
     intervalId.current = window.setInterval(
