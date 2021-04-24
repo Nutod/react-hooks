@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import Hover from './Hover'
 import useHover from '../hooks/useHover'
@@ -25,7 +25,13 @@ const styles = {
   } as React.CSSProperties,
 }
 
-export default function Tooltip({ text, children }) {
+export default function Tooltip({
+  text,
+  children,
+}: {
+  text: string
+  children: ReactNode
+}) {
   const [hovering, { mouseOver, mouseOut }] = useHover()
 
   return (

@@ -6,11 +6,13 @@ interface HoverState {
 
 export default class Hover extends React.Component<
   {
-    children: () => React.ReactElement | null
+    children: (param: boolean) => React.ReactElement | null
   },
-  HoverState
+  {
+    hovering: boolean
+  }
 > {
-  state: HoverState = { hovering: false }
+  state = { hovering: false }
 
   mouseOver = () => this.setState({ hovering: true })
   mouseOut = () => this.setState({ hovering: false })
