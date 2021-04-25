@@ -31,7 +31,6 @@ export default function Posts({ type }) {
 
   const handleFetch = () => {
     dispatch({ type: 'init' })
-
     fetchMainPosts(type)
       .then(posts => dispatch({ type: 'success', posts }))
       .catch(({ message }) => dispatch({ type: 'error', message }))
