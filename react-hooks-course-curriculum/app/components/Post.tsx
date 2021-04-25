@@ -1,20 +1,20 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchItem, fetchPosts, fetchComments } from '../utils/api'
+import { fetchItem, fetchPosts, fetchComments, Post } from '../utils/api'
 import Loading from './Loading'
 import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-export default function Post({ location }) {
-  const [post, setPost] = React.useState(null)
+export default function Post({ location }: { location: { search: string } }) {
+  const [post, setPost] = React.useState<Post | null>(null)
   const [loadingPost, setLoadingPost] = React.useState(true)
-  const [comments, setComments] = React.useState(null)
+  const [comments, setComments] = React.useState<Post[] | null>(null)
   const [loadingComments, setLoadingComments] = React.useState(true)
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
-    const { id } = queryString.parse(location.search)
+    const { id } = queryString.parse(location.search) as { id: string }
 
     fetchItem(id)
       .then(post => {
@@ -36,6 +36,10 @@ export default function Post({ location }) {
 
   if (error) {
     return <p className="center-text error">{error}</p>
+  }
+
+  if (!post || !comments) {
+    return <p className="center-text error"></p>
   }
 
   return (
