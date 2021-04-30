@@ -1,5 +1,5 @@
 import React from 'react'
-import { battle } from '../utils/api'
+import { battle, Player, Profile } from '../utils/api'
 import {
   FaCompass,
   FaBriefcase,
@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-function ProfileList({ profile }) {
+function ProfileList({ profile }: { profile: Profile }) {
   return (
     <ul className="card-list">
       <li>
@@ -54,9 +54,32 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-export default function Results({ location }) {
+type ResultsSuccess = {
+  type: 'success'
+  players: Player[]
+}
+
+type ResultsError = {
+  type: 'error'
+  message: string
+}
+
+type ActionTypes = ResultsSuccess | ResultsError
+
+type StateType = {
+  winner: null | Player
+  loser: null | Player
+  error: null | string
+  loading: boolean
+}
+
+export default function Results({
+  location,
+}: {
+  location: { search: string }
+}) {
   const [{ winner, loser, error, loading }, dispatch] = React.useReducer(
-    (state, action) => {
+    (state: StateType, action: ActionTypes): StateType => {
       switch (action.type) {
         case 'success':
           return {
@@ -83,16 +106,16 @@ export default function Results({ location }) {
   React.useEffect(() => {
     const { playerOne, playerTwo } = queryString.parse(location.search)
 
-    battle([playerOne, playerTwo])
+    battle([playerOne, playerTwo] as [string, string])
       .then(players => {
         dispatch({ type: 'success', players })
       })
-      .catch(({ message }) => {
+      .catch(({ message }: { message: string }) => {
         dispatch({ type: 'error', message })
       })
   }, [])
 
-  if (loading === true) {
+  if (loading === true || !winner || !loser) {
     return <Loading text="Battling" />
   }
 
