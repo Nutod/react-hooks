@@ -11,7 +11,7 @@ export default function Card({
   children,
 }: {
   header: string
-  subheader: string
+  subheader?: string
   avatar: string
   href: string
   name: string

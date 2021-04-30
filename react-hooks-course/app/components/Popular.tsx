@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fetchPopularRepos } from '../utils/api'
+import { fetchPopularRepos, Repo } from '../utils/api'
 import {
   FaUser,
   FaStar,
@@ -11,8 +11,22 @@ import Card from './Card'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
 
-function LangaugesNav({ selected, onUpdateLanguage }) {
-  const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
+type Language = 'All' | 'JavaScript' | 'Ruby' | 'Java' | 'CSS' | 'Python'
+function LangaugesNav({
+  selected,
+  onUpdateLanguage,
+}: {
+  selected: Language
+  onUpdateLanguage: (param: Language) => void
+}) {
+  const languages: Language[] = [
+    'All',
+    'JavaScript',
+    'Ruby',
+    'Java',
+    'CSS',
+    'Python',
+  ]
 
   return (
     <ul className="flex-center">
@@ -20,7 +34,9 @@ function LangaugesNav({ selected, onUpdateLanguage }) {
         <li key={language}>
           <button
             className="btn-clear nav-link"
-            style={language === selected ? { color: 'rgb(187, 46, 31)' } : null}
+            style={
+              language === selected ? { color: 'rgb(187, 46, 31)' } : undefined
+            }
             onClick={() => onUpdateLanguage(language)}
           >
             {language}
@@ -36,7 +52,7 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-function ReposGrid({ repos }) {
+function ReposGrid({ repos }: { repos: Repo[] }) {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
@@ -91,15 +107,19 @@ ReposGrid.propTypes = {
 }
 
 export default function Popular() {
-  const [selectedLanguage, setSelectedLanguage] = React.useState('All')
-  const [repos, setRepos] = React.useState({})
-  const [error, setError] = React.useState(null)
+  const [selectedLanguage, setSelectedLanguage] = React.useState<Language>(
+    'All'
+  )
+  const [repos, setRepos] = React.useState<Record<Language, Repo[]>>(
+    {} as Record<Language, Repo[]>
+  )
+  const [error, setError] = React.useState<string | null>(null)
 
   React.useEffect(() => {
     updateLanguage(selectedLanguage)
   }, [])
 
-  const updateLanguage = selectedLanguage => {
+  const updateLanguage = (selectedLanguage: Language) => {
     setSelectedLanguage(selectedLanguage)
     setError(null)
 

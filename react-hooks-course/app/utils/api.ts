@@ -23,6 +23,11 @@ export interface Profile {
 
 export interface Repo {
   stargazers_count: number
+  name: string
+  owner: Profile
+  html_url: string
+  forks: string
+  open_issues: string
 }
 
 export interface Player {
