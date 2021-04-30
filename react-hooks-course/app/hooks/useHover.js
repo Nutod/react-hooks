@@ -9,6 +9,6 @@ export default function useHover() {
   return {
     hovering,
     mouseOut,
-    mouseOut,
+    mouseOver,
   }
 }
