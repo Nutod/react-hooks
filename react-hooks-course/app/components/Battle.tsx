@@ -41,18 +41,24 @@ function Instructions() {
   )
 }
 
-function PlayerInput({ onSubmit, label }) {
+function PlayerInput({
+  onSubmit,
+  label,
+}: {
+  onSubmit: (param: string) => void
+  label: string
+}) {
   const [username, setUsername] = React.useState('')
   const { theme } = useThemeContext()
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     onSubmit(username)
   }
 
   return (
-    <form className="column player" onSubmit={handleSubmit}>
+    <form className="column player" onSubmit={e => handleSubmit}>
       <label htmlFor="username" className="player-label">
         {label}
       </label>
@@ -83,7 +89,15 @@ PlayerInput.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-function PlayerPreview({ username, onReset, label }) {
+function PlayerPreview({
+  username,
+  onReset,
+  label,
+}: {
+  username: string
+  onReset: () => void
+  label: string
+}) {
   const { theme } = useThemeContext()
 
   return (
@@ -114,9 +128,11 @@ PlayerPreview.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
+type PlayerState = string | null
+
 export default function Battle() {
-  const [playerOne, setPlayerOne] = React.useState(null)
-  const [playerTwo, setPlayerTwo] = React.useState(null)
+  const [playerOne, setPlayerOne] = React.useState<PlayerState>(null)
+  const [playerTwo, setPlayerTwo] = React.useState<PlayerState>(null)
 
   return (
     <React.Fragment>
