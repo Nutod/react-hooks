@@ -3,9 +3,11 @@ import constate from 'constate'
 
 function useTheme() {
   const [theme, setTheme] = React.useState('light')
-  // state and a state setter
-  const toggleTheme = React.useCallback(() =>
-    setTheme(previousTheme => (previousTheme === 'light' ? 'dark' : 'light'))
+
+  const toggleTheme = React.useCallback(
+    () =>
+      setTheme(previousTheme => (previousTheme === 'light' ? 'dark' : 'light')),
+    []
   )
 
   return { theme, toggleTheme }
