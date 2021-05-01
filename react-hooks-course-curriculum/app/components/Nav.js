@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { useThemeContext } from '../hooks/useTheme'
+import { useThemeContext } from '../contexts/useTheme'
 
 const activeStyle = {
   color: 'rgb(187, 46, 31)',

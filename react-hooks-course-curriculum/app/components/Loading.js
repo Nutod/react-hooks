@@ -9,22 +9,23 @@ const styles = {
     right: '0',
     marginTop: '20px',
     textAlign: 'center',
-  } as React.CSSProperties,
+  },
 }
 
 export default function Loading({ text = 'Loading', speed = 300 }) {
   const [content, setContent] = React.useState(text)
+  const interval = React.useRef()
 
   React.useEffect(() => {
-    let intervalId = window.setInterval(() => {
-      if (content === text + '...') {
+    interval.current = window.setInterval(() => {
+      if (content === `${text}...`) {
         setContent(text)
       } else {
-        setContent(content => content + '.')
+        setContent(content + '.')
       }
     }, speed)
 
-    return () => window.clearInterval(intervalId)
+    return () => window.clearInterval(interval.current)
   }, [content])
 
   return <p style={styles.content}>{content}</p>

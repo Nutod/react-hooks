@@ -2,19 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { formatDate } from '../utils/helpers'
-import { useThemeContext } from '../hooks/useTheme'
+import { useThemeContext } from '../contexts/useTheme'
 
-export default function PostMetaInfo({
-  by,
-  time,
-  id,
-  descendants,
-}: {
-  by: string
-  time: number
-  id: number
-  descendants: number
-}) {
+export default function PostMetaInfo({ by, time, id, descendants }) {
   const { theme } = useThemeContext()
 
   return (

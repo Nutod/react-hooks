@@ -3,7 +3,7 @@ import './index.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Loading from './components/Loading'
 import Nav from './components/Nav'
-import { useThemeContext } from './hooks/useTheme'
+import { useThemeContext } from './contexts/useTheme'
 
 const Posts = React.lazy(() => import('./components/Posts'))
 const Post = React.lazy(() => import('./components/Post'))
