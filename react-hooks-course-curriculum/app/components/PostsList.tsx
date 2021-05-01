@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
+import { Post } from '../utils/api'
 
-export default function PostsList({ posts }) {
+export default function PostsList({ posts }: { posts: Post[] }) {
   if (posts.length === 0) {
     return <p className="center-text">This user hasn't posted yet</p>
   }
