@@ -1,19 +1,24 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchUser, fetchPosts } from '../utils/api'
+import { fetchUser, fetchPosts, Post } from '../utils/api'
 import Loading from './Loading'
 import { formatDate } from '../utils/helpers'
 import PostsList from './PostsList'
 
-export default function User({ location }) {
-  const [user, setUser] = React.useState(null)
+export default function User({ location }: { location: { search: string } }) {
+  const [user, setUser] = React.useState<{
+    id: string
+    created: number
+    karma: number
+    about: string
+  } | null>(null)
   const [loadingUser, setLoadingUser] = React.useState(true)
-  const [posts, setPosts] = React.useState(null)
+  const [posts, setPosts] = React.useState<Post[] | null>(null)
   const [loadingPosts, setLoadingPosts] = React.useState(true)
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
-    const { id } = queryString.parse(location.search)
+    const { id } = queryString.parse(location.search) as { id: string }
 
     fetchUser(id)
       .then(user => {
@@ -40,7 +45,7 @@ export default function User({ location }) {
 
   return (
     <React.Fragment>
-      {loadingUser === true ? (
+      {loadingUser === true || !user ? (
         <Loading text="Fetching User" />
       ) : (
         <React.Fragment>
@@ -56,7 +61,7 @@ export default function User({ location }) {
           <p dangerouslySetInnerHTML={{ __html: user.about }} />
         </React.Fragment>
       )}
-      {loadingPosts === true ? (
+      {loadingPosts === true || !posts ? (
         loadingUser === false && <Loading text="Fetching posts" />
       ) : (
         <React.Fragment>
