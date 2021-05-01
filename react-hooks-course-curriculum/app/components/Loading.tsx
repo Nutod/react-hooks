@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import PropTypes from 'prop-types'
 
-const styles = {
+const styles: { content: CSSProperties } = {
   content: {
     fontSize: '35px',
     position: 'absolute',
@@ -14,7 +14,7 @@ const styles = {
 
 export default function Loading({ text = 'Loading', speed = 300 }) {
   const [content, setContent] = React.useState(text)
-  const interval = React.useRef()
+  const interval = React.useRef<number>()
 
   React.useEffect(() => {
     interval.current = window.setInterval(() => {
