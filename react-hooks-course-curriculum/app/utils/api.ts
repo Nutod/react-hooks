@@ -11,6 +11,8 @@ export interface Post {
   descendants?: string
   url: string
   title: string
+  kids: string[]
+  text: string
 }
 
 function removeDead(posts: Post[]) {
@@ -29,11 +31,11 @@ function onlyPosts(posts: Post[]) {
   return posts.filter(({ type }) => type === 'story')
 }
 
-export function fetchItem(id: number): Promise<Post> {
+export function fetchItem(id: string): Promise<Post> {
   return fetch(`${api}/item/${id}${json}`).then(res => res.json())
 }
 
-export function fetchComments(ids: number[]) {
+export function fetchComments(ids: string[]) {
   return Promise.all(ids.map(fetchItem)).then(comments =>
     removeDeleted(onlyComments(removeDead(comments)))
   )
@@ -47,7 +49,7 @@ export function fetchMainPosts(type: string) {
         throw new Error(`There was an error fetching the ${type} posts.`)
       }
 
-      return ids.slice(0, 50) as number[]
+      return ids.slice(0, 50) as string[]
     })
     .then(ids => Promise.all(ids.map(fetchItem)))
     .then(posts => removeDeleted(onlyPosts(removeDead(posts))))
@@ -57,7 +59,7 @@ export function fetchUser(id: string) {
   return fetch(`${api}/user/${id}${json}`).then(res => res.json())
 }
 
-export function fetchPosts(ids: number[]) {
+export function fetchPosts(ids: string[]) {
   return Promise.all(ids.map(fetchItem)).then(posts =>
     removeDeleted(onlyPosts(removeDead(posts)))
   )
