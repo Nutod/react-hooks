@@ -1,5 +1,5 @@
-import constate from 'constate/dist/ts/src'
 import React from 'react'
+import constate from 'constate'
 
 function useTheme() {
   const [theme, setTheme] = React.useState('light')
