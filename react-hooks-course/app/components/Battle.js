@@ -41,7 +41,7 @@ function Instructions() {
   )
 }
 
-function PlayerInput({ onSubmit }) {
+function PlayerInput({ onSubmit, label }) {
   const [username, setUsername] = React.useState('')
   const { theme } = useThemeContext()
 
@@ -54,7 +54,7 @@ function PlayerInput({ onSubmit }) {
   return (
     <form className="column player" onSubmit={handleSubmit}>
       <label htmlFor="username" className="player-label">
-        {this.props.label}
+        {label}
       </label>
       <div className="row player-inputs">
         <input
