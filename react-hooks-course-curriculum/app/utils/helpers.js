@@ -1,4 +1,4 @@
-export function formatDate (timestamp: number) {
+export function formatDate (timestamp) {
   return new Date(timestamp * 1000)
     .toLocaleDateString("en-US", {
       hour: 'numeric' ,
