@@ -4,7 +4,21 @@ import PropTypes from 'prop-types'
 import { formatDate } from '../utils/helpers'
 import { useThemeContext } from '../contexts/useTheme'
 
-export default function PostMetaInfo({ by, time, id, descendants }) {
+export default function PostMetaInfo({
+  by,
+  time,
+  id,
+  descendants,
+  comment,
+  text,
+}: {
+  by: string
+  time: number
+  id: number
+  text?: string
+  descendants?: number
+  comment?: boolean
+}) {
   const { theme } = useThemeContext()
 
   return (

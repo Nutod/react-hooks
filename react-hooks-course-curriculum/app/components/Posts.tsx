@@ -2,11 +2,34 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
 import Loading from './Loading'
-import PostsList from './PostsList'
+import PostsList, { IPost } from './PostsList'
 
-export default function Posts({ type }) {
+type StateType = {
+  posts: null | IPost[]
+  error: null | string
+  loading: boolean
+}
+
+type PostType = 'top' | 'new'
+
+type InitialType = {
+  type: 'init'
+}
+
+type SuccessType = {
+  type: 'success'
+  posts: IPost[]
+}
+
+type ErrorType = {
+  type: 'error'
+  message: string
+}
+
+type ActionType = InitialType | SuccessType | ErrorType
+export default function Posts({ type }: { type: PostType }) {
   const [{ posts, error, loading }, dispatch] = React.useReducer(
-    (state, action) => {
+    (state: StateType, action: ActionType): StateType => {
       switch (action.type) {
         case 'init':
           return { ...state, posts: null, error: null, loading: true }
@@ -38,7 +61,7 @@ export default function Posts({ type }) {
       .catch(({ message }) => dispatch({ type: 'error', message }))
   }
 
-  if (loading === true) {
+  if (loading === true || !posts) {
     return <Loading />
   }
 
