@@ -60,7 +60,7 @@ export interface Repo {
     avatar_url: string
   }
   html_url: string
-  stargazers_count: string
+  stargazers_count: number
   forks: string
   open_issues: string
 }
