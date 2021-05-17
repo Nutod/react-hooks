@@ -6,7 +6,6 @@ import {
   FaTimesCircle,
 } from 'react-icons/fa'
 import PropTypes from 'prop-types'
-import { ThemeConsumer } from '../contexts/theme'
 import { Link } from 'react-router-dom'
 import { useThemeContext } from '../contexts/useTheme'
 
@@ -42,11 +41,17 @@ function Instructions() {
   )
 }
 
-function PlayerInput({ onSubmit, label }) {
+function PlayerInput({
+  onSubmit,
+  label,
+}: {
+  onSubmit: (param: string) => void
+  label: string
+}) {
   const [username, setUsername] = React.useState('')
   const { theme } = useThemeContext()
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     onSubmit(username)
@@ -84,7 +89,15 @@ PlayerInput.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-function PlayerPreview({ username, onReset, label }) {
+function PlayerPreview({
+  username,
+  onReset,
+  label,
+}: {
+  username: string
+  onReset: () => void
+  label: string
+}) {
   const { theme } = useThemeContext()
 
   return (
@@ -116,8 +129,8 @@ PlayerPreview.propTypes = {
 }
 
 export default function Battle() {
-  const [playerOne, setPlayerOne] = React.useState(null)
-  const [playerTwo, setPlayerTwo] = React.useState(null)
+  const [playerOne, setPlayerOne] = React.useState<null | string>(null)
+  const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
 
   return (
     <React.Fragment>
