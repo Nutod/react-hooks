@@ -119,7 +119,10 @@ export default function Results({
   )
 
   React.useEffect(() => {
-    const { playerOne, playerTwo } = queryString.parse(location.search)
+    const { playerOne, playerTwo } = queryString.parse(location.search) as {
+      playerOne: string
+      playerTwo: string
+    }
 
     battle([playerOne, playerTwo])
       .then(players => {
