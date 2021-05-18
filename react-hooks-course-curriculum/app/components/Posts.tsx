@@ -3,10 +3,33 @@ import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
+import { Post } from './Post'
 
-export default function Posts({ type }) {
+type StateType = {
+  posts: null | Post[]
+  error: null | string
+  loading: boolean
+}
+
+type ResetAction = {
+  type: 'reset'
+}
+
+type SuccessAction = {
+  type: 'success'
+  posts: Post[]
+}
+
+type FailureAction = {
+  type: 'failure'
+  message: string
+}
+
+type ActionTypes = ResetAction | SuccessAction | FailureAction
+
+export default function Posts({ type }: { type: string }) {
   const [{ posts, error, loading }, dispatch] = React.useReducer(
-    (state, action) => {
+    (state: StateType, action: ActionTypes): StateType => {
       switch (action.type) {
         case 'reset':
           return { ...state, posts: null, error: null, loading: true }
@@ -37,7 +60,7 @@ export default function Posts({ type }) {
       .catch(({ message }) => dispatch({ type: 'failure', message }))
   }
 
-  if (loading === true) {
+  if (loading === true || !posts) {
     return <Loading />
   }
 

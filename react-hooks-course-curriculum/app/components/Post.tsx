@@ -6,15 +6,29 @@ import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-export default function Post({ location }) {
-  const [post, setPost] = React.useState(null)
+export interface Post {
+  by: string
+  time: number
+  id: number
+  text: string
+  url: string
+  title: string
+  descendants: string
+  dead: boolean
+  deleted: boolean
+  kids: string[]
+  type: string
+}
+
+export default function Post({ location }: { location: { search: string } }) {
+  const [post, setPost] = React.useState<null | Post>(null)
   const [loadingPost, setLoadingPost] = React.useState(true)
-  const [comments, setComments] = React.useState(null)
+  const [comments, setComments] = React.useState<null | Post[]>(null)
   const [loadingComments, setLoadingComments] = React.useState(true)
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
-    const { id } = queryString.parse(location.search)
+    const { id } = queryString.parse(location.search) as { id: string }
 
     fetchItem(id)
       .then(post => {
@@ -36,6 +50,10 @@ export default function Post({ location }) {
 
   if (error) {
     return <p className="center-text error">{error}</p>
+  }
+
+  if (!post || !comments) {
+    return <Loading />
   }
 
   return (
