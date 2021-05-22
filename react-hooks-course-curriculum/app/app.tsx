@@ -9,7 +9,7 @@ const Posts = React.lazy(() => import('./components/Posts'))
 const Post = React.lazy(() => import('./components/Post'))
 const User = React.lazy(() => import('./components/User'))
 
-class App extends React.Component {
+export default class App extends React.Component {
   state = {
     theme: 'light',
     toggleTheme: () => {
