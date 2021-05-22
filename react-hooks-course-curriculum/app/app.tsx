@@ -1,7 +1,6 @@
 import React from 'react'
 import './index.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { ThemeProvider } from './contexts/theme'
 import Loading from './components/Loading'
 import Nav from './components/Nav'
 import { useThemeContext } from './contexts/useTheme'
