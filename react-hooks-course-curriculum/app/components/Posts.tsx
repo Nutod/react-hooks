@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
+import { Post } from './Post'
 
 type PostType = 'top' | 'new'
 
 type StateType = {
-  posts: null | any[]
+  posts: null | Post[]
   error: null | string
   loading: boolean
 }
@@ -18,7 +19,7 @@ type ResetAction = {
 
 type DataAction = {
   type: 'data'
-  posts: any[]
+  posts: Post[]
 }
 
 type ErrorAction = {

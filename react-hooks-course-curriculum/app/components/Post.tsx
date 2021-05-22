@@ -6,7 +6,7 @@ import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-interface Post {
+export interface Post {
   url: string
   title: string
   by: string
