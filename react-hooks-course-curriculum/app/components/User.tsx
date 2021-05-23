@@ -21,7 +21,7 @@ export default function User({ location }: { location: { search: string } }) {
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
-    const { id } = queryString.parse(location.search)
+    const { id } = queryString.parse(location.search) as { id: string }
 
     fetchUser(id)
       .then(user => {
