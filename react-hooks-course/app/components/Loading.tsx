@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import PropTypes from 'prop-types'
 
 const styles = {
@@ -9,12 +9,12 @@ const styles = {
     right: '0',
     marginTop: '20px',
     textAlign: 'center',
-  },
+  } as CSSProperties,
 }
 
 export default function Loading({ text = 'Loading', speed = 300 }) {
   const [content, setContent] = React.useState(text)
-  const intervalId = React.useRef()
+  const intervalId = React.useRef<number>()
 
   React.useEffect(() => {
     intervalId.current = window.setInterval(() => {
