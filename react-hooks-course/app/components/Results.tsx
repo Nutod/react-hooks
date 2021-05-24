@@ -15,7 +15,17 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-function ProfileList({ profile }) {
+export interface Profile {
+  name: string
+  location: string
+  company: string
+  followers: number
+  following: number
+  avatar_url: string
+  html_url: string
+  login: string
+}
+function ProfileList({ profile }: { profile: Profile }) {
   return (
     <ul className="card-list">
       <li>
@@ -54,9 +64,37 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-export default function Results({ location }) {
+export interface Player {
+  profile: Profile
+  score: number
+}
+
+type StateType = {
+  winner: null | Player
+  loser: null | Player
+  error: null | string
+  loading: boolean
+}
+
+type SuccessType = {
+  type: 'success'
+  players: Player[]
+}
+
+type FailureType = {
+  type: 'failure'
+  message: string
+}
+
+type ActionType = SuccessType | FailureType
+
+export default function Results({
+  location,
+}: {
+  location: { search: string }
+}) {
   const [{ winner, loser, error, loading }, dispatch] = React.useReducer(
-    (state, action) => {
+    (state: StateType, action: ActionType): StateType => {
       switch (action.type) {
         case 'success':
           return {
@@ -93,7 +131,7 @@ export default function Results({ location }) {
       })
   }, [])
 
-  if (loading === true) {
+  if (loading === true || !winner || !loser) {
     return <Loading text="Battling" />
   }
 
