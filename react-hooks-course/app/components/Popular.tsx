@@ -35,7 +35,9 @@ function LangaugesNav({
         <li key={language}>
           <button
             className="btn-clear nav-link"
-            style={language === selected ? { color: 'rgb(187, 46, 31)' } : undefined}
+            style={
+              language === selected ? { color: 'rgb(187, 46, 31)' } : undefined
+            }
             onClick={() => onUpdateLanguage(language)}
           >
             {language}
@@ -51,9 +53,9 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-interface Repo {
+export interface Repo {
   name: string
-  owner: { login: string; avatar_url: string }
+  owner: { login: string; avatar_url: string; html_url: string }
   html_url: string
   stargazers_count: string
   forks: string
