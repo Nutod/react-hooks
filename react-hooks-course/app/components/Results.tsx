@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-interface Profile {
+export interface Profile {
   name: string
   location: string
   company: string
@@ -64,7 +64,7 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-interface Player {
+export interface Player {
   score: number
   profile: Profile
 }
@@ -119,7 +119,9 @@ export default function Results({
   )
 
   React.useEffect(() => {
-    const { playerOne, playerTwo } = queryString.parse(location.search)
+    const { playerOne, playerTwo } = queryString.parse(location.search) as {
+      [id: string]: string
+    }
 
     battle([playerOne, playerTwo])
       .then(players => {
