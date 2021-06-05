@@ -14,7 +14,7 @@ export default function PostMetaInfo({
   by: string
   time: number
   id: number
-  descendants?: string
+  descendants?: number
   comment: boolean
 }) {
   const { theme } = useThemeContext()

@@ -5,7 +5,7 @@ import { ThemeContextProvider } from './contexts/theme'
 import App from './app'
 
 ReactDOM.render(
-  <ThemeContextProvider defaultTheme="light">
+  <ThemeContextProvider defaultTheme="dark">
     <App />
   </ThemeContextProvider>,
   document.getElementById('app')
