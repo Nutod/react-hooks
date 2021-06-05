@@ -9,6 +9,7 @@ export default function Comment({
     by: string
     time: number
     id: number
+    text: string
   }
 }) {
   return (
