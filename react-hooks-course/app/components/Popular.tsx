@@ -11,7 +11,7 @@ import Card from './Card'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
 
-type Language = 'All' | 'JavaScript' | 'Ruby' | 'Java' | 'CSS' | 'Python'
+export type Language = 'All' | 'JavaScript' | 'Ruby' | 'Java' | 'CSS' | 'Python'
 function LangaugesNav({
   selected,
   onUpdateLanguage,

@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-interface Profile {
+export interface Profile {
   name: string
   location: null | string
   company: null | string
@@ -65,7 +65,7 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-type Player = {
+export type Player = {
   score: number
   profile: Profile
 }
