@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const ELEMENTS = css`
   button {
@@ -16,8 +16,7 @@ export const ELEMENTS = css`
     }
 
     &:focus {
-      box-shadow: 0px 0px 0px 1px hsl(171deg 90% 13% / 30%),
-        0px 0px 0px 5px hsl(171deg 100% 68% / 40%);
+      box-shadow: 0px 0px 0px 1px hsl(171deg 90% 13% / 30%), 0px 0px 0px 5px hsl(171deg 100% 68% / 40%);
     }
 
     &:active {
@@ -39,7 +38,8 @@ export const ELEMENTS = css`
     text-decoration: none;
     color: var(--textColor);
     border-bottom: 2px solid var(--color-primary);
-    transition: opacity 0.2s;
+    transition: opacity 2s;
+    cursor: pointer;
 
     &:hover {
       opacity: 0.6;
@@ -72,4 +72,4 @@ export const ELEMENTS = css`
       box-shadow: 0px 0px 0px 3.5px var(--color-primary-glare);
     }
   }
-`;
+`

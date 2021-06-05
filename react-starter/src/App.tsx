@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Popular from './components/Popular'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
-      <header className="App-header">
+      {/* HEADER */}
+      {/* NAV */}
+      {/* LIST OF REPOS */}
+      {/* <header>
         <p>Hello Vite + React!</p>
-        <p>
-          <button onClick={() => setCount(count => count + 1)}>count is: {count}</button>
-        </p>
-      </header>
+      </header> */}
+      <Popular />
     </div>
   )
 }
