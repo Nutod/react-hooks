@@ -8,11 +8,18 @@ const LanguagesList = styled.ul`
 
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--space-200);
 `
 
 export default function Popular() {
-  const languages: Language[] = ['All', 'Javascript', 'Python', 'Ruby', 'CSS', 'Java']
+  const languages: Language[] = [
+    'All',
+    'Javascript',
+    'Python',
+    'Ruby',
+    'CSS',
+    'Java',
+  ]
 
   return (
     <div>

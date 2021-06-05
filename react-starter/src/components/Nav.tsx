@@ -1,7 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const NavWrapper = styled.div``
+const NavWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-300);
+
+  div {
+    & > :first-child {
+      margin-right: var(--space-200);
+    }
+  }
+`
 
 export default function Nav() {
   return (
@@ -10,7 +20,7 @@ export default function Nav() {
         <a href="">Popular</a>
         <a href="">Battle</a>
       </div>
-      <div>🔆🔦</div>
+      <a>🔆</a>
     </NavWrapper>
   )
 }

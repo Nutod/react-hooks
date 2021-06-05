@@ -16,22 +16,13 @@ export const ELEMENTS = css`
     }
 
     &:focus {
-      box-shadow: 0px 0px 0px 1px hsl(171deg 90% 13% / 30%), 0px 0px 0px 5px hsl(171deg 100% 68% / 40%);
+      box-shadow: 0px 0px 0px 1px hsl(171deg 90% 13% / 30%),
+        0px 0px 0px 5px hsl(171deg 100% 68% / 40%);
     }
 
     &:active {
       transform: translateY(1px);
     }
-  }
-
-  .bg-green {
-    --btn-bg-clr: green;
-    --btn-clr: white;
-  }
-
-  .bg-pink {
-    --btn-bg-clr: pink;
-    --btn-clr: white;
   }
 
   a {
@@ -48,6 +39,10 @@ export const ELEMENTS = css`
 
     &:focus {
       outline: 2.5px dotted var(--color-secondary);
+    }
+
+    &:active {
+      transform: translateY(1px);
     }
   }
 
