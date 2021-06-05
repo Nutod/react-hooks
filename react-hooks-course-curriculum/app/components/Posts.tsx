@@ -48,7 +48,9 @@ export default function Posts({ type }: { type: 'top' | 'new' }) {
     }
   )
 
-  React.useEffect(() => {}, [type])
+  React.useEffect(() => {
+    handleFetch()
+  }, [type])
 
   const handleFetch = () => {
     dispatch({ type: 'reset' })
