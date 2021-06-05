@@ -1,5 +1,5 @@
-import type { Repo } from '../components/Popular'
-import type { Profile, Player } from '../components/Results'
+import { Repo } from '../components/Popular'
+import { Profile, Player } from '../components/Results'
 
 const id = 'YOUR_CLIENT_ID'
 const sec = 'YOUR_SECRET_ID'
