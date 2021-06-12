@@ -6,7 +6,7 @@ import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-export type Post = {
+export type PostType = {
   url: string
   id: number
   title: string
@@ -17,9 +17,9 @@ export type Post = {
 }
 
 export default function Post({ location }: { location: { search: string } }) {
-  const [post, setPost] = React.useState<null | Post>(null)
+  const [post, setPost] = React.useState<null | PostType>(null)
   const [loadingPost, setLoadingPost] = React.useState(true)
-  const [comments, setComments] = React.useState<null | Post[]>(null)
+  const [comments, setComments] = React.useState<null | PostType[]>(null)
   const [loadingComments, setLoadingComments] = React.useState(true)
   const [error, setError] = React.useState<null | string>(null)
 
