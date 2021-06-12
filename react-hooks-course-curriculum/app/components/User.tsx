@@ -11,6 +11,7 @@ export type UserType = {
   created: number
   karma: number
   about: string
+  submitted: string[]
 }
 
 export default function User({ location }: { location: { search: string } }) {
