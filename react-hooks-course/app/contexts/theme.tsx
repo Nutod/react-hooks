@@ -7,6 +7,8 @@ type ThemeContextType = {
 
 const ThemeContext = React.createContext({} as ThemeContextType)
 
+ThemeContext.displayName = 'ThemeContext'
+
 export function ThemeContextProvider({
   children,
   defaultTheme = 'light',
