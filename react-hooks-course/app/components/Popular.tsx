@@ -17,7 +17,7 @@ function LangaugesNav({
   onUpdateLanguage,
 }: {
   selected: Language
-  onUpdateLanguage
+  onUpdateLanguage: (param: Language) => void
 }) {
   const languages: Language[] = [
     'All',
@@ -52,7 +52,16 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-function ReposGrid({ repos }) {
+export interface Repo {
+  name: string
+  owner: { login: string; avatar_url: string }
+  html_url: string
+  stargazers_count: number
+  forks: number
+  open_issues: number
+}
+
+function ReposGrid({ repos }: { repos: Repo[] }) {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
