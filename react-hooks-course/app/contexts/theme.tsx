@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-const { Consumer, Provider } = React.createContext()
+const { Consumer, Provider } = React.createContext({})
 
 interface IThemeContext {
   theme: 'light' | 'dark'
