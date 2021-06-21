@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom'
 import { Owner } from './Popular'
 import { HoverContextProvider } from '../contexts/hover'
 
-interface Profile extends Owner {
+export interface Profile extends Owner {
   name: string
   location: string
   company: string
