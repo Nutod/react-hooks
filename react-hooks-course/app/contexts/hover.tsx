@@ -6,7 +6,7 @@ interface IHoverContext {
   mouseOut: () => void
 }
 
-function useHover() {
+export function useHover() {
   const [hovering, setHovering] = React.useState(false)
 
   const mouseOn = React.useCallback(() => {
@@ -22,7 +22,7 @@ function useHover() {
 
 const HoverContext = React.createContext({} as IHoverContext)
 
-export function ThemeContextProvider({ children }: { children: ReactNode }) {
+export function HoverContextProvider({ children }: { children: ReactNode }) {
   const { hovering, mouseOn, mouseOut } = useHover()
 
   return (

@@ -10,6 +10,7 @@ import {
 import Card from './Card'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
+import { HoverContextProvider } from '../contexts/hover'
 
 type Language = 'All' | 'JavaScript' | 'Ruby' | 'Java' | 'CSS' | 'Python'
 
@@ -147,16 +148,20 @@ export default function Popular() {
 
   return (
     <React.Fragment>
-      <LangaugesNav
-        selected={selectedLanguage}
-        onUpdateLanguage={updateLanguage}
-      />
+      <HoverContextProvider>
+        <LangaugesNav
+          selected={selectedLanguage}
+          onUpdateLanguage={updateLanguage}
+        />
 
-      {isLoading() && <Loading text="Fetching Repos" />}
+        {isLoading() && <Loading text="Fetching Repos" />}
 
-      {error && <p className="center-text error">{error}</p>}
+        {error && <p className="center-text error">{error}</p>}
 
-      {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
+        {repos[selectedLanguage] && (
+          <ReposGrid repos={repos[selectedLanguage]} />
+        )}
+      </HoverContextProvider>
     </React.Fragment>
   )
 }
