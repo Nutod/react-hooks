@@ -14,6 +14,10 @@ export interface IPost {
   time: number
   descendants: number
   text: string
+  dead: boolean
+  deleted: boolean
+  type: 'comment' | 'story'
+  kids: unknown
 }
 
 export default function Post({ location }: { location: { search: string } }) {
