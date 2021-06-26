@@ -11,8 +11,7 @@
   "babel": {
     "presets": [
       "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
+      "@babel/preset-react"
     ],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
@@ -23,7 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "constate": "^3.2.0",
+    "constate": "^3.3.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
