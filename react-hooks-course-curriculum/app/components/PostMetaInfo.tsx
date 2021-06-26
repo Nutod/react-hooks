@@ -9,11 +9,13 @@ export default function PostMetaInfo({
   time,
   id,
   descendants,
+  comment,
 }: {
   by: string
   time: number
   id: number
-  descendants: unknown
+  descendants?: number
+  comment: boolean
 }) {
   const { theme } = useThemeContext()
 
