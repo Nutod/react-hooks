@@ -18,7 +18,7 @@ function LangaugesNav({
   onUpdateLanguage,
 }: {
   selected: Language
-  onUpdateLanguage
+  onUpdateLanguage: (param: Language) => void
 }) {
   const languages: Language[] = [
     'All',
