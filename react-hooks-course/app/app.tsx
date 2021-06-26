@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import './index.css'
 import { useThemeContext } from './contexts/theme'
 import Nav from './components/Nav'
