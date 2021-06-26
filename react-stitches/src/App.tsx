@@ -7,10 +7,15 @@ import Realtors from './components/Realtors'
 import Sidebar from './components/Sidebar'
 import Stories from './components/Stories'
 import Footer from './components/Footer'
+import { globalStyles } from './global.styles'
 
 function App() {
+  globalStyles()
+
   return (
     <>
+      <h1>Heading One</h1>
+      <h2>Heading Two</h2>
       <Sidebar />
       <Hero />
       <Realtors />
