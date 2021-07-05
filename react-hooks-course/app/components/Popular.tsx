@@ -63,7 +63,7 @@ export interface IRepo {
   name: string
   owner: IOwner
   html_url: string
-  stargazers_count: string
+  stargazers_count: number
   forks: string
   open_issues: string
 }
