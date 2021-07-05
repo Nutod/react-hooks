@@ -53,12 +53,15 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
+export interface IOwner {
+  login: string
+  avatar_url: string
+  html_url: string
+}
+
 export interface IRepo {
   name: string
-  owner: {
-    login: string
-    avatar_url: string
-  }
+  owner: IOwner
   html_url: string
   stargazers_count: string
   forks: string
