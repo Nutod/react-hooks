@@ -1,5 +1,6 @@
 import React from 'react'
+import { Box } from '../elements/Box'
 
 export default function Sidebar() {
-  return <div>Sidebar</div>
+  return <Box>Sidebar..</Box>
 }
