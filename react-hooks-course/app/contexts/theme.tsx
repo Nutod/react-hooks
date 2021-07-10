@@ -2,19 +2,13 @@ import React, { ReactNode } from 'react'
 
 const ThemeContext = React.createContext(
   {} as {
-    theme: 'light' | 'dark'
+    theme: string
     toggleTheme: () => void
   }
 )
 
-export function ThemeContextProvider({
-  children,
-  defaultTheme,
-}: {
-  children: ReactNode
-  defaultTheme: 'light' | 'dark'
-}) {
-  const [theme, setTheme] = React.useState(defaultTheme)
+export function ThemeContextProvider({ children }: { children: ReactNode }) {
+  const [theme, setTheme] = React.useState('')
 
   const toggleTheme = React.useCallback(() => {
     setTheme(theme => (theme === 'light' ? 'dark' : 'light'))
@@ -27,10 +21,10 @@ export function ThemeContextProvider({
   )
 }
 
-export function useThemeContext() {
+export function useTheme() {
   const context = React.useContext(ThemeContext)
 
-  if (!context) throw new Error('Context is not defined')
+  if (!context) throw new Error('Context Undefined')
 
   return context
 }

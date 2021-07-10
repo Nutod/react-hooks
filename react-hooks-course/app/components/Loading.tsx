@@ -12,13 +12,7 @@ const styles = {
   } as CSSProperties,
 }
 
-export default function Loading({
-  text = 'Loading',
-  speed = 300,
-}: {
-  text: string
-  speed: number
-}) {
+export default function Loading({ text = 'Loading', speed = 300 }) {
   const [content, setContent] = React.useState(text)
   const intervalId = React.useRef<number>()
 

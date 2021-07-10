@@ -6,11 +6,11 @@ import {
   FaTimesCircle,
 } from 'react-icons/fa'
 import PropTypes from 'prop-types'
-import { useThemeContext } from '../contexts/theme'
+import { useTheme } from '../contexts/theme'
 import { Link } from 'react-router-dom'
 
 function Instructions() {
-  const { theme } = useThemeContext()
+  const { theme } = useTheme()
 
   return (
     <div className="instructions-container">
@@ -49,7 +49,7 @@ function PlayerInput({
   onSubmit: (param: string) => void
 }) {
   const [username, setUsername] = React.useState('')
-  const { theme } = useThemeContext()
+  const { theme } = useTheme()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -98,7 +98,7 @@ function PlayerPreview({
   onReset: () => void
   label: string
 }) {
-  const { theme } = useThemeContext()
+  const { theme } = useTheme()
 
   return (
     <div className="column player">
@@ -136,6 +136,7 @@ export default function Battle() {
     <React.Fragment>
       <Instructions />
 
+      {/* We use a callback here */}
       <div className="players-container">
         <h1 className="center-text header-lg">Players</h1>
         <div className="row space-around">

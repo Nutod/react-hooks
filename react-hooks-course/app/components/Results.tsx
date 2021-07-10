@@ -5,7 +5,6 @@ import {
   FaBriefcase,
   FaUsers,
   FaUserFriends,
-  FaCode,
   FaUser,
 } from 'react-icons/fa'
 import Card from './Card'
@@ -20,8 +19,8 @@ export interface IProfile extends IOwner {
   name: string
   location: string
   company: string
-  following: number
   followers: number
+  following: number
 }
 
 function ProfileList({ profile }: { profile: IProfile }) {
@@ -76,7 +75,7 @@ type StateType = {
 }
 
 type ResultType = {
-  type: 'results'
+  type: 'result'
   players: IPlayer[]
 }
 
@@ -95,7 +94,7 @@ export default function Results({
   const [{ winner, loser, error, loading }, dispatch] = React.useReducer(
     (state: StateType, action: ActionType): StateType => {
       switch (action.type) {
-        case 'results':
+        case 'result':
           return {
             ...state,
             winner: action.players[0],
@@ -103,8 +102,11 @@ export default function Results({
             error: null,
             loading: false,
           }
-        case 'error':
-          return { ...state, error: action.message, loading: false }
+        case 'result':
+          return {
+            ...state,
+          }
+
         default:
           return state
       }
@@ -124,7 +126,7 @@ export default function Results({
 
     battle([playerOne, playerTwo])
       .then(players => {
-        dispatch({ type: 'results', players })
+        dispatch({ type: 'result', players })
       })
       .catch(({ message }) => {
         dispatch({ type: 'error', message })

@@ -17,7 +17,7 @@ function LangaugesNav({
   selected,
   onUpdateLanguage,
 }: {
-  selected: string
+  selected: Language
   onUpdateLanguage: (param: Language) => void
 }) {
   const languages: Language[] = [
@@ -53,19 +53,19 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-export interface IOwner {
-  login: string
-  avatar_url: string
-  html_url: string
-}
-
 export interface IRepo {
   name: string
   owner: IOwner
   html_url: string
   stargazers_count: number
-  forks: string
-  open_issues: string
+  forks: number
+  open_issues: number
+}
+
+export interface IOwner {
+  login: string
+  avatar_url: string
+  html_url: string
 }
 
 function ReposGrid({ repos }: { repos: IRepo[] }) {
@@ -119,7 +119,7 @@ ReposGrid.propTypes = {
 export default function Popular() {
   const [selectedLanguage, setSelectedLanguage] =
     React.useState<Language>('All')
-  const [repos, setRepos] = React.useState({} as Record<Language, IRepo>)
+  const [repos, setRepos] = React.useState({} as Record<Language, IRepo[]>)
   const [error, setError] = React.useState<null | string>(null)
 
   React.useEffect(() => {
@@ -138,7 +138,7 @@ export default function Popular() {
         .catch(() => {
           console.warn('Error fetching repos: ', error)
 
-          setError('There was an error fetching the repositories.')
+          setError('Error was encountered')
         })
     }
   }
