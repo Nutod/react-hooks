@@ -14,6 +14,9 @@ export interface IPost {
   url: string
   title: string
   descendants: number
+  dead: boolean
+  deleted: boolean
+  type: 'comment' | 'story'
 }
 
 export default function Post({ location }: { location: { search: string } }) {
