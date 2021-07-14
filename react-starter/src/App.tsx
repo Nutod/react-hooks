@@ -8,9 +8,6 @@ function App() {
       {/* HEADER */}
       {/* NAV */}
       {/* LIST OF REPOS */}
-      {/* <header>
-        <p>Hello Vite + React!</p>
-      </header> */}
       <Nav />
       <Popular />
     </div>
