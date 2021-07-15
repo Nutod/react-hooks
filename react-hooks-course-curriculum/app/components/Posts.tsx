@@ -3,78 +3,54 @@ import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
-import { IPost } from './Post'
 
-type StateType = {
-  posts: null | IPost[]
-  error: null | string
-  loading: boolean
-}
-
-type ResetType = {
-  type: 'reset'
-}
-
-type ResultType = {
-  type: 'result'
-  posts: IPost[]
-}
-
-type ErrorType = {
-  type: 'error'
-  message: string
-}
-
-type ActionType = ResetType | ResultType | ErrorType
-export default function Posts({ type }: { type: 'top' | 'new' }) {
-  const [{ posts, error, loading }, dispatch] = React.useReducer(
-    (state: StateType, action: ActionType): StateType => {
-      switch (action.type) {
-        case 'reset':
-          return { ...state, posts: null, error: null, loading: true }
-        case 'result':
-          return { ...state, posts, loading: false, error: null }
-        case 'error':
-          return { ...state, error: action.message, loading: false }
-
-        default:
-          return state
-      }
-    },
-    {
+export default class Posts extends React.Component {
+  state = {
+    posts: null,
+    error: null,
+    loading: true,
+  }
+  componentDidMount() {
+    this.handleFetch()
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.type !== this.props.type) {
+      this.handleFetch()
+    }
+  }
+  handleFetch () {
+    this.setState({
       posts: null,
       error: null,
-      loading: true,
+      loading: true
+    })
+
+    fetchMainPosts(this.props.type)
+      .then((posts) => this.setState({
+        posts,
+        loading: false,
+        error: null
+      }))
+      .catch(({ message }) => this.setState({
+        error: message,
+        loading: false
+      }))
+  }
+  render() {
+    const { posts, error, loading } = this.state
+
+    if (loading === true) {
+      return <Loading />
     }
-  )
 
-  React.useEffect(() => {
-    handleFetch()
-  }, [type])
+    if (error) {
+      return <p className='center-text error'>{error}</p>
+    }
 
-  const handleFetch = () => {
-    dispatch({ type: 'reset' })
-
-    fetchMainPosts(type)
-      .then(posts => {
-        dispatch({ type: 'result', posts })
-      })
-      .catch(({ message }) => {
-        dispatch({ type: 'error', message })
-      })
+    return <PostsList posts={posts} />
   }
-
-  if (loading === true || !posts) {
-    return <Loading />
-  }
-
-  if (error) {
-    return <p className="center-text error">{error}</p>
-  }
-
-  return <PostsList posts={posts} />
 }
 
 Posts.propTypes = {
-  type: PropTypes.oneOf(['top', 'new']),
+  type: PropTypes.oneOf(['top', 'new'])
 }
