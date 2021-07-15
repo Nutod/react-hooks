@@ -15,6 +15,10 @@ export interface IPost {
   created: number
   descendants: number
   text: string
+  dead: boolean
+  deleted: boolean
+  type: 'comment' | 'story'
+  kids: string[]
 }
 
 export default function Post({ location }: { location: { search: string } }) {
@@ -25,7 +29,7 @@ export default function Post({ location }: { location: { search: string } }) {
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
-    const { id } = queryString.parse(location.search)
+    const { id } = queryString.parse(location.search) as { id: string }
 
     fetchItem(id)
       .then(post => {
