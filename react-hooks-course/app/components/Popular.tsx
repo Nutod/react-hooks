@@ -56,6 +56,7 @@ LangaugesNav.propTypes = {
 export interface IOwner {
   login: string
   avatar_url: string
+  html_url: string
 }
 export interface IRepo {
   name: string
