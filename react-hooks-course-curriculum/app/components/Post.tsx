@@ -17,6 +17,7 @@ export interface IPost {
   dead: boolean
   deleted: boolean
   type: 'comment' | 'story'
+  kids: number
 }
 
 export default function Post({ location }: { location: { search: string } }) {
