@@ -1,4 +1,5 @@
-import { IProfile } from '../components/Results'
+import { IRepo } from '../components/Popular'
+import { IPlayer, IProfile } from '../components/Results'
 
 const id = 'YOUR_CLIENT_ID'
 const sec = 'YOUR_SECRET_ID'
@@ -24,7 +25,7 @@ function getProfile(username: string) {
     })
 }
 
-function getRepos(username) {
+function getRepos(username: string) {
   return fetch(
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   )
@@ -34,22 +35,22 @@ function getRepos(username) {
         throw new Error(getErrorMsg(repos.message, username))
       }
 
-      return repos
+      return repos as IRepo[]
     })
 }
 
-function getStarCount(repos) {
+function getStarCount(repos: IRepo[]) {
   return repos.reduce(
     (count, { stargazers_count }) => count + stargazers_count,
     0
   )
 }
 
-function calculateScore(followers, repos) {
+function calculateScore(followers: number, repos: IRepo[]) {
   return followers * 3 + getStarCount(repos)
 }
 
-function getUserData(player) {
+function getUserData(player: string) {
   return Promise.all([getProfile(player), getRepos(player)]).then(
     ([profile, repos]) => ({
       profile,
@@ -58,17 +59,17 @@ function getUserData(player) {
   )
 }
 
-function sortPlayers(players) {
+function sortPlayers(players: IPlayer[]) {
   return players.sort((a, b) => b.score - a.score)
 }
 
-export function battle(players) {
+export function battle(players: string[]) {
   return Promise.all([getUserData(players[0]), getUserData(players[1])]).then(
     results => sortPlayers(results)
   )
 }
 
-export function fetchPopularRepos(language) {
+export function fetchPopularRepos(language: string) {
   const endpoint = window.encodeURI(
     `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
   )
