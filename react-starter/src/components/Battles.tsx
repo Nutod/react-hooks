@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useInput } from '../hooks/useInput'
 import { container } from '../styles/utils/container'
 
 const InstructionsWrapper = styled.div`
@@ -95,18 +96,67 @@ function Instructions() {
   )
 }
 
-
-
 const BattlesWrapper = styled.div`
   ${container};
 `
+
+function PlayerInput({ label }: { label: string }) {
+  const [inputState, { handleInputChange }] = useInput()
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    alert(inputState)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="username">{label}</label>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr auto',
+          gap: 'var(--space-100)',
+        }}
+      >
+        <input
+          type="text"
+          name="username"
+          onChange={handleInputChange}
+          value={inputState}
+          autoComplete="off"
+        />
+        <button disabled={!inputState.trim().length}>Submit</button>
+      </div>
+    </form>
+  )
+}
+
+function BattlesForm() {
+  return (
+    <>
+      <h3 style={{ textAlign: 'center', marginBlockEnd: 'var(--space-200)' }}>
+        Players
+      </h3>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 'var(--space-600)',
+        }}
+      >
+        <PlayerInput label="Player One" />
+        <PlayerInput label="Player Two" />
+      </div>
+    </>
+  )
+}
 
 export default function Battles() {
   return (
     <BattlesWrapper>
       <Instructions />
-      {/* Battle Form here? */}
-      <input type="text" onChange={e => e} />
+      <BattlesForm />
     </BattlesWrapper>
   )
 }
