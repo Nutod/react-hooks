@@ -60,7 +60,7 @@ export default function Popular() {
   React.useEffect(() => {
     // fetch here directly or use another function?
     updateLanguage(selectedLanguage)
-  }, [])
+  }, [selectedLanguage])
 
   const updateLanguage = (selectedLanguage: Language) => {
     setSelectedLanguage(selectedLanguage)
@@ -81,7 +81,7 @@ export default function Popular() {
 
   // interesting loading component
   const isLoading = () => {
-    return !repos && loading
+    return loading
   }
 
   return (
@@ -91,11 +91,13 @@ export default function Popular() {
         setSelectedLanguage={setSelectedLanguage}
       />
 
-      {isLoading() && <p>Loading...</p>}
+      {isLoading() ? (
+        <p>Loading...</p>
+      ) : (
+        <p>{JSON.stringify(repos, null, 2)}</p>
+      )}
 
       {error && <p>Something went wrong!!!</p>}
-
-      {repos && <p>{JSON.stringify(repos)}</p>}
     </div>
   )
 }
