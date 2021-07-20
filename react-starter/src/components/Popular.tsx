@@ -59,21 +59,29 @@ export default function Popular() {
 
   React.useEffect(() => {
     // fetch here directly or use another function?
+    updateLanguage(selectedLanguage)
   }, [])
 
   const updateLanguage = (selectedLanguage: Language) => {
     setSelectedLanguage(selectedLanguage)
     setError(null)
+    setLoading(true)
 
     fetchPopularRepos(selectedLanguage)
+      .then(data => {
+        setLoading(false)
+        setRepos(repos => ({ ...repos, [selectedLanguage]: data }))
+      })
+      .catch(err => {
+        console.warn('Error fetching repos', err)
+        setLoading(false)
+        setError('There was an error')
+      })
   }
 
-  if (loading) {
-    return <p>Loading...</p>
-  }
-
-  if (error) {
-    return <p>Something went wrong!!!</p>
+  // interesting loading component
+  const isLoading = () => {
+    return !repos && loading
   }
 
   return (
@@ -82,6 +90,12 @@ export default function Popular() {
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={setSelectedLanguage}
       />
+
+      {isLoading() && <p>Loading...</p>}
+
+      {error && <p>Something went wrong!!!</p>}
+
+      {repos && <p>{JSON.stringify(repos)}</p>}
     </div>
   )
 }
