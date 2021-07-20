@@ -32,6 +32,8 @@ const RepoObject = {
   forks: 26139,
   open_issues: 248,
   score: 1,
+  avatar_url: 'string',
+  login: 'string',
 }
 
 export type IRepo = typeof RepoObject
