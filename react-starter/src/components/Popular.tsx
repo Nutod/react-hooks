@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import fetchPopularRepos from '../utils/api'
 
 type Language = 'All' | 'Javascript' | 'Python' | 'Ruby' | 'CSS' | 'Java'
 
@@ -47,9 +48,33 @@ function LanguageNav({
   )
 }
 
+export interface IRepo {}
+
 export default function Popular() {
   const [selectedLanguage, setSelectedLanguage] =
     React.useState<Language>('All')
+  const [repos, setRepos] = React.useState({} as Record<Language, IRepo[]>)
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<null | string>(null)
+
+  React.useEffect(() => {
+    // fetch here directly or use another function?
+  }, [])
+
+  const updateLanguage = (selectedLanguage: Language) => {
+    setSelectedLanguage(selectedLanguage)
+    setError(null)
+
+    fetchPopularRepos(selectedLanguage)
+  }
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>Something went wrong!!!</p>
+  }
 
   return (
     <div>
