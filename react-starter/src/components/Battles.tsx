@@ -95,6 +95,8 @@ function Instructions() {
   )
 }
 
+
+
 const BattlesWrapper = styled.div`
   ${container};
 `
@@ -103,6 +105,8 @@ export default function Battles() {
   return (
     <BattlesWrapper>
       <Instructions />
+      {/* Battle Form here? */}
+      <input type="text" onChange={e => e} />
     </BattlesWrapper>
   )
 }
