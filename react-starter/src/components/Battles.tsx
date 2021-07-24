@@ -19,9 +19,9 @@ const InstructionsWrapper = styled.div`
     svg {
       /* block-size: 5rem; */
       margin-inline: auto;
-      margin-block-end: var(--space-200);
+      margin-block: var(--space-200);
       color: var(--color-primary);
-      background-color: #eee;
+      background-color: var(--gray-100);
       padding: var(--space-100);
     }
   }
@@ -141,8 +141,79 @@ function PlayerInput({
   )
 }
 
+const PlayerPreviewWrapper = styled.div`
+  img {
+    block-size: 5rem;
+    border-radius: 99999px;
+  }
+
+  div {
+    background-color: var(--gray-100);
+    padding: var(--space-200);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-100);
+  }
+
+  svg {
+    block-size: 2rem;
+    align-self: center;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-1.5px);
+    }
+  }
+`
+
+function PlayerPreview({
+  label,
+  username,
+  onReset,
+}: {
+  label: string
+  username: string
+  onReset: () => void
+}) {
+  return (
+    <PlayerPreviewWrapper>
+      <p>{label}</p>
+      <div>
+        <span>
+          <img
+            src={`https://github.com/${username}.png?size=200`}
+            alt={`Avatar for ${username}`}
+          />
+          <a href={`https://github.com/${username}`}>{username}</a>
+        </span>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          onClick={onReset}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      </div>
+    </PlayerPreviewWrapper>
+  )
+}
+
 function BattlesForm() {
-  // what do we need to do here
   const [playerOne, setPlayerOne] = React.useState<null | string>(null)
   const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
 
@@ -158,14 +229,40 @@ function BattlesForm() {
           gap: 'var(--space-600)',
         }}
       >
-        <PlayerInput
-          label="Player One"
-          onSubmit={input => setPlayerOne(input)}
-        />
-        <PlayerInput
-          label="Player Two"
-          onSubmit={input => setPlayerTwo(input)}
-        />
+        {playerOne === null ? (
+          <PlayerInput
+            label="Player One"
+            onSubmit={input => setPlayerOne(input)}
+          />
+        ) : (
+          <PlayerPreview
+            label="Player One"
+            username={playerOne}
+            onReset={() => setPlayerOne(null)}
+          />
+        )}
+        {playerTwo === null ? (
+          <PlayerInput
+            label="Player Two"
+            onSubmit={input => setPlayerTwo(input)}
+          />
+        ) : (
+          <PlayerPreview
+            label="Player Two"
+            username={playerTwo}
+            onReset={() => setPlayerTwo(null)}
+          />
+        )}
+        {playerOne !== null && playerTwo !== null ? (
+          <div
+            style={{
+              gridColumn: '1 / -1',
+              marginInline: 'auto',
+            }}
+          >
+            <button>Battle</button>
+          </div>
+        ) : null}
       </div>
     </>
   )

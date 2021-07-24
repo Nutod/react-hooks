@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const CRITICAL = css`
   :root {
@@ -12,7 +12,7 @@ export const CRITICAL = css`
     --color-black-glare: #1b2d45;
     --color-black-shade: #1e3047;
 
-    --gray-100: hsl(210, 20%, 98%);
+    --gray-100: hsl(210, 5%, 98%);
     --gray-200: hsl(210, 20%, 88%);
     --gray-300: hsl(210, 20%, 78%);
     --gray-400: hsl(210, 20%, 68%);
@@ -44,4 +44,4 @@ export const CRITICAL = css`
     --elevation-four: 0 20px 25px -5px rgba(0, 0, 0, 0.2),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
-`;
+`
