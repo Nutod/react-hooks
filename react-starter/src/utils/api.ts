@@ -61,7 +61,7 @@ function getUserData(player: string) {
   )
 }
 
-function sortPlayers(players: { score: number }[]) {
+function sortPlayers(players: { score: number; profile: IProfile }[]) {
   return players.sort((a, b) => b.score - a.score)
 }
 
