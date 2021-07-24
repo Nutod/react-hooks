@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ThemeConsumer } from '../contexts/theme'
 import { useSnapshot } from 'valtio'
 import { themeState } from '../store/store'
 import { ReactNode } from 'react'
