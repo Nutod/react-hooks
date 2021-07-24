@@ -36,4 +36,40 @@ const RepoObject = {
   login: 'string',
 }
 
+const ProfileObject = {
+  login: 'Nutod',
+  id: 7740768,
+  node_id: 'MDQ6VXNlcjc3NDA3Njg=',
+  avatar_url: 'https://avatars.githubusercontent.com/u/7740768?v=4',
+  gravatar_id: '',
+  url: 'https://api.github.com/users/Nutod',
+  html_url: 'https://github.com/Nutod',
+  followers_url: 'https://api.github.com/users/Nutod/followers',
+  following_url: 'https://api.github.com/users/Nutod/following{/other_user}',
+  gists_url: 'https://api.github.com/users/Nutod/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/Nutod/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/Nutod/subscriptions',
+  organizations_url: 'https://api.github.com/users/Nutod/orgs',
+  repos_url: 'https://api.github.com/users/Nutod/repos',
+  events_url: 'https://api.github.com/users/Nutod/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/Nutod/received_events',
+  type: 'User',
+  site_admin: false,
+  name: 'Oladotun Aluko',
+  company: null,
+  blog: 'https://oladotunaluko.com/',
+  location: 'http://localhost:3000',
+  email: null,
+  hireable: null,
+  bio: 'Software Developer focused on the front-end things of the web',
+  twitter_username: null,
+  public_repos: 45,
+  public_gists: 0,
+  followers: 1,
+  following: 0,
+  created_at: '2014-05-29T22:36:55Z',
+  updated_at: '2021-07-24T06:37:55Z',
+}
+
 export type IRepo = typeof RepoObject
+export type IProfile = typeof ProfileObject
