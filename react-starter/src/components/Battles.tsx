@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useInput } from '../hooks/useInput'
 import { container } from '../styles/utils/container'
+import { battle } from '../utils/api'
 
 const InstructionsWrapper = styled.div`
   margin-block-start: var(--space-500);
@@ -213,9 +214,24 @@ function PlayerPreview({
   )
 }
 
+// url state or local state
+
 function BattlesForm() {
   const [playerOne, setPlayerOne] = React.useState<null | string>(null)
   const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
+  const [results, setResults] = React.useState<null | {}>(null)
+
+  if (results) {
+    return <pre>{JSON.stringify(results, null, 2)}</pre>
+  }
+
+  const onBattle = () => {
+    battle([playerOne, playerTwo] as string[])
+      .then(results => setResults(results))
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   return (
     <>
@@ -260,7 +276,7 @@ function BattlesForm() {
               marginInline: 'auto',
             }}
           >
-            <button>Battle</button>
+            <button onClick={onBattle}>Battle</button>
           </div>
         ) : null}
       </div>
