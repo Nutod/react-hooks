@@ -23,13 +23,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "constate": "^3.3.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-icons": "^3.7.0",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "valtio": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

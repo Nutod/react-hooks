@@ -100,39 +100,52 @@ const BattlesWrapper = styled.div`
   ${container};
 `
 
-function PlayerInput({ label }: { label: string }) {
+function PlayerInput({
+  label,
+  onSubmit,
+}: {
+  label: string
+  onSubmit: (param: string) => void
+}) {
   const [inputState, { handleInputChange }] = useInput()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    alert(inputState)
+    // communicate this state to the parent
+    onSubmit(inputState)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">{label}</label>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr auto',
-          gap: 'var(--space-100)',
-        }}
-      >
-        <input
-          type="text"
-          name="username"
-          onChange={handleInputChange}
-          value={inputState}
-          autoComplete="off"
-        />
-        <button disabled={!inputState.trim().length}>Submit</button>
-      </div>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username">{label}</label>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr auto',
+            gap: 'var(--space-100)',
+          }}
+        >
+          <input
+            type="text"
+            name="username"
+            onChange={handleInputChange}
+            value={inputState}
+            autoComplete="off"
+          />
+          <button disabled={!inputState.trim().length}>Submit</button>
+        </div>
+      </form>
+    </>
   )
 }
 
 function BattlesForm() {
+  // what do we need to do here
+  const [playerOne, setPlayerOne] = React.useState<null | string>(null)
+  const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
+
   return (
     <>
       <h3 style={{ textAlign: 'center', marginBlockEnd: 'var(--space-200)' }}>
@@ -145,8 +158,14 @@ function BattlesForm() {
           gap: 'var(--space-600)',
         }}
       >
-        <PlayerInput label="Player One" />
-        <PlayerInput label="Player Two" />
+        <PlayerInput
+          label="Player One"
+          onSubmit={input => setPlayerOne(input)}
+        />
+        <PlayerInput
+          label="Player Two"
+          onSubmit={input => setPlayerTwo(input)}
+        />
       </div>
     </>
   )
