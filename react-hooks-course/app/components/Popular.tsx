@@ -13,7 +13,13 @@ import Tooltip from './Tooltip'
 import { useSnapshot } from 'valtio'
 import { themeState, toggleTheme } from '../store/store'
 
-function LangaugesNav({ selected, onUpdateLanguage }) {
+function LangaugesNav({
+  selected,
+  onUpdateLanguage,
+}: {
+  selected: string
+  onUpdateLanguage: (param: string) => void
+}) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
 
   return (
@@ -22,7 +28,9 @@ function LangaugesNav({ selected, onUpdateLanguage }) {
         <li key={language}>
           <button
             className="btn-clear nav-link"
-            style={language === selected ? { color: 'rgb(187, 46, 31)' } : null}
+            style={
+              language === selected ? { color: 'rgb(187, 46, 31)' } : undefined
+            }
             onClick={() => onUpdateLanguage(language)}
           >
             {language}
@@ -38,7 +46,19 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-function ReposGrid({ repos }) {
+export interface IRepo {
+  name: string
+  owner: {
+    login: string
+    avatar_url: string
+  }
+  html_url: string
+  stargazers_count: number
+  forks: number
+  open_issues: number
+}
+
+function ReposGrid({ repos }: { repos: IRepo[] }) {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
@@ -86,16 +106,25 @@ ReposGrid.propTypes = {
   repos: PropTypes.array.isRequired,
 }
 
-export default class Popular extends React.Component {
+export default class Popular extends React.Component<
+  {},
+  {
+    selectedLanguage: string
+    repos: Record<string, IRepo[]>
+    error: null | string
+  }
+> {
   state = {
     selectedLanguage: 'All',
-    repos: {},
+    repos: {} as Record<string, IRepo[]>,
     error: null,
   }
+
   componentDidMount() {
     this.updateLanguage(this.state.selectedLanguage)
   }
-  updateLanguage = selectedLanguage => {
+
+  updateLanguage = (selectedLanguage: string) => {
     this.setState({
       selectedLanguage,
       error: null,
@@ -111,7 +140,7 @@ export default class Popular extends React.Component {
             },
           }))
         })
-        .catch(() => {
+        .catch(error => {
           console.warn('Error fetching repos: ', error)
 
           this.setState({
@@ -120,11 +149,13 @@ export default class Popular extends React.Component {
         })
     }
   }
+
   isLoading = () => {
     const { selectedLanguage, repos, error } = this.state
 
     return !repos[selectedLanguage] && error === null
   }
+
   render() {
     const { selectedLanguage, repos, error } = this.state
 
