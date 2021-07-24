@@ -1,6 +1,7 @@
 import React from 'react'
 import { IProfile } from '../types/types'
 import { battle } from '../utils/api'
+import Loading from './Loading'
 
 interface IPlayer {
   profile: IProfile
@@ -26,7 +27,7 @@ export default function Results() {
   }, [])
 
   if (loading) {
-    return <p>Loading...</p>
+    return <Loading />
   }
 
   return (
