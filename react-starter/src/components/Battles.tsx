@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useInput } from '../hooks/useInput'
 import { container } from '../styles/utils/container'
@@ -276,7 +277,14 @@ function BattlesForm() {
               marginInline: 'auto',
             }}
           >
-            <button onClick={onBattle}>Battle</button>
+            <Link
+              to={{
+                pathname: '/battles/result',
+                search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`,
+              }}
+            >
+              Battle
+            </Link>
           </div>
         ) : null}
       </div>
