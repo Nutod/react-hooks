@@ -7,9 +7,9 @@ import {
   FaCodeBranch,
   FaExclamationTriangle,
 } from 'react-icons/fa'
+import { Tooltip } from '@mantine/core'
 import Card from './Card'
 import Loading from './Loading'
-import Tooltip from './Tooltip'
 
 function LangaugesNav({
   selected,
@@ -74,7 +74,7 @@ function ReposGrid({ repos }: { repos: IRepo[] }) {
             >
               <ul className="card-list">
                 <li>
-                  <Tooltip text="Github username">
+                  <Tooltip label="Github username" withArrow>
                     <FaUser color="rgb(255, 191, 116)" size={22} />
                     <a href={`https://github.com/${login}`}>{login}</a>
                   </Tooltip>
