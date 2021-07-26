@@ -1,4 +1,5 @@
 import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 import Battles from './components/Battles'
 import Nav from './components/Nav'
 import Popular from './components/Popular'
@@ -8,9 +9,18 @@ function App() {
   return (
     <>
       <Nav />
-      <Results />
-      {/* <Battles /> */}
-      {/* <Popular /> */}
+
+      <Switch>
+        <Route path="/" exact>
+          <Popular />
+        </Route>
+        <Route path="/battle/result">
+          <Results />
+        </Route>
+        <Route path="battle">
+          <Battles />
+        </Route>
+      </Switch>
     </>
   )
 }

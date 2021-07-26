@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { IRepo } from '../types/types'
-import fetchPopularRepos from '../utils/api'
+import { fetchPopularRepos } from '../utils/api'
 
 type Language = 'All' | 'Javascript' | 'Python' | 'Ruby' | 'CSS' | 'Java'
 
