@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useThemeContext } from '../context/theme'
 
 const NavWrapper = styled.div`
   display: flex;
@@ -14,13 +16,23 @@ const NavWrapper = styled.div`
 `
 
 export default function Nav() {
+  const { theme, toggleTheme } = useThemeContext()
+
   return (
     <NavWrapper>
       <div>
-        <a href="">Popular</a>
-        <a href="">Battle</a>
+        <Link to="/">Popular</Link>
+        <Link to="battles">Battle</Link>
       </div>
-      <a>🔆</a>
+      {theme === 'light' ? (
+        <p onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+          🔆
+        </p>
+      ) : (
+        <p onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+          🔦
+        </p>
+      )}
     </NavWrapper>
   )
 }

@@ -39,7 +39,7 @@ function LanguageNav({
   return (
     <LanguagesList>
       {languages.map(language => (
-        <li onClick={() => setSelectedLanguage(language)}>
+        <li key={language} onClick={() => setSelectedLanguage(language)}>
           <LanguageLink selected={selectedLanguage === language}>
             {language}
           </LanguageLink>

@@ -14,10 +14,10 @@ function App() {
         <Route path="/" exact>
           <Popular />
         </Route>
-        <Route path="/battle/result">
+        <Route path="/battles/result" exact>
           <Results />
         </Route>
-        <Route path="battle">
+        <Route path="/battles" exact>
           <Battles />
         </Route>
       </Switch>
