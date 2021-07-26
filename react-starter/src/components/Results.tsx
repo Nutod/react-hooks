@@ -1,5 +1,7 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
+import queryString from 'query-string'
 import { IProfile } from '../types/types'
 import { battle } from '../utils/api'
 import Loading from './Loading'
@@ -41,9 +43,14 @@ export default function Results() {
   const [loser, setLoser] = React.useState<null | IPlayer>(null)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<null | string>(null)
+  const location = useLocation()
+
+  const { playerOne, playerTwo } = queryString.parse(location.search) as {
+    [id: string]: string
+  }
 
   React.useEffect(() => {
-    battle(['nutod', 'nutod'])
+    battle([playerOne, playerTwo])
       .then(players => {
         setWinner(players[0])
         setLoser(players[1])
@@ -99,6 +106,17 @@ export default function Results() {
           <p>Score: {loser.score}</p>
         </span>
       </ResultsContent>
+
+      <div
+        style={{
+          marginBlockStart: 'var(--space-200)',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        {/* Check out some alternate requirements here */}
+        <button>Reset</button>
+      </div>
     </ResultsWrapper>
   )
 }
