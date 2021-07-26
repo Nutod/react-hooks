@@ -15,5 +15,5 @@ export function useToggle() {
     [],
   )
 
-  return [state, handlers]
+  return [state, handlers] as const
 }

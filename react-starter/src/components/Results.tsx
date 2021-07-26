@@ -3,18 +3,12 @@ import styled from 'styled-components'
 import { IProfile } from '../types/types'
 import { battle } from '../utils/api'
 import Loading from './Loading'
+import Tooltip from './Tooltip'
 
 const ResultsWrapper = styled.div`
   h3 {
     text-align: center;
     padding-block-end: var(--space-300);
-  }
-
-  div {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-300);
-    text-align: center;
   }
 
   span {
@@ -25,9 +19,16 @@ const ResultsWrapper = styled.div`
   img {
     block-size: 15rem;
     border-radius: 50%;
-    margin-block: var(--space-200);
+    margin-block: var(--space-500);
     margin-inline: auto;
   }
+`
+
+const ResultsContent = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-300);
+  text-align: center;
 `
 
 interface IPlayer {
@@ -70,14 +71,16 @@ export default function Results() {
     <ResultsWrapper>
       <h3>Results</h3>
 
-      <div>
+      <ResultsContent>
         <span>
           <h4>Winner</h4>
           <img
             src={`${winner.profile.avatar_url}`}
             alt={`Avatar for ${winner.profile.login}`}
           />
-          <p>Name: {winner.profile.name}</p>
+          <Tooltip label="Github Username">
+            <p>Name: {winner.profile.name}</p>
+          </Tooltip>
           <p>Location: {winner.profile.location}</p>
           <p>Public Repos: {winner.profile.public_repos}</p>
           <p>Score: {winner.score}</p>
@@ -88,12 +91,14 @@ export default function Results() {
             src={`${loser.profile.avatar_url}`}
             alt={`Avatar for ${loser.profile.login}`}
           />
-          <p>Name: {loser.profile.name}</p>
+          <Tooltip label="Github Username">
+            <p>Name: {loser.profile.name}</p>
+          </Tooltip>
           <p>Location: {loser.profile.location}</p>
           <p>Public Repos: {loser.profile.public_repos}</p>
           <p>Score: {loser.score}</p>
         </span>
-      </div>
+      </ResultsContent>
     </ResultsWrapper>
   )
 }
