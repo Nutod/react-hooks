@@ -60,12 +60,18 @@ export default function Popular() {
   ]
   const [selectedLanguage, setSelectedLanguage] =
     React.useState<Language>('All')
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<null | string>(null)
 
   const getLanguageNavProps = () => ({
     selectedLanguage,
     setSelectedLanguage,
     languages,
   })
+
+  const getPopularReposProps = () => ({})
+
+  // fetch data for popular repos
 
   return (
     <PopularWrapper>
