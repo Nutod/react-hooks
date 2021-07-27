@@ -31,6 +31,5 @@ export const GlobalStyledElements = createGlobalStyle`
    line-height: 1.65;
    overflow-x: hidden;
    font-size: 1.1rem;
-   background: pink;
   }
 `

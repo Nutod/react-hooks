@@ -1,22 +1,17 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const CRITICAL = css`
   :root {
-    --color-primary: #00ebc7;
-    --color-primary-glare: #5cffe7;
-    --color-white: #fffffe;
-    --color-secondary: #ff5470;
-    --color-tertiary: #fde24f;
-    --color-tertiary-glare: #feef9a;
-    --color-black: #00214d;
-    --color-black-glare: #1b2d45;
-    --color-black-shade: #1e3047;
+    --color-primary: hsl(33, 46%, 58%);
+    --color-primary-glare: hsl(32, 39%, 51%);
 
-    --font-display: 'Carrois Gothic', sans-serif;
-    --font-body: 'Roboto', sans-serif;
+    --color-secondary: hsl(211, 48%, 12%);
+    --color-primary-shade: hsl(212, 47%, 2%);
+
+    --font-display: 'Josefin Sans', sans-serif;
+    --font-body: 'Nunito', sans-serif;
 
     --space: 1rem;
-
     --space-100: calc(0.75 * var(--space));
     --space-200: calc(1 * var(--space));
     --space-300: calc(1.33 * var(--space));
@@ -35,4 +30,4 @@ export const CRITICAL = css`
     --elevation-four: 0 20px 25px -5px rgba(0, 0, 0, 0.2),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
-`;
+`

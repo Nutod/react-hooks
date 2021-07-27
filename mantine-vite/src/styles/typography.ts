@@ -1,8 +1,7 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const TYPOGRAPHY = css`
-  /* This should not go into production */
-  @import url('https://fonts.googleapis.com/css?family=Roboto:400|Carrois+Gothic:400');
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Nunito+Sans&display=swap');
 
   html {
     font-size: 100%;
@@ -43,4 +42,4 @@ export const TYPOGRAPHY = css`
   .text_small {
     font-size: 0.833rem;
   }
-`;
+`
