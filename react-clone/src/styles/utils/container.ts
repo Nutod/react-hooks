@@ -1,6 +1,6 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const container = css`
-  max-width: 50rem;
+  max-width: 70rem;
   margin: 0 auto;
-`;
+`
