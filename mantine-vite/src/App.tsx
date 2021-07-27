@@ -1,16 +1,30 @@
 import React, { useState } from 'react'
+import { useMantineTheme } from '@mantine/core'
 import logo from './logo.svg'
 
 // Config and then defaults
+// Use a custom Context Provider?
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const theme = useMantineTheme()
+
+  console.log(theme)
+
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Heading One</h1>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p
+          style={{
+            color: `${theme.primaryColor}`,
+            fontFamily: theme.fontFamily,
+          }}
+        >
+          Hello Vite + React!
+        </p>
         <p>
           <button type="button" onClick={() => setCount(count => count + 1)}>
             count is: {count}
