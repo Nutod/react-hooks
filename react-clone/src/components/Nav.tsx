@@ -5,19 +5,25 @@ import styled from 'styled-components'
 const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
+
+  ul {
+    display: flex;
+    gap: var(--space-100);
+  }
 `
 
 export default function Nav() {
   return (
-    <nav>
+    <NavWrapper>
       <ul>
         <li>
           <Link to="/">Popular</Link>
         </li>
-        <li>Battle</li>
+        <li>
+          <Link to="/battle">Battle</Link>
+        </li>
       </ul>
-      {/* Links */}
-      {/* Toggle */}
-    </nav>
+      <div>🔦</div>
+    </NavWrapper>
   )
 }
