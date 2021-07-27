@@ -9,7 +9,6 @@ const PopularWrapper = styled.div`
   margin-block-start: var(--space-500);
 
   ul {
-    background: pink;
     display: flex;
     justify-content: center;
     gap: var(--space-400);
@@ -52,8 +51,57 @@ function SelectionNav({
   )
 }
 
+// Just another Card Component
+
+// name, {avatar_url}, stargazers_count, language, forks, open_issues
+
+const ReposGridWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--space-400);
+
+  div {
+    background-color: var(--gray-100);
+
+    & > * {
+      padding: var(--space-100);
+    }
+  }
+
+  h4 {
+    text-align: center;
+    margin-block: var(--space-100);
+  }
+
+  img {
+    padding: 0;
+  }
+`
+
 function ReposGrid({ repos }: { repos: IRepo[] }) {
-  return <pre>{JSON.stringify(repos, null, 2)}</pre>
+  if (!repos) {
+    return null
+  }
+
+  return (
+    <ReposGridWrapper>
+      {repos.map((repo, index) => (
+        <div key={repo.name}>
+          <h4>
+            #{index} - {repo.name}
+          </h4>
+          <img
+            src={repo.owner.avatar_url}
+            alt={`Avatar for ${repo.full_name}`}
+          />
+          <p>Star Count: {repo.stargazers_count}</p>
+          <p>Language: {repo.language}</p>
+          <p>Forks: {repo.forks}</p>
+          <p>Open Issues: {repo.open_issues}</p>
+        </div>
+      ))}
+    </ReposGridWrapper>
+  )
 }
 
 export default function Popular() {
@@ -111,9 +159,19 @@ export default function Popular() {
 
   return (
     <PopularWrapper>
-      {JSON.stringify(selectedLanguage)}
       <SelectionNav {...getLanguageNavProps()} />
-      <ReposGrid {...getPopularReposProps()} />
+      {loading ? (
+        <p
+          style={{ textAlign: 'center', marginBlockStart: 'var(--space-200)' }}
+        >
+          Loading...
+        </p>
+      ) : error ? (
+        <p>Something went wrong!!!</p>
+      ) : (
+        <ReposGrid repos={repos[selectedLanguage]} />
+        // <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre>
+      )}
     </PopularWrapper>
   )
 }
