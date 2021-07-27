@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { container } from '../styles/utils/container'
+import { IRepo } from '../types/types'
+import { fetchPopularRepos } from '../utils/api'
 
 const PopularWrapper = styled.div`
   ${container}
@@ -60,8 +62,25 @@ export default function Popular() {
   ]
   const [selectedLanguage, setSelectedLanguage] =
     React.useState<Language>('All')
+  const [repos, setRepos] = React.useState({} as Record<Language, IRepo[]>)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<null | string>(null)
+
+  React.useEffect(() => {
+    if (!repos[selectedLanguage]) {
+      setLoading(true)
+
+      fetchPopularRepos(selectedLanguage)
+        .then(data => {
+          setRepos(repos => ({ ...repos, [selectedLanguage]: data }))
+          setLoading(false)
+        })
+        .catch(({ message }) => {
+          setError(message)
+          setLoading(false)
+        })
+    }
+  }, [selectedLanguage])
 
   const getLanguageNavProps = () => ({
     selectedLanguage,
@@ -72,11 +91,23 @@ export default function Popular() {
   const getPopularReposProps = () => ({})
 
   // fetch data for popular repos
+  if (loading) {
+    return (
+      <p style={{ marginBlockStart: 'var(--space-300)', textAlign: 'center' }}>
+        Loading...
+      </p>
+    )
+  }
+
+  if (error) {
+    return <p>Something went wrong!!!</p>
+  }
 
   return (
     <PopularWrapper>
+      {JSON.stringify(selectedLanguage)}
       <SelectionNav {...getLanguageNavProps()} />
-      {/* Content */}
+      <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre>
     </PopularWrapper>
   )
 }
