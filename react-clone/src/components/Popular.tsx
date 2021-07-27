@@ -13,6 +13,7 @@ const PopularWrapper = styled.div`
     display: flex;
     justify-content: center;
     gap: var(--space-400);
+    padding: var(--space-100);
 
     li {
       cursor: pointer;
@@ -49,6 +50,10 @@ function SelectionNav({
       ))}
     </ul>
   )
+}
+
+function ReposGrid({ repos }: { repos: IRepo[] }) {
+  return <pre>{JSON.stringify(repos, null, 2)}</pre>
 }
 
 export default function Popular() {
@@ -88,9 +93,10 @@ export default function Popular() {
     languages,
   })
 
-  const getPopularReposProps = () => ({})
+  const getPopularReposProps = () => ({
+    repos: repos[selectedLanguage],
+  })
 
-  // fetch data for popular repos
   if (loading) {
     return (
       <p style={{ marginBlockStart: 'var(--space-300)', textAlign: 'center' }}>
@@ -107,7 +113,7 @@ export default function Popular() {
     <PopularWrapper>
       {JSON.stringify(selectedLanguage)}
       <SelectionNav {...getLanguageNavProps()} />
-      <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre>
+      <ReposGrid {...getPopularReposProps()} />
     </PopularWrapper>
   )
 }
