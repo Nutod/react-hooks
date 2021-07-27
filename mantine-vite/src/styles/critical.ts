@@ -12,15 +12,6 @@ export const CRITICAL = css`
     --color-black-glare: #1b2d45;
     --color-black-shade: #1e3047;
 
-    --gray-100: hsl(210, 20%, 98%);
-    --gray-200: hsl(210, 20%, 88%);
-    --gray-300: hsl(210, 20%, 78%);
-    --gray-400: hsl(210, 20%, 68%);
-    --gray-500: hsl(210, 20%, 58%);
-    --gray-600: hsl(210, 20%, 48%);
-    --gray-700: hsl(210, 20%, 38%);
-    --gray-800: hsl(210, 20%, 28%);
-
     --font-display: 'Carrois Gothic', sans-serif;
     --font-body: 'Roboto', sans-serif;
 

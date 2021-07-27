@@ -1,13 +1,14 @@
 import React from 'react'
-import { MantineProvider, NormalizeCSS, GlobalStyles } from '@mantine/core'
 import ReactDOM from 'react-dom'
+import { MantineProvider, GlobalStyles } from '@mantine/core'
 import App from './App'
 import { theme } from './styles/theme'
+import { GlobalStyledElements } from './styles/global'
 
 ReactDOM.render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
-      {/* <NormalizeCSS /> */}
+      <GlobalStyledElements />
       <GlobalStyles />
       <App />
     </MantineProvider>

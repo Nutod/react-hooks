@@ -16,7 +16,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Heading One</h1>
-        <img src={logo} className="App-logo" alt="logo" />
         <p
           style={{
             color: `${theme.primaryColor}`,
