@@ -18,7 +18,7 @@ export default function Loading({ text = 'Loading', speed = 300 }) {
 
   React.useEffect(() => {
     intervalId.current = window.setInterval(() => {
-      content === `${text}...`
+      content === text + '...'
         ? setContent(text)
         : setContent(content => content + '.')
     }, speed)

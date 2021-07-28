@@ -1,0 +1,88 @@
+const ProfileObj = {
+  login: 'Nutod',
+  id: 7740768,
+  node_id: 'MDQ6VXNlcjc3NDA3Njg=',
+  avatar_url: 'https://avatars.githubusercontent.com/u/7740768?v=4',
+  url: 'https://api.github.com/users/Nutod',
+  html_url: 'https://github.com/Nutod',
+  followers_url: 'https://api.github.com/users/Nutod/followers',
+  following_url: 'https://api.github.com/users/Nutod/following{/other_user}',
+  repos_url: 'https://api.github.com/users/Nutod/repos',
+  events_url: 'https://api.github.com/users/Nutod/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/Nutod/received_events',
+  type: 'User',
+  site_admin: false,
+  name: 'Oladotun Aluko',
+  company: null,
+  blog: 'https://oladotunaluko.com/',
+  location: 'http://localhost:3000',
+  email: null,
+  bio: 'Software Developer focused on the front-end things of the web',
+  public_repos: 45,
+  public_gists: 0,
+  followers: 1,
+  following: 0,
+  created_at: '2014-05-29T22:36:55Z',
+  updated_at: '2021-07-26T05:33:43Z',
+}
+
+const RepoObj = {
+  id: 28457823,
+  node_id: 'MDEwOlJlcG9zaXRvcnkyODQ1NzgyMw==',
+  name: 'freeCodeCamp',
+  full_name: 'freeCodeCamp/freeCodeCamp',
+  private: false,
+  owner: {
+    login: 'freeCodeCamp',
+    id: 9892522,
+    node_id: 'MDEyOk9yZ2FuaXphdGlvbjk4OTI1MjI=',
+    avatar_url: 'https://avatars.githubusercontent.com/u/9892522?v=4',
+    gravatar_id: '',
+    url: 'https://api.github.com/users/freeCodeCamp',
+    html_url: 'https://github.com/freeCodeCamp',
+    followers_url: 'https://api.github.com/users/freeCodeCamp/followers',
+    following_url:
+      'https://api.github.com/users/freeCodeCamp/following{/other_user}',
+    repos_url: 'https://api.github.com/users/freeCodeCamp/repos',
+    events_url: 'https://api.github.com/users/freeCodeCamp/events{/privacy}',
+    received_events_url:
+      'https://api.github.com/users/freeCodeCamp/received_events',
+    type: 'Organization',
+  },
+  html_url: 'https://github.com/freeCodeCamp/freeCodeCamp',
+  description:
+    "freeCodeCamp.org's open-source codebase and curriculum. Learn to code for free.",
+  fork: false,
+  url: 'https://api.github.com/repos/freeCodeCamp/freeCodeCamp',
+  forks_url: 'https://api.github.com/repos/freeCodeCamp/freeCodeCamp/forks',
+  keys_url:
+    'https://api.github.com/repos/freeCodeCamp/freeCodeCamp/keys{/key_id}',
+  stargazers_url:
+    'https://api.github.com/repos/freeCodeCamp/freeCodeCamp/stargazers',
+  contributors_url:
+    'https://api.github.com/repos/freeCodeCamp/freeCodeCamp/contributors',
+  deployments_url:
+    'https://api.github.com/repos/freeCodeCamp/freeCodeCamp/deployments',
+  created_at: '2014-12-24T17:49:19Z',
+  updated_at: '2021-07-27T04:54:29Z',
+  pushed_at: '2021-07-27T03:31:43Z',
+  svn_url: 'https://github.com/freeCodeCamp/freeCodeCamp',
+  homepage: 'https://contribute.freecodecamp.org',
+  size: 212113,
+  stargazers_count: 326614,
+  watchers_count: 326614,
+  language: 'JavaScript',
+  forks_count: 26172,
+  mirror_url: null,
+  archived: false,
+  disabled: false,
+  open_issues_count: 242,
+  forks: 26172,
+  open_issues: 242,
+  watchers: 326614,
+  default_branch: 'main',
+  score: 1,
+}
+
+export type IRepo = typeof RepoObj
+export type IProfile = typeof ProfileObj

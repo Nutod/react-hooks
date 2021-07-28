@@ -3,64 +3,31 @@ import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
-import { PostType } from './Post'
+import { IPost } from './Post'
 
-type StateType = {
-  posts: null | PostType[]
-  error: null | string
-  loading: boolean
-}
-
-type ResetType = {
-  type: 'reset'
-}
-
-type ResultType = {
-  type: 'result'
-  posts: PostType[]
-}
-
-type ErrorType = {
-  type: 'error'
-  message: string
-}
-
-type ActionType = ResetType | ResultType | ErrorType
-
-export default function Posts({ type }: { type: 'top' | 'new' }) {
-  const [{ posts, error, loading }, dispatch] = React.useReducer(
-    (state: StateType, action: ActionType): StateType => {
-      switch (action.type) {
-        case 'reset':
-          return { ...state, posts: null, error: null, loading: true }
-        case 'result':
-          return { ...state, posts: action.posts, loading: false, error: null }
-        case 'error':
-          return { ...state, error: action.message, loading: false }
-        default:
-          return state
-      }
-    },
-    {
-      posts: null,
-      error: null,
-      loading: true,
-    }
-  )
+export default function Posts({ type }: { type: string }) {
+  const [posts, setPosts] = React.useState<null | IPost[]>(null)
+  const [error, setError] = React.useState(null)
+  const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     handleFetch()
   }, [type])
 
   const handleFetch = () => {
-    dispatch({ type: 'reset' })
+    setPosts(null)
+    setError(null)
+    setLoading(true)
 
     fetchMainPosts(type)
       .then(posts => {
-        dispatch({ type: 'result', posts })
+        setPosts(posts)
+        setLoading(false)
+        setError(null)
       })
       .catch(({ message }) => {
-        dispatch({ type: 'error', message })
+        setError(message)
+        setLoading(false)
       })
   }
 
@@ -71,6 +38,8 @@ export default function Posts({ type }: { type: 'top' | 'new' }) {
   if (error) {
     return <p className="center-text error">{error}</p>
   }
+
+  // handle the empty state
 
   return <PostsList posts={posts} />
 }

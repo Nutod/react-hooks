@@ -1,25 +1,25 @@
-import { PostType } from '../components/Post'
+import { IPost } from '../components/Post'
 
 const api = `https://hacker-news.firebaseio.com/v0`
 const json = '.json?print=pretty'
 
-function removeDead(posts: PostType[]) {
+function removeDead(posts: IPost[]) {
   return posts.filter(Boolean).filter(({ dead }) => dead !== true)
 }
 
-function removeDeleted(posts: PostType[]) {
+function removeDeleted(posts: IPost[]) {
   return posts.filter(({ deleted }) => deleted !== true)
 }
 
-function onlyComments(posts: PostType[]) {
+function onlyComments(posts: IPost[]) {
   return posts.filter(({ type }) => type === 'comment')
 }
 
-function onlyPosts(posts: PostType[]) {
+function onlyPosts(posts: IPost[]) {
   return posts.filter(({ type }) => type === 'story')
 }
 
-export function fetchItem(id: string) {
+export function fetchItem(id: string): Promise<IPost> {
   return fetch(`${api}/item/${id}${json}`).then(res => res.json())
 }
 
@@ -29,7 +29,7 @@ export function fetchComments(ids: string[]) {
   )
 }
 
-export function fetchMainPosts(type: 'top' | 'new') {
+export function fetchMainPosts(type: string) {
   return fetch(`${api}/${type}stories${json}`)
     .then(res => res.json())
     .then(ids => {
@@ -37,7 +37,7 @@ export function fetchMainPosts(type: 'top' | 'new') {
         throw new Error(`There was an error fetching the ${type} posts.`)
       }
 
-      return ids.slice(0, 50) as Array<string>
+      return ids.slice(0, 50) as string[]
     })
     .then(ids => Promise.all(ids.map(fetchItem)))
     .then(posts => removeDeleted(onlyPosts(removeDead(posts))))

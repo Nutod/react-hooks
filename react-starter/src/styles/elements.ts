@@ -23,6 +23,10 @@ export const ELEMENTS = css`
     &:active {
       transform: translateY(1px);
     }
+
+    &:disabled {
+      opacity: 0.4;
+    }
   }
 
   a {

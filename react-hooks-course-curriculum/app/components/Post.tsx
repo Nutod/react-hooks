@@ -1,30 +1,31 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchItem, fetchPosts, fetchComments } from '../utils/api'
+import { fetchItem, fetchComments } from '../utils/api'
 import Loading from './Loading'
 import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-export type PostType = {
+export interface IPost {
   url: string
   title: string
+  id: number
   by: string
   time: number
-  id: number
   text: string
-  descendants?: number
+  descendants: number
   dead: boolean
   deleted: boolean
   type: 'comment' | 'story'
+  kids: number
 }
 
 export default function Post({ location }: { location: { search: string } }) {
-  const [post, setPost] = React.useState<PostType | null>(null)
+  const [post, setPost] = React.useState<null | IPost>(null)
   const [loadingPost, setLoadingPost] = React.useState(true)
-  const [comments, setComments] = React.useState<PostType[] | null>(null)
+  const [comments, setComments] = React.useState<null | IPost[]>(null)
   const [loadingComments, setLoadingComments] = React.useState(true)
-  const [error, setError] = React.useState<null | string>(null)
+  const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
     const { id } = queryString.parse(location.search) as { id: string }
@@ -40,7 +41,7 @@ export default function Post({ location }: { location: { search: string } }) {
         setComments(comments)
         setLoadingComments(false)
       })
-      .catch(({ message }: { message: string }) => {
+      .catch(({ message }) => {
         setError(message)
         setLoadingPost(false)
         setLoadingComments(false)
@@ -51,13 +52,9 @@ export default function Post({ location }: { location: { search: string } }) {
     return <p className="center-text error">{error}</p>
   }
 
-  if (!post || !comments) {
-    return <Loading />
-  }
-
   return (
     <React.Fragment>
-      {loadingPost === true ? (
+      {loadingPost === true || !post ? (
         <Loading text="Fetching post" />
       ) : (
         <React.Fragment>
@@ -73,7 +70,7 @@ export default function Post({ location }: { location: { search: string } }) {
           <p dangerouslySetInnerHTML={{ __html: post.text }} />
         </React.Fragment>
       )}
-      {loadingComments === true ? (
+      {loadingComments === true || !comments ? (
         loadingPost === false && <Loading text="Fetching comments" />
       ) : (
         <React.Fragment>

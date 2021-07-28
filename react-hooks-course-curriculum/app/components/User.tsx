@@ -4,21 +4,21 @@ import { fetchUser, fetchPosts } from '../utils/api'
 import Loading from './Loading'
 import { formatDate } from '../utils/helpers'
 import PostsList from './PostsList'
-import { PostType } from './Post'
+import { IPost } from './Post'
 
-export type UserType = {
-  id: number
+export interface IUser {
+  id: string
   karma: number
   created: number
   about: string
 }
 
 export default function User({ location }: { location: { search: string } }) {
-  const [user, setUser] = React.useState<null | UserType>(null)
+  const [user, setUser] = React.useState<IUser | null>(null)
   const [loadingUser, setLoadingUser] = React.useState(true)
-  const [posts, setPosts] = React.useState<null | PostType[]>(null)
+  const [posts, setPosts] = React.useState<null | IPost[]>(null)
   const [loadingPosts, setLoadingPosts] = React.useState(true)
-  const [error, setError] = React.useState<null | string>(null)
+  const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
     const { id } = queryString.parse(location.search) as { id: string }
@@ -37,8 +37,8 @@ export default function User({ location }: { location: { search: string } }) {
       })
       .catch(({ message }) => {
         setError(message)
-        setLoadingUser(false)
         setLoadingPosts(false)
+        setLoadingUser(false)
       })
   }, [])
 
@@ -46,13 +46,9 @@ export default function User({ location }: { location: { search: string } }) {
     return <p className="center-text error">{error}</p>
   }
 
-  if (!user || !posts) {
-    return <Loading />
-  }
-
   return (
     <React.Fragment>
-      {loadingUser === true ? (
+      {loadingUser === true || !user ? (
         <Loading text="Fetching User" />
       ) : (
         <React.Fragment>
@@ -68,7 +64,7 @@ export default function User({ location }: { location: { search: string } }) {
           <p dangerouslySetInnerHTML={{ __html: user.about }} />
         </React.Fragment>
       )}
-      {loadingPosts === true ? (
+      {loadingPosts === true || !posts ? (
         loadingUser === false && <Loading text="Fetching posts" />
       ) : (
         <React.Fragment>
