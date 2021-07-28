@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Sidebar from './components/Sidebar'
 import Hero from './components/Hero'
 import Realtors from './components/Realtors'
@@ -8,8 +8,6 @@ import Features from './components/Features'
 // Use a custom Context Provider?
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Sidebar />

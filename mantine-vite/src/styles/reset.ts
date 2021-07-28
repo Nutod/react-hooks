@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const RESET = css`
   /* Remove default padding */
@@ -32,7 +32,6 @@ export const RESET = css`
   body {
     min-height: 100vh;
     text-rendering: optimizeSpeed;
-    padding: 2rem;
   }
 
   /* Remove list styles on ul, ol elements with a class attribute */
@@ -71,4 +70,4 @@ export const RESET = css`
       scroll-behavior: auto !important;
     }
   }
-`;
+`
