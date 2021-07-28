@@ -1,8 +1,6 @@
 import { css } from 'styled-components'
 
 export const TYPOGRAPHY = css`
-  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Nunito+Sans&display=swap');
-
   html {
     font-size: 100%;
   } /*16px*/
