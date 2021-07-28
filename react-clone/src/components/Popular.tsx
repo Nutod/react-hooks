@@ -5,7 +5,8 @@ import { IRepo } from '../types/types'
 import { fetchPopularRepos } from '../utils/api'
 
 const PopularWrapper = styled.div`
-  ${container}
+  ${container};
+  
   margin-block-start: var(--space-500);
 
   ul {
