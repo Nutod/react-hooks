@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useInput } from '../hooks/useInput'
 import { container } from '../styles/utils/container'
@@ -145,6 +146,7 @@ function PlayerInput({
           value={state}
           onChange={handleInputChange}
           required
+          autoComplete="off"
           name={label}
         />
         <button type="submit" disabled={!state.trim().length}>
@@ -225,6 +227,23 @@ function BattleForm() {
           label="Player Two"
           onSubmit={player => setPlayerTwo(player)}
         />
+      )}
+      {playerOne && playerTwo && (
+        <div
+          style={{
+            gridColumn: '1 / -1',
+            textAlign: 'center',
+          }}
+        >
+          <Link
+            to={{
+              pathname: '/battle/results',
+              search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`,
+            }}
+          >
+            Battle
+          </Link>
+        </div>
       )}
     </BattleFormWrapper>
   )
