@@ -27,7 +27,7 @@ export default function Nav() {
         </li>
       </ul>
       <button onClick={toggleTheme}>
-        {theme === 'light' ? 'Light' : 'Dark'} mode
+        {theme === 'light' ? 'Dark' : 'Light'} mode
       </button>
     </NavWrapper>
   )
