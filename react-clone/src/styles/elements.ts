@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export const ELEMENTS = css`
   button {
@@ -22,6 +22,10 @@ export const ELEMENTS = css`
 
     &:active {
       transform: translateY(1px);
+    }
+
+    &:disabled {
+      opacity: 0.5;
     }
   }
 
@@ -62,4 +66,4 @@ export const ELEMENTS = css`
       box-shadow: 0px 0px 0px 3.5px var(--color-primary-glare);
     }
   }
-`;
+`

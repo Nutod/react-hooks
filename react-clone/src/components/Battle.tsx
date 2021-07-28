@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useInput } from '../hooks/useInput'
 import { container } from '../styles/utils/container'
 
 const BattleWrapper = styled.div`
@@ -100,7 +101,6 @@ function Instructions() {
 }
 
 const BattleFormWrapper = styled.div`
-  background: pink;
   margin-block-start: var(--space-400);
 
   display: grid;
@@ -122,12 +122,22 @@ const Form = styled.form`
 `
 
 function PlayerInput({ label }: { label: string }) {
+  const [state, { handleInputChange }] = useInput()
+
   return (
     <Form>
       <label htmlFor="username">{label}</label>
       <div>
-        <input type="text" onChange={e => } />
-        <button type="submit">Submit</button>
+        <input
+          type="text"
+          value={state}
+          onChange={handleInputChange}
+          required
+          name={label}
+        />
+        <button type="submit" disabled={!state.trim().length}>
+          Submit
+        </button>
       </div>
     </Form>
   )
