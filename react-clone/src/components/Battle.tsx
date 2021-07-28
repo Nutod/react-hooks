@@ -99,10 +99,55 @@ function Instructions() {
   )
 }
 
+const BattleFormWrapper = styled.div`
+  background: pink;
+  margin-block-start: var(--space-400);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-200);
+  column-gap: var(--space-600);
+
+  h4 {
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+`
+
+const Form = styled.form`
+  div {
+    display: flex;
+    gap: var(--space-100);
+  }
+`
+
+function PlayerInput({ label }: { label: string }) {
+  return (
+    <Form>
+      <label htmlFor="username">{label}</label>
+      <div>
+        <input type="text" onChange={e => } />
+        <button type="submit">Submit</button>
+      </div>
+    </Form>
+  )
+}
+
+function BattleForm() {
+  return (
+    <BattleFormWrapper>
+      <h4>Battle</h4>
+      <PlayerInput label="Player One" />
+      <PlayerInput label="Player Two" />
+    </BattleFormWrapper>
+  )
+}
+
 export default function Battle() {
   return (
     <BattleWrapper>
       <Instructions />
+      <BattleForm />
     </BattleWrapper>
   )
 }
