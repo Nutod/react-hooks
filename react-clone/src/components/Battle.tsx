@@ -121,11 +121,23 @@ const Form = styled.form`
   }
 `
 
-function PlayerInput({ label }: { label: string }) {
+function PlayerInput({
+  label,
+  onSubmit,
+}: {
+  label: string
+  onSubmit: (param: string) => void
+}) {
   const [state, { handleInputChange }] = useInput()
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    onSubmit(state)
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <label htmlFor="username">{label}</label>
       <div>
         <input
@@ -143,12 +155,77 @@ function PlayerInput({ label }: { label: string }) {
   )
 }
 
+const PlayerPreviewWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  box-shadow: var(--elevation-one);
+  padding: var(--space-100);
+
+  img {
+    block-size: 4rem;
+  }
+
+  div {
+    display: flex;
+    gap: var(--space-100);
+  }
+
+  a,
+  button {
+    align-self: center;
+  }
+`
+
+function PlayerPreview({
+  username,
+  onReset,
+}: {
+  username: string
+  onReset: () => void
+}) {
+  return (
+    <PlayerPreviewWrapper>
+      <div>
+        <img
+          src={`https://github.com/${username}.png?size=200`}
+          alt={`Avatar for ${username}`}
+        />
+        <a href={`https://github.com/${username}`}>{username}</a>
+      </div>
+      <button onClick={onReset}>Reset</button>
+    </PlayerPreviewWrapper>
+  )
+}
+
 function BattleForm() {
+  const [playerOne, setPlayerOne] = React.useState<null | string>(null)
+  const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
+
   return (
     <BattleFormWrapper>
       <h4>Battle</h4>
-      <PlayerInput label="Player One" />
-      <PlayerInput label="Player Two" />
+      {playerOne ? (
+        <PlayerPreview
+          username={playerOne}
+          onReset={() => setPlayerOne(null)}
+        />
+      ) : (
+        <PlayerInput
+          label="Player One"
+          onSubmit={player => setPlayerOne(player)}
+        />
+      )}
+      {playerTwo ? (
+        <PlayerPreview
+          username={playerTwo}
+          onReset={() => setPlayerTwo(null)}
+        />
+      ) : (
+        <PlayerInput
+          label="Player Two"
+          onSubmit={player => setPlayerTwo(player)}
+        />
+      )}
     </BattleFormWrapper>
   )
 }

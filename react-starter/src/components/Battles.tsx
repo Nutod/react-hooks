@@ -220,19 +220,6 @@ function PlayerPreview({
 function BattlesForm() {
   const [playerOne, setPlayerOne] = React.useState<null | string>(null)
   const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
-  const [results, setResults] = React.useState<null | {}>(null)
-
-  if (results) {
-    return <pre>{JSON.stringify(results, null, 2)}</pre>
-  }
-
-  const onBattle = () => {
-    battle([playerOne, playerTwo] as string[])
-      .then(results => setResults(results))
-      .catch(err => {
-        console.log(err)
-      })
-  }
 
   return (
     <>
