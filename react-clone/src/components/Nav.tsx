@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useThemeContext } from '../context/theme'
 
 const NavWrapper = styled.nav`
   display: flex;
@@ -13,6 +14,8 @@ const NavWrapper = styled.nav`
 `
 
 export default function Nav() {
+  const { theme, toggleTheme } = useThemeContext()
+
   return (
     <NavWrapper>
       <ul>
@@ -23,7 +26,9 @@ export default function Nav() {
           <Link to="/battle">Battle</Link>
         </li>
       </ul>
-      <div>🔦</div>
+      <button onClick={toggleTheme}>
+        {theme === 'light' ? 'Light' : 'Dark'} mode
+      </button>
     </NavWrapper>
   )
 }
