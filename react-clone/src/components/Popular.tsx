@@ -6,7 +6,7 @@ import { fetchPopularRepos } from '../utils/api'
 
 const PopularWrapper = styled.div`
   ${container};
-  
+
   margin-block-start: var(--space-500);
 
   ul {
@@ -146,18 +146,6 @@ export default function Popular() {
     repos: repos[selectedLanguage],
   })
 
-  if (loading) {
-    return (
-      <p style={{ marginBlockStart: 'var(--space-300)', textAlign: 'center' }}>
-        Loading...
-      </p>
-    )
-  }
-
-  if (error) {
-    return <p>Something went wrong!!!</p>
-  }
-
   return (
     <PopularWrapper>
       <SelectionNav {...getLanguageNavProps()} />
@@ -170,8 +158,7 @@ export default function Popular() {
       ) : error ? (
         <p>Something went wrong!!!</p>
       ) : (
-        <ReposGrid repos={repos[selectedLanguage]} />
-        // <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre>
+        <ReposGrid {...getPopularReposProps()} />
       )}
     </PopularWrapper>
   )
