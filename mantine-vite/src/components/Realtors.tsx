@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import RealtorOne from '../assets/realtor-1.jpeg'
 import RealtorTwo from '../assets/realtor-2.jpeg'
 import RealtorThree from '../assets/realtor-3.jpeg'
+import { container } from '../styles/utils/container'
 
 const RealtorsWrapper = styled.div`
   background-color: var(--color-secondary);
@@ -20,6 +21,8 @@ const RealtorsWrapper = styled.div`
 `
 
 const RealtorContainer = styled.div`
+  ${container};
+
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: var(--space-300);

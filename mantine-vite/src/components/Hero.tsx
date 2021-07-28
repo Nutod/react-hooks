@@ -6,6 +6,7 @@ import BBCLogo from '../assets/logo-bbc.png'
 import BILogo from '../assets/logo-bi.png'
 import ForbesLogo from '../assets/logo-forbes.png'
 import TCLogo from '../assets/logo-techcrunch.png'
+import { container } from '../styles/utils/container'
 
 const HeroWrapper = styled.header`
   background-image: linear-gradient(
