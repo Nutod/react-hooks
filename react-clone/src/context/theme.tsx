@@ -13,7 +13,14 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
 
   const toggleTheme = React.useCallback(() => {
-    setTheme(theme => (theme === 'dark' ? 'light' : 'dark'))
+    setTheme(theme => {
+      if (theme === 'light') {
+        document.body.classList.add('dark')
+      } else {
+        document.body.classList.remove('dark')
+      }
+      return theme === 'light' ? 'dark' : 'light'
+    })
   }, [])
 
   return (
