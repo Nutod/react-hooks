@@ -62,7 +62,8 @@ const ReposGridWrapper = styled.div`
   gap: var(--space-400);
 
   div {
-    background-color: var(--gray-100);
+    /* background-color: var(--gray-100); */
+    box-shadow: var(--elevation-three);
 
     & > * {
       padding: var(--space-100);

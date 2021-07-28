@@ -25,16 +25,6 @@ export const ELEMENTS = css`
     }
   }
 
-  .bg-green {
-    --btn-bg-clr: green;
-    --btn-clr: white;
-  }
-
-  .bg-pink {
-    --btn-bg-clr: pink;
-    --btn-clr: white;
-  }
-
   a {
     text-decoration: none;
     color: var(--textColor);
