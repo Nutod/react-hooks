@@ -3,47 +3,54 @@ import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
-import { IPost } from './Post'
 
-export default function Posts({ type }: { type: string }) {
-  const [posts, setPosts] = React.useState<null | IPost[]>(null)
-  const [error, setError] = React.useState(null)
-  const [loading, setLoading] = React.useState(true)
-
-  React.useEffect(() => {
-    handleFetch()
-  }, [type])
-
-  const handleFetch = () => {
-    setPosts(null)
-    setError(null)
-    setLoading(true)
-
-    fetchMainPosts(type)
-      .then(posts => {
-        setPosts(posts)
-        setLoading(false)
-        setError(null)
-      })
-      .catch(({ message }) => {
-        setError(message)
-        setLoading(false)
-      })
+export default class Posts extends React.Component {
+  state = {
+    posts: null,
+    error: null,
+    loading: true,
   }
-
-  if (loading === true || !posts) {
-    return <Loading />
+  componentDidMount() {
+    this.handleFetch()
   }
-
-  if (error) {
-    return <p className="center-text error">{error}</p>
+  componentDidUpdate(prevProps) {
+    if (prevProps.type !== this.props.type) {
+      this.handleFetch()
+    }
   }
+  handleFetch () {
+    this.setState({
+      posts: null,
+      error: null,
+      loading: true
+    })
 
-  // handle the empty state
+    fetchMainPosts(this.props.type)
+      .then((posts) => this.setState({
+        posts,
+        loading: false,
+        error: null
+      }))
+      .catch(({ message }) => this.setState({
+        error: message,
+        loading: false
+      }))
+  }
+  render() {
+    const { posts, error, loading } = this.state
 
-  return <PostsList posts={posts} />
+    if (loading === true) {
+      return <Loading />
+    }
+
+    if (error) {
+      return <p className='center-text error'>{error}</p>
+    }
+
+    return <PostsList posts={posts} />
+  }
 }
 
 Posts.propTypes = {
-  type: PropTypes.oneOf(['top', 'new']),
+  type: PropTypes.oneOf(['top', 'new'])
 }
