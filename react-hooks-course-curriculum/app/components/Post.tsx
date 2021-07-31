@@ -1,51 +1,66 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchItem, fetchPosts, fetchComments } from '../utils/api'
+import { fetchItem, fetchComments } from '../utils/api'
 import Loading from './Loading'
 import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-export default class Post extends React.Component {
-  state = {
-    post: null,
-    loadingPost: true,
-    comments: null,
-    loadingComments: true,
-    error: null,
-  }
-  componentDidMount() {
-    const { id } = queryString.parse(this.props.location.search)
+export interface IPost {
+  url: string
+  title: string
+  id: number
+  by: string
+  time: number
+  text: string
+  descendants: number
+}
+
+export default function Post({ location }: { location: { search: string } }) {
+  const [post, setPost] = React.useState<null | IPost>(null)
+  const [loadingPost, setLoadingPost] = React.useState(true)
+  const [comments, setComments] = React.useState<null | IPost[]>(null)
+  const [loadingComments, setLoadingComments] = React.useState(true)
+  const [error, setError] = React.useState<null | string>(null)
+
+  React.useEffect(() => {
+    const { id } = queryString.parse(location.search) as { id: string }
 
     fetchItem(id)
-      .then((post) => {
-        this.setState({ post, loadingPost: false })
+      .then(post => {
+        setPost(post)
+        setLoadingPost(false)
 
         return fetchComments(post.kids || [])
       })
-      .then((comments) => this.setState({
-        comments,
-        loadingComments: false
-      }))
-      .catch(({ message }) => this.setState({
-        error: message,
-        loadingPost: false,
-        loadingComments: false
-      }))
+      .then(comments => {
+        setComments(comments)
+        setLoadingComments(false)
+      })
+      .catch(({ message }) => {
+        setError(message)
+        setLoadingPost(false)
+        setLoadingComments(false)
+      })
+  }, [])
+
+  if (error) {
+    return <p className="center-text error">{error}</p>
   }
-  render() {
-    const { post, loadingPost, comments, loadingComments, error } = this.state
 
-    if (error) {
-      return <p className='center-text error'>{error}</p>
-    }
-
-    return (
-      <React.Fragment>
-        {loadingPost === true
-          ? <Loading text='Fetching post' />
-          : <React.Fragment>
-              <h1 className='header'>
+  return (
+    <React.Fragment>
+      {loadingPost === true ? (
+        <Loading text="Fetching post" />
+      ) : (
+        <>
+          {!post ? (
+            <>
+              <p>Posts do not exist</p>
+            </>
+          ) : (
+            <React.Fragment>
+              <h1 className="header">
                 <Title url={post.url} title={post.title} id={post.id} />
               </h1>
               <PostMetaInfo
@@ -54,19 +69,20 @@ export default class Post extends React.Component {
                 id={post.id}
                 descendants={post.descendants}
               />
-              <p dangerouslySetInnerHTML={{__html: post.text}} />
-            </React.Fragment>}
-        {loadingComments === true
-          ? loadingPost === false && <Loading text='Fetching comments' />
-          : <React.Fragment>
-              {comments.map((comment) =>
-                <Comment
-                  key={comment.id}
-                  comment={comment}
-                />
-              )}
-            </React.Fragment>}
-      </React.Fragment>
-    )
-  }
+              <p dangerouslySetInnerHTML={{ __html: post.text }} />
+            </React.Fragment>
+          )}
+        </>
+      )}
+      {loadingComments === true || !comments ? (
+        loadingPost === false && <Loading text="Fetching comments" />
+      ) : (
+        <React.Fragment>
+          {comments.map(comment => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+        </React.Fragment>
+      )}
+    </React.Fragment>
+  )
 }
