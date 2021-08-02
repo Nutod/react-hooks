@@ -93,17 +93,36 @@ function Instructions() {
   )
 }
 
-function PlayerInput() {
-  const [state, {}] = useInput()
+function PlayerInput({
+  username,
+  onSubmit,
+}: {
+  username: string
+  onSubmit: (param: string) => void
+}) {
+  const [state, { handleInputChange }] = useInput()
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    onSubmit(state)
+  }
 
   return (
-    <form
-      onSubmit={e => {
-        e.preventDefault()
-      }}
-    >
-      <input type="text" />
-      <button type="submit">Submit</button>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor={username}>{username}</label>
+      <div style={{ display: 'flex', gap: '5px' }}>
+        <input
+          type="text"
+          autoComplete="off"
+          name={username}
+          value={state}
+          onChange={handleInputChange}
+        />
+        <button type="submit" disabled={!state.trim().length}>
+          Submit
+        </button>
+      </div>
     </form>
   )
 }
@@ -113,8 +132,27 @@ export default function Battle() {
     <BattleWrapper>
       <Instructions />
 
-      <h3>Battle</h3>
-      <PlayerInput />
+      <div style={{ marginBlockStart: 'var(--space-500)' }}>
+        <h3 style={{ textAlign: 'center', marginBlockEnd: 'var(--space-100)' }}>
+          Battle
+        </h3>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--space-400)',
+          }}
+        >
+          <PlayerInput
+            username="Player One"
+            onSubmit={player => alert(player)}
+          />
+          <PlayerInput
+            username="Player Two"
+            onSubmit={player => alert(player)}
+          />
+        </div>
+      </div>
     </BattleWrapper>
   )
 }
