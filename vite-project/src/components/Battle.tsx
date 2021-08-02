@@ -127,8 +127,19 @@ function PlayerInput({
   )
 }
 
-function PlayerPreview() {
-   
+function PlayerPreview({ username }: { username: string }) {
+  return (
+    <div>
+      <div>
+        <img
+          src={`https://github.com/${username}.png?size=200`}
+          alt={`Avatar for ${username}`}
+        />
+        <a href={`https://github.com/${username}`}>{username}</a>
+      </div>
+      <button>✖</button>
+    </div>
+  )
 }
 
 export default function Battle() {
@@ -155,7 +166,9 @@ export default function Battle() {
               username="Player One"
               onSubmit={player => setPlayerOne(player)}
             />
-          ) : null}
+          ) : (
+            <PlayerPreview username={playerOne} />
+          )}
           <PlayerInput
             username="Player Two"
             onSubmit={player => setPlayerTwo(player)}
