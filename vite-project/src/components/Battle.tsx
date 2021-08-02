@@ -127,6 +127,10 @@ function PlayerInput({
   )
 }
 
+function PlayerPreview() {
+   
+}
+
 export default function Battle() {
   const [playerOne, setPlayerOne] = React.useState<null | string>(null)
   const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
