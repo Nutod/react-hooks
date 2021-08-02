@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useInput } from '../hooks/useInput'
 import { container } from '../styles/utils/container'
@@ -213,7 +214,14 @@ export default function Battle() {
               textAlign: 'center',
             }}
           >
-            <button>Battle</button>
+            <Link
+              to={{
+                pathname: '/battle/results',
+                search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`,
+              }}
+            >
+              Battle
+            </Link>
           </div>
         )}
       </div>
