@@ -15,5 +15,5 @@ export function useInput() {
     []
   )
 
-  return [state, handlers]
+  return [state, handlers] as const
 }
