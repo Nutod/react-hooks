@@ -143,7 +143,13 @@ const PlayerPreviewWrapper = styled.div`
   }
 `
 
-function PlayerPreview({ username }: { username: string }) {
+function PlayerPreview({
+  username,
+  onReset,
+}: {
+  username: string
+  onReset: () => void
+}) {
   return (
     <PlayerPreviewWrapper>
       <div>
@@ -153,7 +159,7 @@ function PlayerPreview({ username }: { username: string }) {
         />
         <a href={`https://github.com/${username}`}>{username}</a>
       </div>
-      <button>✖</button>
+      <button onClick={onReset}>✖</button>
     </PlayerPreviewWrapper>
   )
 }
