@@ -92,12 +92,26 @@ function Instructions() {
   )
 }
 
+function PlayerInput() {
+  return (
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+      }}
+    >
+      <input type="text" />
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
 export default function Battle() {
   return (
     <BattleWrapper>
-      {/* Instructions */}
       <Instructions />
-      {/* Forms component */}
+
+      <h3>Battle</h3>
+      <PlayerInput />
     </BattleWrapper>
   )
 }
