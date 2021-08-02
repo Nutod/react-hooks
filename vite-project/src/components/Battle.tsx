@@ -127,15 +127,25 @@ function PlayerInput({
   )
 }
 
+const PlayerPreviewWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    block-size: 5rem;
+  }
+
+  div {
+    display: flex;
+    gap: var(--space-100);
+    align-items: center;
+  }
+`
+
 function PlayerPreview({ username }: { username: string }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
+    <PlayerPreviewWrapper>
       <div>
         <img
           src={`https://github.com/${username}.png?size=200`}
@@ -144,7 +154,7 @@ function PlayerPreview({ username }: { username: string }) {
         <a href={`https://github.com/${username}`}>{username}</a>
       </div>
       <button>✖</button>
-    </div>
+    </PlayerPreviewWrapper>
   )
 }
 
@@ -173,12 +183,22 @@ export default function Battle() {
               onSubmit={player => setPlayerOne(player)}
             />
           ) : (
-            <PlayerPreview username={playerOne} />
+            <PlayerPreview
+              username={playerOne}
+              onReset={() => setPlayerOne(null)}
+            />
           )}
-          <PlayerInput
-            username="Player Two"
-            onSubmit={player => setPlayerTwo(player)}
-          />
+          {!playerTwo ? (
+            <PlayerInput
+              username="Player Two"
+              onSubmit={player => setPlayerTwo(player)}
+            />
+          ) : (
+            <PlayerPreview
+              username={playerTwo}
+              onReset={() => setPlayerTwo(null)}
+            />
+          )}
         </div>
         {playerOne && playerTwo && (
           <div
