@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useInput } from '../hooks/useInput'
 import { container } from '../styles/utils/container'
 
 const BattleWrapper = styled.div`
@@ -93,6 +94,8 @@ function Instructions() {
 }
 
 function PlayerInput() {
+  const [state, {}] = useInput()
+
   return (
     <form
       onSubmit={e => {
