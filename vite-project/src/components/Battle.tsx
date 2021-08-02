@@ -129,7 +129,13 @@ function PlayerInput({
 
 function PlayerPreview({ username }: { username: string }) {
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
       <div>
         <img
           src={`https://github.com/${username}.png?size=200`}
