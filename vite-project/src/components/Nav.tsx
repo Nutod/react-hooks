@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useThemeContext } from '../context/theme'
 
 const NavWrapper = styled.nav`
   padding-block: var(--space-100);
@@ -16,6 +17,8 @@ const NavWrapper = styled.nav`
 `
 
 export default function Nav() {
+  const { theme, toggleTheme } = useThemeContext()
+
   return (
     <NavWrapper>
       <ul>
@@ -27,7 +30,9 @@ export default function Nav() {
         </li>
       </ul>
       <div>
-        <button>Light</button>
+        <button onClick={toggleTheme}>
+          {theme === 'light' ? 'Dark' : 'Light'} mode
+        </button>
       </div>
     </NavWrapper>
   )
