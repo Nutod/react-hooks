@@ -128,6 +128,9 @@ function PlayerInput({
 }
 
 export default function Battle() {
+  const [playerOne, setPlayerOne] = React.useState<null | string>(null)
+  const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
+
   return (
     <BattleWrapper>
       <Instructions />
@@ -143,15 +146,27 @@ export default function Battle() {
             gap: 'var(--space-400)',
           }}
         >
-          <PlayerInput
-            username="Player One"
-            onSubmit={player => alert(player)}
-          />
+          {!playerOne ? (
+            <PlayerInput
+              username="Player One"
+              onSubmit={player => setPlayerOne(player)}
+            />
+          ) : null}
           <PlayerInput
             username="Player Two"
-            onSubmit={player => alert(player)}
+            onSubmit={player => setPlayerTwo(player)}
           />
         </div>
+        {playerOne && playerTwo && (
+          <div
+            style={{
+              marginBlockStart: 'var(--space-100)',
+              textAlign: 'center',
+            }}
+          >
+            <button>Battle</button>
+          </div>
+        )}
       </div>
     </BattleWrapper>
   )
