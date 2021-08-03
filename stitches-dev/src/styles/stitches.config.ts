@@ -103,6 +103,7 @@ export const { styled, css, global, keyframes, getCssString, theme } =
         'radius-lg': '0.75rem',
         'radius-xl': '1rem',
         'radius-2xl': '1.5rem',
+        'radius-round': '9999px',
       },
       shadows: {
         'shadow-2xs': '0 1px 2px rgba(134, 144, 162, 0.1)',
