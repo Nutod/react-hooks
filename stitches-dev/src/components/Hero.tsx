@@ -3,6 +3,10 @@ import HeroBG from '../assets/hero.jpeg'
 import Logo from '../assets/logo.png'
 import { styled } from '../styles/stitches.config'
 import Button from './Button'
+import LogoBBC from '../assets/logo-bbc.png'
+import LogoBI from '../assets/logo-bi.png'
+import LogoForbes from '../assets/logo-forbes.png'
+import LogoTC from '../assets/logo-techcrunch.png'
 
 const HeroWrapper = styled('div', {
   backgroundImage: `linear-gradient(
@@ -13,7 +17,7 @@ const HeroWrapper = styled('div', {
   paddingInline: '$400',
   paddingBlock: '$500',
   display: 'grid',
-  gap: '$300',
+  gap: '$400',
   color: 'white',
 
   '& .logo': {
@@ -32,6 +36,29 @@ const HeroWrapper = styled('div', {
   '& h4': {
     fontSize: '1.44rem',
   },
+
+  '& p': {
+    display: 'grid',
+    gridTemplateColumns: '1fr auto 1fr',
+    gap: '$100',
+  },
+
+  '& p::before, & p::after': {
+    content: '',
+    width: '100%',
+    height: '2px',
+    background: `linear-gradient(
+      rgba(255, 254, 254, 0.7),
+      rgba(161, 161, 161, 0.26)
+    )`,
+    alignSelf: 'center',
+  },
+
+  '& .logo__group': {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(10rem, 1fr))',
+    gap: '$200',
+  },
 })
 
 export default function Hero() {
@@ -43,6 +70,13 @@ export default function Hero() {
         <h1>The ultimate personal freedom</h1>
       </div>
       <Button>View Our Properties</Button>
+      <p>As seenon on</p>
+      <div className="logo__group">
+        <img src={LogoBBC} alt="Logo BBC" />
+        <img src={LogoBI} alt="Logo BI" />
+        <img src={LogoTC} alt="Logo TC" />
+        <img src={LogoForbes} alt="Logo Forbes" />
+      </div>
     </HeroWrapper>
   )
 }
