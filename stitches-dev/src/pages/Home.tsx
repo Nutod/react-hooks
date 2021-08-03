@@ -1,4 +1,5 @@
 import React from 'react'
+import Features from '../components/Features'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
 import Realtors from '../components/Realtors'
@@ -10,6 +11,7 @@ export default function Home() {
       <Sidebar />
       <Hero />
       <Realtors />
+      <Features />
       <Footer />
     </>
   )
