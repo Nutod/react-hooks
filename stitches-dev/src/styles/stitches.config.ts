@@ -14,19 +14,22 @@ export const { styled, css, global, keyframes, getCssString, theme } =
         gray800: '#495057',
         gray900: '#343a40',
 
-        
+        'color-primary': 'hsl(33, 46%, 58%)',
+        'color-primary-shade': 'hsl(32, 39%, 51%)',
+        'color-secondary': 'hsl(211, 48%, 12%)',
+        'color-secondary-shade': 'hsl(212, 47%, 2%)',
       },
       // spacing
       space: {
-        100: '0.875rem',
+        100: '0.75rem',
         200: '1rem',
-        300: '1.125rem',
-        400: '1.25rem',
-        500: '1.5rem',
-        600: '1.75rem',
-        700: '2rem',
-        800: '2.25rem',
-        900: '2.5rem',
+        300: '1.33rem',
+        400: '1.77rem',
+        500: '2.36rem',
+        600: '3.15rem',
+        700: '4.2rem',
+        800: '5.6rem',
+        900: '6.9rem',
       },
       // width and height
       sizes: {
@@ -58,8 +61,8 @@ export const { styled, css, global, keyframes, getCssString, theme } =
         'fs-10xl': '4.5rem',
       },
       fonts: {
-        untitled: 'Untitled Sans, apple-system, sans-serif',
-        mono: 'Söhne Mono, menlo, monospace',
+        primary: 'Nunito, sans-serif',
+        display: 'Josefin Sans, sans-serif',
       },
       fontWeights: {
         'fw-ultralight': 100,
