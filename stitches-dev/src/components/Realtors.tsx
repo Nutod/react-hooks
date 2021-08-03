@@ -34,6 +34,10 @@ const RealtorsWrapper = styled('div', {
     gap: '$200',
   },
 
+  '& p': {
+    opacity: '.8',
+  },
+
   '& img': {
     blockSize: '8rem',
     borderRadius: '$radius-round',
