@@ -20,6 +20,18 @@ const HeroWrapper = styled('div', {
     blockSize: '4rem',
     justifySelf: 'center',
   },
+
+  '& h4, & h1': {
+    fontFamily: '$display',
+  },
+
+  '& h1': {
+    fontSize: '2.488rem',
+  },
+
+  '& h4': {
+    fontSize: '1.44rem',
+  },
 })
 
 export default function Hero() {
