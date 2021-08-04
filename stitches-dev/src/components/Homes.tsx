@@ -17,6 +17,11 @@ const HomesWrapper = styled('div', {
     color: '$color-primary',
   },
 
+  '& .heart': {
+    gridColumn: '2 / -1',
+    alignSelf: 'end',
+  },
+
   '& .home': {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
@@ -44,10 +49,6 @@ const HomesWrapper = styled('div', {
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
     textAlign: 'center',
-  },
-
-  [`& ${Button}`]: {
-    gridColumn: '1 / -1',
   },
 })
 

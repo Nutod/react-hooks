@@ -18,12 +18,12 @@ export default function Footer() {
   return (
     <FooterWrapper>
       <ul>
-        <li>Footer Link 1</li>
-        <li>Footer Link 2</li>
-        <li>Footer Link 3</li>
-        <li>Footer Link 4</li>
-        <li>Footer Link 5</li>
-        <li>Footer Link 6</li>
+        <li>Find your Dream Home</li>
+        <li>Request Proposal</li>
+        <li>Download home Planner</li>
+        <li>Contact Us</li>
+        <li>Sumit your Proposal</li>
+        <li>Come work with us!</li>
       </ul>
     </FooterWrapper>
   )

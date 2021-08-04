@@ -18,3 +18,5 @@ const ButtonWrapper = styled('button', {
 export default function Button({ children }: { children: ReactNode }) {
   return <ButtonWrapper>{children}</ButtonWrapper>
 }
+
+Button.toString = () => '.btn-base'
