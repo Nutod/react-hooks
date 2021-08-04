@@ -15,6 +15,16 @@ const StoriesPictures = styled('div', {
     objectFit: 'cover',
   },
 
+  '& .main_image': {
+    gridColumn: '2 / 6',
+    gridRow: '2 / 6',
+  },
+
+  '& .sub_image': {
+    gridColumn: '4 / -1',
+    gridRow: '4 / -1',
+  },
+
   '& img': {
     width: '100%',
     height: '100%',
@@ -30,9 +40,11 @@ export default function Stories() {
   return (
     <>
       <StoriesPictures>
-        <figure>
-          <img className="main_image" src={StoryOne} alt="" />
-          {/* <img className="sub_image" src={StoryTwo} alt="" /> */}
+        <figure className="main_image">
+          <img src={StoryOne} alt="" />
+        </figure>
+        <figure className="sub_image">
+          <img src={StoryTwo} alt="" />
         </figure>
       </StoriesPictures>
       <StoriesContent>Stories Content</StoriesContent>
