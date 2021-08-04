@@ -32,8 +32,22 @@ const StoriesPictures = styled('div', {
 })
 
 const StoriesContent = styled('div', {
-  background: 'pink',
+  background: 'bisque',
   padding: '$400',
+  color: '$color-secondary',
+
+  '& > * + *': {
+    marginTop: '$200',
+  },
+
+  '& h4': {
+    fontFamily: '$display',
+  },
+
+  '& h2': {
+    fontFamily: '$display',
+    fontStyle: 'italic',
+  },
 })
 
 export default function Stories() {
@@ -47,7 +61,15 @@ export default function Stories() {
           <img src={StoryTwo} alt="" />
         </figure>
       </StoriesPictures>
-      <StoriesContent>Stories Content</StoriesContent>
+      <StoriesContent>
+        <h4>Happy Customers</h4>
+        <h2>Listen to what our Customers are saying</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis qui
+          perferendis blanditiis rerum, fugiat magni. Temporibus maiores
+          quisquam assumenda quibusdam!
+        </p>
+      </StoriesContent>
     </>
   )
 }
