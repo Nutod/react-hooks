@@ -2,6 +2,7 @@ import React from 'react'
 import Features from '../components/Features'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
+import Homes from '../components/Homes'
 import Realtors from '../components/Realtors'
 import Sidebar from '../components/Sidebar'
 import Stories from '../components/Stories'
@@ -14,6 +15,7 @@ export default function Home() {
       <Realtors />
       <Features />
       <Stories />
+      <Homes />
       <Footer />
     </>
   )
