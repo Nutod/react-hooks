@@ -9,6 +9,8 @@ import LogoForbes from '../assets/logo-forbes.png'
 import LogoTC from '../assets/logo-techcrunch.png'
 
 const HeroWrapper = styled('div', {
+  // maxWidth: '70rem',
+  // marginInline: 'auto',
   backgroundImage: `linear-gradient(
     rgba(16, 29, 44, 0.7),
     rgba(16, 29, 44, 0.7)
