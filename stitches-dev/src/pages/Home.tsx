@@ -4,6 +4,7 @@ import Footer from '../components/Footer'
 import Hero from '../components/Hero'
 import Realtors from '../components/Realtors'
 import Sidebar from '../components/Sidebar'
+import Stories from '../components/Stories'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <Realtors />
       <Features />
+      <Stories />
       <Footer />
     </>
   )

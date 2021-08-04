@@ -8,7 +8,6 @@ const RealtorsWrapper = styled('div', {
   background: '$color-secondary',
   color: 'white',
   padding: '$400',
-  maxBlockSize: '70rem',
 
   '& h2': {
     fontFamily: '$display',
@@ -22,6 +21,8 @@ const RealtorsWrapper = styled('div', {
   },
 
   '& .realtors': {
+    maxWidth: '70rem',
+    marginInline: 'auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(18rem, 1fr))',
     gap: '$300',

@@ -2,7 +2,8 @@ import React from 'react'
 import { styled } from '../styles/stitches.config'
 
 const FeaturesWrapper = styled('div', {
-  maxBlockSize: '70rem',
+  maxWidth: '70rem',
+  marginInline: 'auto',
   padding: '$400',
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(20rem, 1fr))',
