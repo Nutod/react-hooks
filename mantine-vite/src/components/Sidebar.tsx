@@ -1,5 +1,5 @@
 import React from 'react'
-import { useMantineTheme, theming } from '@mantine/core'
+import { theming } from '@mantine/core'
 import { createUseStyles } from 'react-jss'
 import { theme as extendedTheme } from '../config/extendedTheme'
 
@@ -19,7 +19,6 @@ const useStyles = createUseStyles(
 )
 
 export default function Sidebar() {
-  const theme = useMantineTheme()
   const styles = useStyles()
 
   return (
