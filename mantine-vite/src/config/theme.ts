@@ -1,6 +1,6 @@
 export const theme = {
   colors: {
-    'gray-000': '#fff',
+    'gray-000': '#ffffff',
     'gray-100': '#f8f9fa',
     'gray-200': '#f1f3f5',
     'gray-300': '#e9ecef',
