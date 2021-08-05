@@ -9,7 +9,7 @@ const useStyles = createUseStyles(
       maxWidth: '70rem',
       marginInline: 'auto',
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(18rem, 1fr))',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(18rem, 100%), 1fr))',
       gap: theme.spacing.md,
       paddingInline: theme.spacing.lg,
       paddingBlock: theme.spacing.xl,
