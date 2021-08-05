@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Title, useMantineTheme, theming } from '@mantine/core'
+import { useMantineTheme, theming } from '@mantine/core'
 import { createUseStyles } from 'react-jss'
 import { theme as extendedTheme } from '../config/extendedTheme'
 
@@ -22,13 +22,8 @@ export default function Sidebar() {
   const theme = useMantineTheme()
   const styles = useStyles()
 
-  console.log(theme)
-
   return (
     <aside className={styles.root}>
-      {/* {/* <Title order={1}>This is h1 title</Title>
-      <Title order={2}>This is h2 title</Title>
-      <Title order={3}>This is h3 title</Title> */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className={styles.icon}
