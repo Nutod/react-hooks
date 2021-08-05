@@ -1,15 +1,18 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
-import { theming } from '@mantine/core'
+import { Button, theming, Title } from '@mantine/core'
+import { theme as extendedTheme } from '../config/extendedTheme'
 import HouseOne from '../assets/house-1.jpeg'
 
 const useStyles = createUseStyles(
   theme => ({
     wrapper: {
       background: 'ghostwhite',
+      padding: theme.spacing.xl,
 
       '& svg': {
         blockSize: '2rem',
+        color: extendedTheme.colors['color-primary'],
       },
     },
     container: {
@@ -18,6 +21,12 @@ const useStyles = createUseStyles(
     },
     homes: {},
     home: {},
+    button: {
+      fontFamily: extendedTheme.fonts.display,
+      background: extendedTheme.colors['color-primary'],
+      textShadow: 'none',
+      boxShadow: extendedTheme.shadows['shadow-md'],
+    },
   }),
   { theming }
 )
@@ -43,6 +52,8 @@ export default function Homes() {
               />
             </svg>
             <img src={HouseOne} alt="House One" />
+            <Title order={5}>Beautiful Family House</Title>
+            <Button className={styles.button}>Contact Realtor</Button>
           </div>
         </div>
       </div>
