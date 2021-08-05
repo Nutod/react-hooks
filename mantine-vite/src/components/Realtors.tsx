@@ -2,6 +2,9 @@ import React from 'react'
 import { createUseStyles } from 'react-jss'
 import { Text, theming, Title } from '@mantine/core'
 import { theme as extendedTheme } from '../config/extendedTheme'
+import RealtorOne from '../assets/realtor-1.jpeg'
+import RealtorTwo from '../assets/realtor-2.jpeg'
+import RealtorThree from '../assets/realtor-3.jpeg'
 
 const useStyles = createUseStyles(
   theme => ({
@@ -15,8 +18,13 @@ const useStyles = createUseStyles(
         marginBlockEnd: theme.spacing.md,
       },
 
+      '& h4': {
+        color: theme.white,
+      },
+
       '& p': {
         color: theme.white,
+        opacity: 0.8,
       },
     },
     container: {
@@ -24,6 +32,20 @@ const useStyles = createUseStyles(
       marginInline: 'auto',
       color: theme.white,
     },
+    realtors: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(14rem, 100%), 1fr))',
+      gap: theme.spacing.lg,
+      textAlign: 'center',
+
+      '& img': {
+        blockSize: '8rem',
+        marginBlockEnd: theme.spacing.xs,
+        borderRadius: theme.radius.md,
+        marginInline: 'auto',
+      },
+    },
+    realtor: {},
   }),
   { theming }
 )
@@ -35,10 +57,23 @@ export default function Realtors() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <Title order={3}>Realtors</Title>
-        <Text component="p">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius non
-          impedit repudiandae ab quasi veniam at autem hic nostrum perferendis.
-        </Text>
+        <div className={styles.realtors}>
+          <div className={styles.realtor}>
+            <img src={RealtorOne} alt="Realtor one" />
+            <Title order={4}>Eric Schneiderlin</Title>
+            <Text component="p">500 Houses sold</Text>
+          </div>
+          <div className={styles.realtor}>
+            <img src={RealtorTwo} alt="Realtor two" />
+            <Title order={4}>Lucy Evans</Title>
+            <Text component="p">300 Houses sold</Text>
+          </div>
+          <div className={styles.realtor}>
+            <img src={RealtorThree} alt="Realtor three" />
+            <Title order={4}>Morgan Freeman</Title>
+            <Text component="p">100 Houses sold</Text>
+          </div>
+        </div>
       </div>
     </div>
   )
