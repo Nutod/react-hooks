@@ -1,5 +1,6 @@
 import React from 'react'
 import Features from '../components/Features'
+import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <Sidebar />
       <Features />
+      <Footer />
     </>
   )
 }
