@@ -1,27 +1,48 @@
 import React from 'react'
-import { Text, Title, useMantineTheme } from '@mantine/core'
+import { Text, Title, useMantineTheme, theming } from '@mantine/core'
+import { createUseStyles } from 'react-jss'
+import { theme as extendedTheme } from '../config/extendedTheme'
+
+const useStyles = createUseStyles(
+  theme => ({
+    root: {
+      background: 'bisque',
+      display: 'flex',
+      padding: theme.spacing.xs,
+    },
+    icon: {
+      blockSize: '2rem',
+      color: extendedTheme.colors['color-primary'],
+    },
+  }),
+  { theming }
+)
 
 export default function Sidebar() {
   const theme = useMantineTheme()
+  const styles = useStyles()
 
   console.log(theme)
 
   return (
-    <>
-      <p>Sidebar...</p>
-      <Text component="h1">Level Heading</Text>
-      <Text component="h2">Level Heading</Text>
-      <Text component="h3">Level Heading</Text>
-      <Text component="h4">Level Heading</Text>
-      <Text component="h5">Level Heading</Text>
-      <Text component="p">Heading One</Text>
-
-      <Title order={1}>This is h1 title</Title>
+    <aside className={styles.root}>
+      {/* {/* <Title order={1}>This is h1 title</Title>
       <Title order={2}>This is h2 title</Title>
-      <Title order={3}>This is h3 title</Title>
-      <Title order={4}>This is h4 title</Title>
-      <Title order={5}>This is h5 title</Title>
-      <Title order={6}>This is h6 title</Title>
-    </>
+      <Title order={3}>This is h3 title</Title> */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={styles.icon}
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M4 6h16M4 12h8m-8 6h16"
+        />
+      </svg>
+    </aside>
   )
 }
