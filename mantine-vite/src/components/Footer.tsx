@@ -1,10 +1,15 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
 import { theming } from '@mantine/core'
+import { theme as extendedTheme } from '../config/extendedTheme'
 
 const useStyles = createUseStyles(
   theme => ({
     container: {
+      background: extendedTheme.colors['color-secondary'],
+      padding: theme.spacing.xl,
+      color: theme.white,
+
       '& ul': {
         listStyle: 'none',
         display: 'flex',
