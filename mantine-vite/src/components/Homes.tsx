@@ -26,12 +26,20 @@ const useStyles = createUseStyles(
         transform: 'translateY(-50%)',
         textAlign: 'center',
       },
+
+      '& img': {
+        margin: 0,
+      },
     },
     container: {
       maxWidth: '70rem',
       marginInline: 'auto',
     },
-    homes: {},
+    homes: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(18rem, 100%), 1fr))',
+      gap: theme.spacing.md,
+    },
     home: {
       position: 'relative',
       background: theme.white,
