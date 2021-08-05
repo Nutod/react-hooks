@@ -11,8 +11,7 @@ const useStyles = createUseStyles(
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(min(18rem, 100%), 1fr))',
       gap: theme.spacing.md,
-      paddingInline: theme.spacing.lg,
-      paddingBlock: theme.spacing.xl,
+      padding: theme.spacing.xl,
     },
     feature: {
       '& h4': {
@@ -37,7 +36,7 @@ export default function Features() {
       </div>
       <div className={styles.feature}>
         <Title order={4}>Only the best properties</Title>
-        <Text component="p">
+        <Text component="p" color="white">
           Cumque consequuntur veniam dolorum ratione sint illo placeat numquam
           ullam odio itaque ab eos, debitis quidem culpa!
         </Text>
