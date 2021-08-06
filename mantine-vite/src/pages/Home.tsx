@@ -7,6 +7,7 @@ import Homes from '../components/Homes'
 import Realtors from '../components/Realtors'
 import Sidebar from '../components/Sidebar'
 import Story from '../components/Story'
+import Header from '../components/Header'
 
 const useStyles = createUseStyles(
   theme => ({
@@ -27,6 +28,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Sidebar />
+      <Header />
       <Realtors />
       <Features />
       <Homes />
