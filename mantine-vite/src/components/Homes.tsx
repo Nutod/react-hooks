@@ -30,6 +30,10 @@ const useStyles = createUseStyles(
       '& img': {
         margin: 0,
       },
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '1 / -1',
+      },
     },
     container: {
       maxWidth: '70rem',
