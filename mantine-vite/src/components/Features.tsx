@@ -12,6 +12,10 @@ const useStyles = createUseStyles(
       gridTemplateColumns: 'repeat(auto-fit, minmax(min(18rem, 100%), 1fr))',
       gap: theme.spacing.md,
       padding: theme.spacing.xl,
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '1 / -1',
+      },
     },
     feature: {
       '& h4': {
