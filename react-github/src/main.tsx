@@ -5,6 +5,8 @@ import App from './App'
 import { MantineProvider } from '@mantine/core'
 import { theme } from './styles/theme'
 
+// Handle the routes
+
 ReactDOM.render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
