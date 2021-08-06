@@ -10,7 +10,7 @@ const useStyles = createUseStyles(
   theme => ({
     wrapper: {
       background: extendedTheme.colors['color-secondary'],
-      padding: theme.spacing.xl,
+      padding: extendedTheme.space[600],
 
       '& h3': {
         color: extendedTheme.colors['color-primary'],

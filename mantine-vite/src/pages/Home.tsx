@@ -10,7 +10,7 @@ import Story from '../components/Story'
 import Header from '../components/Header'
 
 const useStyles = createUseStyles(
-  theme => ({
+  () => ({
     container: {
       '@media screen and (min-width: 1024px)': {
         display: 'grid',

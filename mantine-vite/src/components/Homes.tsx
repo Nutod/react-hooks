@@ -10,7 +10,8 @@ const useStyles = createUseStyles(
   theme => ({
     wrapper: {
       background: 'ghostwhite',
-      padding: theme.spacing.xl,
+      paddingBlock: extendedTheme.space[900],
+      paddingInline: extendedTheme.space[500],
 
       '& svg': {
         blockSize: '2rem',

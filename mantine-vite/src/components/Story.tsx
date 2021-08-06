@@ -1,6 +1,7 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
 import { Text, theming, Title } from '@mantine/core'
+import { theme as extendedTheme } from '../config/extendedTheme'
 import ImageOne from '../assets/story-1.jpeg'
 import ImageTwo from '../assets/story-2.jpeg'
 
@@ -40,7 +41,8 @@ const useStyles = createUseStyles(
     },
     content: {
       background: 'bisque',
-      padding: theme.spacing.xl,
+      paddingBlock: extendedTheme.space[900],
+      paddingInline: extendedTheme.space[500],
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',

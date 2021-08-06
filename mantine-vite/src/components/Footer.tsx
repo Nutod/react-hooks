@@ -7,7 +7,7 @@ const useStyles = createUseStyles(
   theme => ({
     container: {
       background: extendedTheme.colors['color-secondary'],
-      padding: theme.spacing.xl,
+      paddingBlock: extendedTheme.space[900],
       color: theme.white,
 
       '& ul': {

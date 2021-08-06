@@ -22,7 +22,7 @@ const useStyles = createUseStyles(
         textAlign: 'center',
       },
 
-      padding: theme.spacing.xl,
+      padding: extendedTheme.space[900],
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
