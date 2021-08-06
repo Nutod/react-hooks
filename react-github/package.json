@@ -9,6 +9,7 @@
   "dependencies": {
     "@mantine/core": "^2.2.1",
     "@mantine/hooks": "^2.2.1",
+    "history": "^5.0.0",
     "query-string": "^7.0.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
