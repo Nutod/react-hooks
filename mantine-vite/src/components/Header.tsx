@@ -28,14 +28,32 @@ const useStyles = createUseStyles(
       gap: theme.spacing.xl,
     },
     logo: {
-      width: '25rem',
+      width: '20rem',
       marginInline: 'auto',
+    },
+    seenon: {
+      display: 'grid',
+      gridTemplateColumns: '1fr auto 1fr',
+      gap: theme.spacing.xs,
+
+      '&::before, &::after': {
+        content: "''",
+        width: '100%',
+        height: '2px',
+        alignSelf: 'center',
+        background: theme.white,
+      },
     },
     button: {
       fontFamily: extendedTheme.fonts.display,
       background: extendedTheme.colors['color-primary'],
       textShadow: 'none',
       boxShadow: extendedTheme.shadows['shadow-md'],
+    },
+    logos: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 4rem), 1fr))',
+      gap: theme.spacing.xs,
     },
   }),
   { theming }
@@ -52,8 +70,10 @@ export default function Header() {
         <Title order={1}>The ultimate personal freedom</Title>
       </hgroup>
       <Button className={styles.button}>View Our Properties</Button>
-      <Text component="p">As seen on</Text>
-      <div>
+      <Text component="p" className={styles.seenon}>
+        As seen on
+      </Text>
+      <div className={styles.logos}>
         <img src={BBCLogo} alt="" />
         <img src={TCLogo} alt="" />
         <img src={BILogo} alt="" />
