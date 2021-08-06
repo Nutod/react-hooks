@@ -1,5 +1,7 @@
 export const theme = {
   colorScheme: 'light',
+  white: '#fffffe',
+  black: '#33272a',
   fontFamily: 'Work Sans, sans-serif',
   headings: {
     fontFamily: 'Inter, sans-serif',
