@@ -28,7 +28,7 @@ const useStyles = createUseStyles(
       },
 
       '@media screen and (min-width: 1024px)': {
-        gridColumn: '1 / -1',
+        gridColumn: '7 / -1',
       },
     },
     container: {

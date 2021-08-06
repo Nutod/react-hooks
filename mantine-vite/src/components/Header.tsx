@@ -25,7 +25,12 @@ const useStyles = createUseStyles(
       padding: theme.spacing.xl,
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'center',
       gap: theme.spacing.xl,
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '1 / 7',
+      },
     },
     logo: {
       width: '20rem',
