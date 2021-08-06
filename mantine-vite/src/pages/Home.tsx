@@ -17,6 +17,11 @@ const useStyles = createUseStyles(
         gridTemplateColumns:
           'minmax(6rem, 1fr) repeat(8, minmax(min-content, 14rem)) minmax(6rem, 1fr)',
       },
+
+      '@media screen and (min-width: 1440px)': {
+        gridTemplateColumns:
+          '16rem minmax(6rem, 1fr) repeat(8, minmax(min-content, 14rem)) minmax(6rem, 1fr)',
+      },
     },
   }),
   { theming }
