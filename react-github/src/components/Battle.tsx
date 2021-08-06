@@ -1,11 +1,24 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
-import { Center, Col, Container, Grid, theming, Title } from '@mantine/core'
+import {
+  Button,
+  Center,
+  Col,
+  Container,
+  Grid,
+  TextInput,
+  theming,
+  Title,
+} from '@mantine/core'
 import { extendedTheme } from '../config/extendedTheme'
 
 const useStyles = createUseStyles(
   theme => ({
-    container: {},
+    container: {
+      '& button': {
+        background: extendedTheme.colors['color-primary'],
+      },
+    },
     card: {
       background: extendedTheme.colors['color-primary-glare'],
       display: 'flex',
@@ -15,6 +28,35 @@ const useStyles = createUseStyles(
 
       '& svg': {
         color: extendedTheme.colors['color-secondary'],
+      },
+    },
+    form: {
+      // display: 'flex',
+      // gap: theme.spacing.xs,
+      display: 'grid',
+      gridTemplateColumns: '1fr min-content',
+      gap: theme.spacing.xs,
+    },
+    button: {
+      alignSelf: 'flex-end',
+    },
+    formContainer: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: theme.spacing.xl,
+      marginBlockStart: theme.spacing.md,
+    },
+    battleButtonContainer: {
+      textAlign: 'center',
+      marginBlock: theme.spacing.md,
+    },
+    buttonStyles: {
+      background: extendedTheme.colors['color-primary'],
+      textShadow: 'none',
+
+      '&:hover': {
+        background: extendedTheme.colors['color-secondary'],
+        boxShadow: theme.shadows.md,
       },
     },
   }),
@@ -88,10 +130,51 @@ function Instructions() {
   )
 }
 
+function PlayerInput({ label }: { label: string }) {
+  const styles = useStyles()
+
+  return (
+    <form className={styles.form}>
+      <TextInput placeholder="Enter a Github Username" label={label} />
+      <Button
+        type="submit"
+        className={`${styles.button} ${styles.buttonStyles}`}
+      >
+        Submit
+      </Button>
+    </form>
+  )
+}
+
+function BattleForm() {
+  const styles = useStyles()
+
+  return (
+    <>
+      <Center>
+        <Title
+          order={4}
+          style={{ marginBlockStart: `${extendedTheme.space[500]}` }}
+        >
+          Battle
+        </Title>
+      </Center>
+      <div className={styles.formContainer}>
+        <PlayerInput label="Player One" />
+        <PlayerInput label="Player Two" />
+      </div>
+      <div className={styles.battleButtonContainer}>
+        <Button className={styles.buttonStyles}>Battle</Button>
+      </div>
+    </>
+  )
+}
+
 export default function Battle() {
   return (
     <Container>
       <Instructions />
+      <BattleForm />
     </Container>
   )
 }
