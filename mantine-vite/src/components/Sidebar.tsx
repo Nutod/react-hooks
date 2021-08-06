@@ -9,6 +9,10 @@ const useStyles = createUseStyles(
       background: 'bisque',
       display: 'flex',
       padding: theme.spacing.xs,
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '1 / -1',
+      },
     },
     icon: {
       blockSize: '2rem',
