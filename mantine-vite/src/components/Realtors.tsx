@@ -26,6 +26,10 @@ const useStyles = createUseStyles(
         color: theme.white,
         opacity: 0.8,
       },
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '1 / -1',
+      },
     },
     container: {
       maxWidth: '70rem',
