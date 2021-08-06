@@ -20,8 +20,19 @@ const useStyles = createUseStyles(
         padding: 0,
       },
 
+      '& a': {
+        color: theme.black,
+
+        '&:hover': {
+          borderBottom: `2px solid ${extendedTheme.colors['color-primary']}`,
+          textDecoration: 'none',
+        },
+      },
+
       '& svg': {
         blockSize: '1.3rem',
+        color: extendedTheme.colors['color-primary'],
+        cursor: 'pointer',
       },
     },
   }),
