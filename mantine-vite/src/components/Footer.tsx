@@ -16,6 +16,10 @@ const useStyles = createUseStyles(
         gap: theme.spacing.md,
         flexWrap: 'wrap',
       },
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '1 / -1',
+      },
     },
   }),
   { theming }
