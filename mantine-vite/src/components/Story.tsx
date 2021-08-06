@@ -1,6 +1,6 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
-import { theming } from '@mantine/core'
+import { Text, theming, Title } from '@mantine/core'
 import ImageOne from '../assets/story-1.jpeg'
 import ImageTwo from '../assets/story-2.jpeg'
 
@@ -30,7 +30,18 @@ const useStyles = createUseStyles(
       gridColumn: '5 / -1',
       gridRow: '5 / -1',
     },
-    content: {},
+    content: {
+      background: 'bisque',
+      padding: theme.spacing.xl,
+
+      '& h2': {
+        fontStyle: 'italic',
+      },
+
+      '& > * + *': {
+        marginBlockStart: theme.spacing.md,
+      },
+    },
   }),
   { theming }
 )
@@ -48,7 +59,15 @@ export default function Story() {
           <img src={ImageTwo} alt="Image Two" />
         </figure>
       </div>
-      <div className={styles.content}>Content</div>
+      <div className={styles.content}>
+        <Title order={5}>Happy Customers</Title>
+        <Title order={2}>Listen to what our Customers are saying</Title>
+        <Text component="p">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis qui
+          perferendis blanditiis rerum, fugiat magni. Temporibus maiores
+          quisquam assumenda quibusdam!
+        </Text>
+      </div>
     </>
   )
 }
