@@ -1,15 +1,25 @@
 import React from 'react'
-import { Title, Text, Container, Center } from '@mantine/core'
+import {
+  Title,
+  Text,
+  Container,
+  Center,
+  Loader,
+  Alert,
+  Grid,
+  Col,
+  Image,
+  Card,
+  CardSection,
+} from '@mantine/core'
 import { createUseStyles } from 'react-jss'
 import { theming } from '@mantine/core'
 import { extendedTheme } from '../config/extendedTheme'
-import { CSSProperties } from 'react'
+import { fetchPopularRepos } from '../utils/api'
 
 const useStyles = createUseStyles(
   theme => ({
-    container: {
-      background: 'pink',
-    },
+    container: {},
     unorderedList: {
       listStyle: 'none',
       display: 'flex',
@@ -18,6 +28,9 @@ const useStyles = createUseStyles(
       '& li': {
         cursor: 'pointer',
       },
+    },
+    loader: {
+      fill: extendedTheme.colors['color-primary'],
     },
   }),
   { theming }
@@ -56,11 +69,53 @@ function SelectionNav({
   )
 }
 
+function ReposGrid({ repos }: { repos: IRepo[] }) {
+  if (!repos) return null
+
+  return (
+    <Grid gutter="xl">
+      {repos.map((repo, index) => (
+        <Col span={4}>
+          <Card shadow="md">
+            <Title order={5}>
+              #{index} - {repo.name}
+            </Title>
+            <CardSection>
+              <Image
+                src={repo.owner.avatar_url}
+                alt="With default placeholder"
+                withPlaceholder
+              />
+            </CardSection>
+            <Text component="a">{repo.owner.html_url}</Text>
+          </Card>
+        </Col>
+      ))}
+    </Grid>
+  )
+}
+
+export interface IRepo {
+  id: number
+  full_name: string
+  name: string
+  owner: {
+    html_url: string
+    avatar_url: string
+  }
+  forks: number
+  open_issues: number
+  watchers: number
+}
+
 export default function Popular() {
   const styles = useStyles()
 
   const languages: Language[] = ['All', 'Javascript', 'Python', 'Ruby', 'Java']
   const [selected, setSelected] = React.useState<Language>('All')
+  const [repos, setRepos] = React.useState({} as Record<Language, IRepo[]>)
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<null | string>(null)
 
   const getSelectionNavProps = () => ({
     selected,
@@ -69,24 +124,51 @@ export default function Popular() {
     languages,
   })
 
+  React.useEffect(() => {
+    if (!repos[selected]) {
+      setLoading(true)
+
+      fetchPopularRepos(selected)
+        .then(data => {
+          setRepos(repos => ({
+            ...repos,
+            [selected]: data,
+          }))
+          setLoading(false)
+        })
+        .catch(err => {
+          console.error(err)
+          setLoading(false)
+          setError(err)
+        })
+    }
+  }, [selected])
+
   return (
     <Container size="md" className={styles.container}>
       <Center>
         <SelectionNav {...getSelectionNavProps()} />
       </Center>
-      {/* Language Nav */}
-      {/* Data Content */}
-      <Title order={1}>Level Heading</Title>
-      <Title order={2}>Level Heading</Title>
-      <Title order={3}>Level Heading</Title>
-      <Title order={4}>Level Heading</Title>
-      <Title order={5}>Level Heading</Title>
-      <Title order={6}>Level Heading</Title>
-      <Text component="p">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo natus
-        quasi incidunt nemo laudantium dolorum harum aliquam aliquid fugiat
-        quia?
-      </Text>
+
+      {loading ? (
+        <Center>
+          <Loader className={styles.loader} />
+        </Center>
+      ) : (
+        <>
+          {error ? (
+            <Center>
+              <Alert color="red" title="Something went wrong">
+                Application crashed, please contact out support via email
+              </Alert>
+            </Center>
+          ) : (
+            <>
+              <ReposGrid repos={repos[selected]} />
+            </>
+          )}
+        </>
+      )}
     </Container>
   )
 }
