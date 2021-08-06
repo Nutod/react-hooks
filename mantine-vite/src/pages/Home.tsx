@@ -11,8 +11,6 @@ import Story from '../components/Story'
 const useStyles = createUseStyles(
   theme => ({
     container: {
-      background: 'orangered',
-
       '@media screen and (min-width: 1024px)': {
         display: 'grid',
         gridTemplateColumns:

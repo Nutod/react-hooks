@@ -21,6 +21,10 @@ const useStyles = createUseStyles(
       display: 'grid',
       gridTemplateColumns: 'repeat(6, 1fr)',
       gridTemplateRows: 'repeat(6, 1fr)',
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '1 / 6',
+      },
     },
     mainImage: {
       gridColumn: '2 / 6',
@@ -33,13 +37,20 @@ const useStyles = createUseStyles(
     content: {
       background: 'bisque',
       padding: theme.spacing.xl,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
 
       '& h2': {
         fontStyle: 'italic',
       },
 
       '& > * + *': {
-        marginBlockStart: theme.spacing.md,
+        marginBlockStart: theme.spacing.lg,
+      },
+
+      '@media screen and (min-width: 1024px)': {
+        gridColumn: '6 / -1',
       },
     },
   }),
