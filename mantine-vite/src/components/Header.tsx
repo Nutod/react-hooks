@@ -31,6 +31,10 @@ const useStyles = createUseStyles(
       '@media screen and (min-width: 1024px)': {
         gridColumn: '1 / 7',
       },
+
+      '@media screen and (min-width: 1440px)': {
+        gridColumn: '2 / 8',
+      },
     },
     logo: {
       width: '20rem',

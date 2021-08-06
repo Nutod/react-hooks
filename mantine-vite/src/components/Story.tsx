@@ -25,6 +25,10 @@ const useStyles = createUseStyles(
       '@media screen and (min-width: 1024px)': {
         gridColumn: '1 / 6',
       },
+
+      '@media screen and (min-width: 1440px)': {
+        gridColumn: '2 / 7',
+      },
     },
     mainImage: {
       gridColumn: '2 / 6',
@@ -51,6 +55,10 @@ const useStyles = createUseStyles(
 
       '@media screen and (min-width: 1024px)': {
         gridColumn: '6 / -1',
+      },
+
+      '@media screen and (min-width: 1440px)': {
+        gridColumn: '7 / -1',
       },
     },
   }),

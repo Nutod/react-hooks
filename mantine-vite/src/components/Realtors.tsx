@@ -30,6 +30,10 @@ const useStyles = createUseStyles(
       '@media screen and (min-width: 1024px)': {
         gridColumn: '7 / -1',
       },
+
+      '@media screen and (min-width: 1440px)': {
+        gridColumn: '8 / -1',
+      },
     },
     container: {
       maxWidth: '70rem',

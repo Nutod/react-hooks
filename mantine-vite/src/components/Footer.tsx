@@ -21,6 +21,10 @@ const useStyles = createUseStyles(
       '@media screen and (min-width: 1024px)': {
         gridColumn: '1 / -1',
       },
+
+      '@media screen and (min-width: 1440px)': {
+        gridColumn: '2 / -1',
+      },
     },
   }),
   { theming }

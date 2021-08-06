@@ -20,7 +20,8 @@ const useStyles = createUseStyles(
 
       '@media screen and (min-width: 1440px)': {
         gridTemplateColumns:
-          '16rem minmax(6rem, 1fr) repeat(8, minmax(min-content, 14rem)) minmax(6rem, 1fr)',
+          '4rem minmax(6rem, 1fr) repeat(8, minmax(min-content, 14rem)) minmax(6rem, 1fr)',
+        gridTemplateRows: 'repeat(5, auto)',
       },
     },
   }),
