@@ -13,6 +13,7 @@ const useStyles = createUseStyles(
       '& ul': {
         listStyle: 'none',
         display: 'flex',
+        justifyContent: 'center',
         gap: theme.spacing.md,
         flexWrap: 'wrap',
       },
