@@ -15,5 +15,5 @@ export function useInput(initialState = '') {
     [initialState]
   )
 
-  return [state, handlers]
+  return [state, handlers] as const
 }
