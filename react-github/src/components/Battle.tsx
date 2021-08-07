@@ -11,6 +11,7 @@ import {
   Title,
 } from '@mantine/core'
 import { extendedTheme } from '../config/extendedTheme'
+import { useForm } from '@mantine/hooks'
 
 const useStyles = createUseStyles(
   theme => ({
@@ -30,13 +31,7 @@ const useStyles = createUseStyles(
         color: extendedTheme.colors['color-secondary'],
       },
     },
-    form: {
-      // display: 'flex',
-      // gap: theme.spacing.xs,
-      display: 'grid',
-      gridTemplateColumns: '1fr min-content',
-      gap: theme.spacing.xs,
-    },
+    form: {},
     button: {
       alignSelf: 'flex-end',
     },
@@ -130,12 +125,30 @@ function Instructions() {
   )
 }
 
+// Probably not using this form hook
 function PlayerInput({ label }: { label: string }) {
   const styles = useStyles()
+  const form = useForm({
+    initialValues: {
+      username: '',
+    },
+    validationRules: {
+      username: value => value.trim().length > 0,
+    },
+  })
+
+  console.log(form)
 
   return (
     <form className={styles.form}>
-      <TextInput placeholder="Enter a Github Username" label={label} />
+      <TextInput
+        placeholder="Enter a Github Username"
+        required
+        autoComplete="off"
+        value={form.values.username}
+        onChange={e => form.setFieldValue('username', e.currentTarget.value)}
+        label={label}
+      />
       <Button
         type="submit"
         className={`${styles.button} ${styles.buttonStyles}`}
