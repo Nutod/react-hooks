@@ -51,7 +51,7 @@ export const RESET = css`
     max-width: 100%;
     display: block;
     box-shadow: var(--elevation-four);
-    border-radius: 10px;
+    border-radius: 1rem;
   }
 
   /* Inherit fonts for inputs and buttons */

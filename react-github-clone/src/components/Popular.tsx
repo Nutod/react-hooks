@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fetchPopularRepos } from '../utils/api'
+import Card from './Card'
+import Container from './Container'
 
 const PopularWrapper = styled.div`
   margin-block: var(--space-500);
@@ -51,10 +53,42 @@ function SelectionNav({
   )
 }
 
+const ReposGridContainer = styled.div`
+  margin-block-start: var(--space-300);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--space-300);
+
+  h3 {
+    text-align: center;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  p {
+    margin-inline: var(--space-200);
+  }
+`
+
 function ReposGrid({ repos }: { repos: {}[] }) {
   if (!repos.length) return null
 
-  return <>{JSON.stringify(repos, null, 2)}</>
+  return (
+    <ReposGridContainer>
+      {repos.map((repo, index) => (
+        <Card key={repo.id}>
+          <img src={repo.owner.avatar_url} alt="" />
+          <h3>
+            #{index + 1} - {repo.id}
+          </h3>
+          <p>Name: {repo.name}</p>
+          <p>Description: {repo.description}</p>
+        </Card>
+      ))}
+    </ReposGridContainer>
+  )
 }
 
 export default function Popular() {
@@ -98,10 +132,12 @@ export default function Popular() {
   }
 
   return (
-    <PopularWrapper>
-      <SelectionNav {...getSelectionNavProps()} />
+    <Container>
+      <PopularWrapper>
+        <SelectionNav {...getSelectionNavProps()} />
 
-      <ReposGrid repos={repos} />
-    </PopularWrapper>
+        <ReposGrid repos={repos} />
+      </PopularWrapper>
+    </Container>
   )
 }
