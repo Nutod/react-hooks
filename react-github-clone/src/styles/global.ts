@@ -30,9 +30,7 @@ export const GlobalStyles = createGlobalStyle`
    font-family: var(--font-body);
    font-weight: 300;
    line-height: 1.65;
-   overflow-x: hidden;
    font-size: 1.1rem;
-
    background: var(--surface1);
    color: var(--text1);
   }
