@@ -25,7 +25,7 @@ export default function Nav() {
         <Link to="/">Popular</Link>
         <Link to="battle">Battle</Link>
       </div>
-      <form>
+      <div onChange={e => console.log(e)}>
         <div>
           <input type="radio" id="light" name="theme" checked />
           <label htmlFor="light">Light</label>
@@ -34,7 +34,7 @@ export default function Nav() {
           <input type="radio" id="dark" name="theme" />
           <label htmlFor="dark">Dark</label>
         </div>
-      </form>
+      </div>
     </NavWrapper>
   )
 }

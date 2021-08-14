@@ -72,8 +72,17 @@ const ReposGridContainer = styled.div`
   }
 `
 
-function ReposGrid({ repos }: { repos: {}[] }) {
-  if (!repos.length) return null
+export interface IRepo {
+  id: number
+  owner: {
+    avatar_url: string
+  }
+  name: string
+  description: string
+}
+
+function ReposGrid({ repos }: { repos: IRepo[] }) {
+  if (!repos) return null
 
   return (
     <ReposGridContainer>
@@ -96,18 +105,25 @@ export default function Popular() {
     React.useState<Language>('All')
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<null | string>(null)
-  const [repos, setRepos] = React.useState<null | {}[]>(null)
+  const [repos, setRepos] = React.useState({} as Record<Language, IRepo[]>)
 
   React.useEffect(() => {
-    fetchPopularRepos(selectedLanguage)
-      .then(data => {
-        setRepos(data)
-        setLoading(false)
-      })
-      .catch(error => {
-        setError('An error occurred')
-        setLoading(false)
-      })
+    if (!repos[selectedLanguage]) {
+      setLoading(true)
+
+      fetchPopularRepos(selectedLanguage)
+        .then(data => {
+          setRepos(repos => ({
+            ...repos,
+            [selectedLanguage]: data,
+          }))
+          setLoading(false)
+        })
+        .catch(error => {
+          setError('An error occurred')
+          setLoading(false)
+        })
+    }
   }, [selectedLanguage])
 
   const getSelectionNavProps = () => ({
@@ -136,7 +152,7 @@ export default function Popular() {
       <PopularWrapper>
         <SelectionNav {...getSelectionNavProps()} />
 
-        <ReposGrid repos={repos} />
+        <ReposGrid repos={repos[selectedLanguage]} />
       </PopularWrapper>
     </Container>
   )
