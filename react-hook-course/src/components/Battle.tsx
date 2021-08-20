@@ -89,6 +89,7 @@ function PlayerInput({
         <input
           className="zi-input big"
           onChange={handleInputChange}
+          placeholder="Enter Github Username"
           style={{ marginInline: '0', width: '100%', marginBlockEnd: '0' }}
           id={label}
           value={username}
@@ -107,9 +108,22 @@ function PlayerInput({
   )
 }
 
-function PlayerPreview({ username }: { username: string }) {
+function PlayerPreview({
+  username,
+  onReset,
+}: {
+  username: string
+  onReset: () => void
+}) {
   return (
-    <div className="zi-card" style={{ display: 'flex', alignItems: 'center' }}>
+    <div
+      className="zi-card"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
       <div
         style={{
           display: 'flex',
@@ -121,8 +135,11 @@ function PlayerPreview({ username }: { username: string }) {
           className="zi-avatar big"
           src={`https://github.com/${username}.png?size=200`}
         />
-        <a>{username}</a>
+        <a href={`https://github.com/${username}`}>{username}</a>
       </div>
+      <button onClick={onReset} className="zi-btn mini">
+        Reset
+      </button>
     </div>
   )
 }
@@ -148,7 +165,10 @@ function BattleForm() {
             onSubmit={player => setPlayerOne(player)}
           />
         ) : (
-          <PlayerPreview username={playerOne} />
+          <PlayerPreview
+            username={playerOne}
+            onReset={() => setPlayerOne(null)}
+          />
         )}
         {!playerTwo ? (
           <PlayerInput
@@ -156,7 +176,10 @@ function BattleForm() {
             onSubmit={player => setPlayerTwo(player)}
           />
         ) : (
-          <PlayerPreview username={playerTwo} />
+          <PlayerPreview
+            username={playerTwo}
+            onReset={() => setPlayerTwo(null)}
+          />
         )}
       </div>
     </div>
