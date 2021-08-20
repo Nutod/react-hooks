@@ -5,8 +5,6 @@ import { useThemeContext } from '../context/theme'
 export default function Nav() {
   const { theme, toggleTheme } = useThemeContext()
 
-  console.log(theme)
-
   return (
     <nav
       style={{
@@ -25,7 +23,7 @@ export default function Nav() {
       </ul>
       <div>
         <button onClick={toggleTheme} className="zi-btn primary mini shadow">
-          Dark Mode
+          {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
         </button>
       </div>
     </nav>
