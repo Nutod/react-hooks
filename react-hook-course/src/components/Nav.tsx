@@ -19,7 +19,7 @@ export default function Nav() {
         </li>
       </ul>
       <div>
-        <button className="zi-btn mini shadow">Light</button>
+        <button className="zi-btn primary mini shadow">Dark Mode</button>
       </div>
     </nav>
   )
