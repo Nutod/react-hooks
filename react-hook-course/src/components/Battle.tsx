@@ -53,12 +53,63 @@ function Instructions() {
   )
 }
 
+function PlayerInput({ label }: { label: string }) {
+  return (
+    <form
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '2fr 1fr',
+        gap: 'var(--space-100)',
+      }}
+    >
+      <div>
+        <label
+          style={{ display: 'block', marginBlock: 'var(--space-100)' }}
+          htmlFor={label}
+        >
+          {label}
+        </label>
+        <input
+          className="zi-input big"
+          style={{ marginInline: '0', width: '100%', marginBlockEnd: '0' }}
+          id={label}
+          value="The Evil Rabbit"
+        />
+      </div>
+      <button
+        style={{ minWidth: 'auto', alignSelf: 'end' }}
+        className="zi-btn primary"
+      >
+        Submit
+      </button>
+    </form>
+  )
+}
+
+function BattleForm() {
+  return (
+    <div style={{ marginBlockStart: 'var(--space-500)' }}>
+      <h3 className="text-center">Battle</h3>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns:
+            'repeat(auto-fit, minmax(min(17rem, 100%), 1fr))',
+          gap: 'var(--space-300)',
+        }}
+      >
+        <PlayerInput label="Player One" />
+        <PlayerInput label="Player Two" />
+      </div>
+    </div>
+  )
+}
+
 export default function Battle() {
   return (
     <main className="container" style={{ marginBlock: 'var(--space-500)' }}>
       <Instructions />
-      {/* Forms */}
-      {/* Battle */}
+      <BattleForm />
     </main>
   )
 }
