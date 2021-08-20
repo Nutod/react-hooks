@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useThemeContext } from '../context/theme'
 
 export default function Nav() {
+  const { theme, toggleTheme } = useThemeContext()
+
+  console.log(theme)
+
   return (
     <nav
       style={{
@@ -19,7 +24,9 @@ export default function Nav() {
         </li>
       </ul>
       <div>
-        <button className="zi-btn primary mini shadow">Dark Mode</button>
+        <button onClick={toggleTheme} className="zi-btn primary mini shadow">
+          Dark Mode
+        </button>
       </div>
     </nav>
   )
