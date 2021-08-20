@@ -1,5 +1,6 @@
 import React from 'react'
 import { fetchPopularRepos } from '../utils/api'
+import Loading from './Loading'
 
 type Language = 'All' | 'Javascript' | 'CSS' | 'Python' | 'Ruby' | 'Java'
 
@@ -71,7 +72,7 @@ export default function Popular() {
     <main className="container" style={{ marginBlock: 'var(--space-500)' }}>
       <SelectionNav {...SelectionNavProps} />
 
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {/* Content */}
     </main>
   )
