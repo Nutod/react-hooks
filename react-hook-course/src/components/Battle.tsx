@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 function Instructions() {
   return (
@@ -71,6 +72,7 @@ function PlayerInput({ label }: { label: string }) {
         </label>
         <input
           className="zi-input big"
+          onChange={e => {}}
           style={{ marginInline: '0', width: '100%', marginBlockEnd: '0' }}
           id={label}
           value="The Evil Rabbit"
@@ -78,7 +80,7 @@ function PlayerInput({ label }: { label: string }) {
       </div>
       <button
         style={{ minWidth: 'auto', alignSelf: 'end' }}
-        className="zi-btn primary"
+        className={classNames('zi-btn primary', { disabled: true })}
       >
         Submit
       </button>
