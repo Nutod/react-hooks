@@ -2,3 +2,12 @@
   max-width: 60rem;
   margin-inline: auto;
 }
+
+nav,
+.nav {
+  ul {
+    li::before {
+      content: '';
+    }
+  }
+}

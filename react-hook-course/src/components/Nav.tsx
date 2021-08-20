@@ -7,13 +7,14 @@ export default function Nav() {
 
   return (
     <nav
+      className="container"
       style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
       }}
     >
-      <ul style={{ display: 'flex', gap: 'var(--space-400)' }}>
+      <ul style={{ display: 'flex', gap: 'var(--space-400)', margin: '0' }}>
         <li>
           <Link to="/">Popular</Link>
         </li>
