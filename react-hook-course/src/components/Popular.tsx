@@ -1,4 +1,5 @@
 import React from 'react'
+import { fetchPopularRepos } from '../utils/api'
 
 type Language = 'All' | 'Javascript' | 'CSS' | 'Python' | 'Ruby' | 'Java'
 
@@ -50,6 +51,9 @@ function SelectionNav({
 export default function Popular() {
   const [selectedLanguage, setSelectedLanguage] =
     React.useState<Language>('All')
+  const [repos, setRepos] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<null | string>(null)
 
   const SelectionNavProps = React.useMemo(
     () => ({
@@ -59,9 +63,15 @@ export default function Popular() {
     [selectedLanguage]
   )
 
+  React.useEffect(() => {
+    fetchPopularRepos(selectedLanguage).then(data => console.log(data))
+  }, [selectedLanguage])
+
   return (
     <main className="container" style={{ marginBlock: 'var(--space-500)' }}>
       <SelectionNav {...SelectionNavProps} />
+
+      {loading && <p>Loading...</p>}
       {/* Content */}
     </main>
   )
