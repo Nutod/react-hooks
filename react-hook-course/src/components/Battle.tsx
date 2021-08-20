@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { useInput } from '../hooks/useInput'
+import { Link, Navigate } from 'react-router-dom'
 
 function Instructions() {
   return (
@@ -182,6 +183,21 @@ function BattleForm() {
           />
         )}
       </div>
+      {playerOne && playerTwo && (
+        <div
+          style={{ textAlign: 'center', marginBlockStart: 'var(--space-200)' }}
+        >
+          <Link
+            to={{
+              pathname: 'result',
+              search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`,
+            }}
+            className="zi-btn big primary"
+          >
+            Battle
+          </Link>
+        </div>
+      )}
     </div>
   )
 }
