@@ -5,16 +5,17 @@ import { battle } from '../utils/api'
 import Loading from './Loading'
 import Error from './Error'
 
+export interface IProfile {
+  name: string
+  avatar_url: string
+  followers: number
+  public_repos: number
+  id: number
+  created_at: number
+}
 export interface IPlayer {
   score: number
-  profile: {
-    name: string
-    avatar_url: string
-    followers: number
-    public_repos: number
-    id: number
-    created_at: number
-  }
+  profile: IProfile
 }
 
 export default function Result() {

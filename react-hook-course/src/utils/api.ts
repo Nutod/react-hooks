@@ -2,7 +2,7 @@ const id = 'YOUR_CLIENT_ID'
 const sec = 'YOUR_SECRET_ID'
 const params = `?client_id=${id}&client_secret=${sec}`
 
-function getErrorMsg(message, username) {
+function getErrorMsg(message: string, username: string) {
   if (message === 'Not Found') {
     return `${username} doesn't exist`
   }
@@ -10,7 +10,7 @@ function getErrorMsg(message, username) {
   return message
 }
 
-function getProfile(username) {
+function getProfile(username: string) {
   return fetch(`https://api.github.com/users/${username}${params}`)
     .then(res => res.json())
     .then(profile => {
