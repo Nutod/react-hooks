@@ -66,30 +66,16 @@ export default function Result() {
             }}
           >
             <div className="zi-card">
-              <h4 className="text-center">Users</h4>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-              </svg>
+              <h4 className="text-center">{winner?.profile.name}</h4>
+              <img src={winner?.profile.avatar_url} />
+              <p>Followers: {winner?.profile.followers}</p>
+              <p>Score: {winner?.score}</p>
             </div>
             <div className="zi-card">
-              <h4 className="text-center">Results</h4>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-                />
-              </svg>
+              <h4 className="text-center">{loser?.profile.name}</h4>
+              <img src={loser?.profile.avatar_url} />
+              <p>Followers: {loser?.profile.followers}</p>
+              <p>Score: {loser?.score}</p>
             </div>
           </div>
         )}
