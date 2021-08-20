@@ -73,6 +73,8 @@ export default function Popular() {
       <SelectionNav {...SelectionNavProps} />
 
       {loading && <Loading />}
+
+      {error && <p>Something went wrong</p>}
       {/* Content */}
     </main>
   )
