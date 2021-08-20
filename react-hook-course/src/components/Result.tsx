@@ -19,11 +19,11 @@ export interface IPlayer {
 }
 
 export default function Result() {
-  const { search } = useLocation()
   const [winner, setWinner] = React.useState<null | IPlayer>(null)
   const [loser, setLoser] = React.useState<null | IPlayer>(null)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<null | string>(null)
+  const { search } = useLocation()
 
   React.useEffect(() => {
     const { playerOne, playerTwo } = queryString.parse(search) as {

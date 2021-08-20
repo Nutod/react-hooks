@@ -1,3 +1,6 @@
+import { IRepo } from '../components/Popular'
+import { IPlayer, IProfile } from '../components/Result'
+
 const id = 'YOUR_CLIENT_ID'
 const sec = 'YOUR_SECRET_ID'
 const params = `?client_id=${id}&client_secret=${sec}`
@@ -18,11 +21,11 @@ function getProfile(username: string) {
         throw new Error(getErrorMsg(profile.message, username))
       }
 
-      return profile
+      return profile as IProfile
     })
 }
 
-function getRepos(username) {
+function getRepos(username: string) {
   return fetch(
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   )
@@ -32,22 +35,22 @@ function getRepos(username) {
         throw new Error(getErrorMsg(repos.message, username))
       }
 
-      return repos
+      return repos as IRepo[]
     })
 }
 
-function getStarCount(repos) {
+function getStarCount(repos: IRepo[]) {
   return repos.reduce(
     (count, { stargazers_count }) => count + stargazers_count,
     0
   )
 }
 
-function calculateScore(followers: number, repos) {
+function calculateScore(followers: number, repos: IRepo[]) {
   return followers * 3 + getStarCount(repos)
 }
 
-function getUserData(player) {
+function getUserData(player: string) {
   return Promise.all([getProfile(player), getRepos(player)]).then(
     ([profile, repos]) => ({
       profile,
@@ -56,17 +59,17 @@ function getUserData(player) {
   )
 }
 
-function sortPlayers(players) {
+function sortPlayers(players: IPlayer[]) {
   return players.sort((a, b) => b.score - a.score)
 }
 
-export function battle(players) {
+export function battle(players: string[]) {
   return Promise.all([getUserData(players[0]), getUserData(players[1])]).then(
     results => sortPlayers(results)
   )
 }
 
-export function fetchPopularRepos(language) {
+export function fetchPopularRepos(language: string) {
   const endpoint = window.encodeURI(
     `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
   )
@@ -78,6 +81,6 @@ export function fetchPopularRepos(language) {
         throw new Error(data.message)
       }
 
-      return data.items
+      return data.items as IRepo[]
     })
 }
