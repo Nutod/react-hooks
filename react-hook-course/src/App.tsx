@@ -9,7 +9,11 @@ function App() {
       <header className="App-header">
         <p>Hello Vite + React!</p>
         <p>
-          <button type="button" onClick={() => setCount(count => count + 1)}>
+          <button
+            className="zi-btn primary"
+            type="button"
+            onClick={() => setCount(count => count + 1)}
+          >
             count is: {count}
           </button>
         </p>
