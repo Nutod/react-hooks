@@ -18,3 +18,7 @@
   --shadow-400: 0 20px 25px -5px rgba(0, 0, 0, 0.2),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
+
+body {
+  padding: var(--space-300);
+}
