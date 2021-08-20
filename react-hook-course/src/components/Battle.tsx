@@ -79,7 +79,7 @@ function PlayerInput({
       }}
       onSubmit={handleSubmit}
     >
-      <div>
+      <div style={{ alignSelf: 'end' }}>
         <label
           style={{ display: 'block', marginBlock: 'var(--space-100)' }}
           htmlFor={label}
@@ -107,6 +107,26 @@ function PlayerInput({
   )
 }
 
+function PlayerPreview({ username }: { username: string }) {
+  return (
+    <div className="zi-card" style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-100)',
+        }}
+      >
+        <img
+          className="zi-avatar big"
+          src={`https://github.com/${username}.png?size=200`}
+        />
+        <a>{username}</a>
+      </div>
+    </div>
+  )
+}
+
 function BattleForm() {
   const [playerOne, setPlayerOne] = React.useState<null | string>(null)
   const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
@@ -122,14 +142,22 @@ function BattleForm() {
           gap: 'var(--space-300)',
         }}
       >
-        <PlayerInput
-          label="Player One"
-          onSubmit={player => setPlayerOne(player)}
-        />
-        <PlayerInput
-          label="Player Two"
-          onSubmit={player => setPlayerTwo(player)}
-        />
+        {!playerOne ? (
+          <PlayerInput
+            label="Player One"
+            onSubmit={player => setPlayerOne(player)}
+          />
+        ) : (
+          <PlayerPreview username={playerOne} />
+        )}
+        {!playerTwo ? (
+          <PlayerInput
+            label="Player Two"
+            onSubmit={player => setPlayerTwo(player)}
+          />
+        ) : (
+          <PlayerPreview username={playerTwo} />
+        )}
       </div>
     </div>
   )
