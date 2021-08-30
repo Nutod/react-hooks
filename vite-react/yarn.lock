@@ -318,6 +318,11 @@
   dependencies:
     styled-jsx "^4.0.0"
 
+"@mantine/hooks@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-2.3.2.tgz#7a687c817af8cc2e9aca6eea52d9607a610384f4"
+  integrity sha512-RzsV6BhJ6PSFn5G2zLVlGRPkAxTYxMjLmdG+gikrosT7JXmUjCqaCB3CoEnBodC4YO3VarORlHfl9vulPcQW0A==
+
 "@rollup/pluginutils@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.1.1.tgz#1d4da86dd4eded15656a57d933fda2b9a08d47ec"
