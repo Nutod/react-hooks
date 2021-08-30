@@ -12,7 +12,7 @@ function useMountedCallback<T>(toggleCb: () => () => void, options: T[]) {
 
 function useTheme({ defaultTheme }: { defaultTheme: 'light' | 'dark' }) {
   const [theme, setTheme] = React.useState(defaultTheme)
-  
+
   function toggleCb() {
     return () => {
       setTheme(theme => (theme === 'dark' ? 'light' : 'dark'))
@@ -22,7 +22,6 @@ function useTheme({ defaultTheme }: { defaultTheme: 'light' | 'dark' }) {
   const toggleTheme = useMountedCallback(toggleCb, [])
 
   return { theme, toggleTheme }
-
 }
 
 export const [ThemeContextProvider, useThemeContext] = constate(useTheme)
