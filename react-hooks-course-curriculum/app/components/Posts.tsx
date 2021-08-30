@@ -5,7 +5,7 @@ import Loading from './Loading'
 import PostsList from './PostsList'
 import { IPost } from './Post'
 
-export default function Posts({ type }: { type: 'new' | 'top' }) {
+export default function Posts({ type }: { type: 'top' | 'new' }) {
   const [posts, setPosts] = React.useState<null | IPost[]>(null)
   const [error, setError] = React.useState<null | string>(null)
   const [loading, setLoading] = React.useState(true)
@@ -15,7 +15,7 @@ export default function Posts({ type }: { type: 'new' | 'top' }) {
   }, [type])
 
   const handleFetch = () => {
-    setPosts(null)
+    setPosts(posts)
     setError(null)
     setLoading(true)
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchItem, fetchPosts, fetchComments } from '../utils/api'
+import { fetchItem, fetchComments } from '../utils/api'
 import Loading from './Loading'
 import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
@@ -8,15 +8,15 @@ import Comment from './Comment'
 
 export interface IPost {
   url: string
+  id: number
   title: string
   by: string
   time: number
-  id: number
   text: string
-  descendants: any
+  descendants: number
   dead: boolean
   deleted: boolean
-  type: 'comment' | 'story'
+  type: 'story' | 'comment'
 }
 
 export default function Post({ location }: { location: { search: string } }) {
@@ -44,8 +44,8 @@ export default function Post({ location }: { location: { search: string } }) {
       })
       .catch(({ message }) => {
         setError(message)
-        setLoadingComments(false)
         setLoadingPost(false)
+        setLoadingComments(false)
       })
   }, [])
 

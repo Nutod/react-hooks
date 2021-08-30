@@ -6,15 +6,13 @@ const { Consumer, Provider } = React.createContext({})
 export const ThemeConsumer = Consumer
 export const ThemeProvider = Provider
 
-function useTheme({
-  defaultTheme = 'light',
-}: {
-  defaultTheme: 'light' | 'dark'
-}) {
+function useTheme({ defaultTheme }: { defaultTheme: 'light' | 'dark' }) {
   const [theme, setTheme] = React.useState(defaultTheme)
 
+  // too many manual things
+  // return onmounted
   const toggleTheme = React.useCallback(() => {
-    setTheme(theme => (theme === 'light' ? 'dark' : 'light'))
+    setTheme(theme === 'dark' ? 'light' : 'dark')
   }, [])
 
   return { theme, toggleTheme }

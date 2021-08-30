@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { formatDate } from '../utils/helpers'
-import { ThemeConsumer, useThemeContext } from '../contexts/theme'
+import { useThemeContext } from '../contexts/theme'
 
 export default function PostMetaInfo({
   by,
