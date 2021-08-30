@@ -74,6 +74,8 @@ export interface IRepo {
 }
 
 function RepoList({ repos }: { repos: IRepo[] }) {
+  if (!repos) return null
+
   return (
     <Grid.Container gap={2} justify="center">
       {repos.map((repo, index) => (
@@ -107,21 +109,28 @@ export default function Popular() {
   const [selectedLanguage, setSelectedLanguage] =
     React.useState<Language>('All')
   useDocumentTitle('Github Popular Repos')
-  const [repos, setRepos] = React.useState([])
+  const [repos, setRepos] = React.useState({} as Record<Language, IRepo[]>)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<null | string>(null)
 
   React.useEffect(() => {
-    fetchPopularRepos(selectedLanguage)
-      .then(data => {
-        setRepos(data)
-        setLoading(false)
-      })
-      .catch(({ message }) => {
-        console.error(message)
-        setLoading(false)
-        setError(message)
-      })
+    if (!repos[selectedLanguage]) {
+      setLoading(true)
+
+      fetchPopularRepos(selectedLanguage)
+        .then(data => {
+          setRepos(repos => ({
+            ...repos,
+            [selectedLanguage]: data,
+          }))
+          setLoading(false)
+        })
+        .catch(({ message }) => {
+          console.error(message)
+          setLoading(false)
+          setError(message)
+        })
+    }
   }, [selectedLanguage])
 
   const getSelectionNavProps = () => ({
@@ -142,8 +151,7 @@ export default function Popular() {
         </Note>
       )}
 
-      {/* Display the languages */}
-      {!loading && !error && <RepoList repos={repos} />}
+      {!loading && !error && <RepoList repos={repos[selectedLanguage]} />}
     </Container>
   )
 }

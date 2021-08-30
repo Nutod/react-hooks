@@ -1,8 +1,10 @@
+import { IRepo } from '../components/Popular'
+
 const id = 'YOUR_CLIENT_ID'
 const sec = 'YOUR_SECRET_ID'
 const params = `?client_id=${id}&client_secret=${sec}`
 
-function getErrorMsg(message, username) {
+function getErrorMsg(message: string, username: string) {
   if (message === 'Not Found') {
     return `${username} doesn't exist`
   }
@@ -10,7 +12,7 @@ function getErrorMsg(message, username) {
   return message
 }
 
-function getProfile(username) {
+function getProfile(username: string) {
   return fetch(`https://api.github.com/users/${username}${params}`)
     .then(res => res.json())
     .then(profile => {
@@ -22,7 +24,7 @@ function getProfile(username) {
     })
 }
 
-function getRepos(username) {
+function getRepos(username: string) {
   return fetch(
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   )
@@ -32,7 +34,7 @@ function getRepos(username) {
         throw new Error(getErrorMsg(repos.message, username))
       }
 
-      return repos
+      return repos as IRepo[]
     })
 }
 
