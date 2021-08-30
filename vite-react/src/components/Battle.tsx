@@ -1,5 +1,6 @@
 import React from 'react'
+import Container from './Container'
 
 export default function Battle() {
-  return <div>Battle...</div>
+  return <Container>Battle...</Container>
 }

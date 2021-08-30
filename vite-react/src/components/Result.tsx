@@ -1,5 +1,6 @@
 import React from 'react'
+import Container from './Container'
 
 export default function Result() {
-  return <div>Result...</div>
+  return <Container>Result...</Container>
 }
