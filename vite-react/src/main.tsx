@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { GeistProvider, CssBaseline } from '@geist-ui/react'
-import App from './App'
 import { BrowserRouter as Router } from 'react-router-dom'
+import App from './App'
 import { ThemeContextProvider, useThemeContext } from './context/theme'
 
 function Main() {
@@ -10,7 +10,7 @@ function Main() {
 
   return (
     <Router>
-      <GeistProvider themeType="light">
+      <GeistProvider themeType={theme}>
         <CssBaseline />
         <App />
       </GeistProvider>
