@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "@geist-ui/react": "^2.2.0",
+    "@geist-ui/react-icons": "^1.0.1",
     "@mantine/hooks": "^2.3.2",
+    "constate": "^3.3.0",
     "history": "^5.0.1",
     "linaria": "^2.1.0",
     "query-string": "^7.0.1",
