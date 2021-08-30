@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import { styled } from 'linaria/react'
 
 const ContainerWrapper = styled.div`
-  max-width: 70rem;
+  max-width: 60rem;
   margin-inline: auto;
 `
 
