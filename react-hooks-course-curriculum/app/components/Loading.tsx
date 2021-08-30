@@ -22,6 +22,8 @@ export default function Loading({ text = 'Loading', speed = 300 }) {
         ? setContent(text)
         : setContent(content => content + '.')
     }, speed)
+
+    return () => window.clearInterval(intervalId.current)
   }, [content])
 
   return <p style={styles.content}>{content}</p>
