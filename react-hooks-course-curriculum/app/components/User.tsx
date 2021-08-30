@@ -11,6 +11,7 @@ export interface IUser {
   created: number
   karma: string
   about: string
+  submitted: string[]
 }
 
 export default function User({ location }: { location: { search: string } }) {
