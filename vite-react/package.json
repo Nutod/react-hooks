@@ -9,6 +9,7 @@
   "dependencies": {
     "@geist-ui/react": "^2.2.0",
     "history": "^5.0.1",
+    "linaria": "^2.1.0",
     "query-string": "^7.0.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
