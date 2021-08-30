@@ -3,6 +3,7 @@ import { Button } from '@geist-ui/react'
 import { Sun, Moon } from '@geist-ui/react-icons'
 import { useThemeContext } from '../context/theme'
 import { css } from 'linaria'
+import { Link } from 'react-router-dom'
 
 const classes = {
   wrapper: css`
@@ -29,8 +30,12 @@ export default function Nav() {
   return (
     <nav className={classes.wrapper}>
       <ul className={classes.ul}>
-        <li className={classes.li}>Popular</li>
-        <li className={classes.li}>Battle</li>
+        <li className={classes.li}>
+          <Link to="/">Popular</Link>
+        </li>
+        <li className={classes.li}>
+          <Link to="battle">Battle</Link>
+        </li>
       </ul>
       <div>
         {theme === 'dark' ? (
