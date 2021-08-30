@@ -9,7 +9,7 @@ export default function Title({
 }: {
   url: string
   title: string
-  id: number
+  id: string
 }) {
   return url ? (
     <a className="link" href={url}>
