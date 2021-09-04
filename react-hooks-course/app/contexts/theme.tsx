@@ -16,6 +16,8 @@ const ThemeContext = React.createContext(
   }
 )
 
+ThemeContext.displayName = 'ThemeContext'
+
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
 
@@ -32,4 +34,12 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       {children}
     </ThemeContext.Provider>
   )
+}
+
+export function useThemeContext() {
+  const context = React.useContext(ThemeContext)
+
+  if (!context) throw new Error('ThemeContext is not defined')
+
+  return context
 }
