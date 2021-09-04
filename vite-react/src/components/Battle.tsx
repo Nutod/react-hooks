@@ -1,7 +1,14 @@
 import React from 'react'
-import { Grid, Text, Card } from '@geist-ui/react'
-import { Users, Info, CloudLightning } from '@geist-ui/react-icons'
+import { css } from 'linaria'
+import { Grid, Text, Card, Input, Button } from '@geist-ui/react'
+import { Users, Info, CloudLightning, Github } from '@geist-ui/react-icons'
 import Container from './Container'
+
+const classes = {
+  battlesWrapper: css`
+    margin-block-start: 3rem;
+  `,
+}
 
 function Instructions() {
   return (
@@ -38,12 +45,61 @@ function Instructions() {
   )
 }
 
+function PlayerForm({ label }: { label: string }) {
+  return (
+    <Card style={{ width: '100%' }}>
+      <Text h4>{label}</Text>
+      <div
+        style={{
+          display: 'flex',
+          gap: '.75rem',
+        }}
+      >
+        <Input
+          icon={<Github />}
+          placeholder="GitHub Username"
+          clearable
+          scale={1}
+          width="100%"
+          onChange={e => {}}
+        />
+        <Button disabled auto scale={0.83}>
+          Submit
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
+function BattlesForm() {
+  return (
+    <div className={classes.battlesWrapper}>
+      <Text h3 style={{ textAlign: 'center' }}>
+        Battle
+      </Text>
+      <Grid.Container
+        gap={2}
+        justify="center"
+        style={{ marginBlockStart: '1rem' }}
+      >
+        <Grid xs={24} sm={12}>
+          <PlayerForm label="Player One" />
+        </Grid>
+        <Grid xs={24} sm={12}>
+          <Card style={{ width: '100%' }}>
+            <Text h3>Battle</Text>
+          </Card>
+        </Grid>
+      </Grid.Container>
+    </div>
+  )
+}
+
 export default function Battle() {
   return (
     <Container>
-      {/* Instructions */}
       <Instructions />
-      {/* Battle Form */}
+      <BattlesForm />
     </Container>
   )
 }
