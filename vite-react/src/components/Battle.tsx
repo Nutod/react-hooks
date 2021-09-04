@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from 'linaria'
-import { Grid, Text, Card, Input, Button } from '@geist-ui/react'
+import { Grid, Text, Card, Input, Button, Avatar, Link } from '@geist-ui/react'
 import { Users, Info, CloudLightning, Github } from '@geist-ui/react-icons'
 import Container from './Container'
 import { useInput } from '../hooks/useInput'
@@ -93,9 +93,42 @@ function PlayerForm({
   )
 }
 
+function PlayerPreview({
+  username,
+  label,
+  onReset,
+}: {
+  username: string
+  label: string
+  onReset: () => void
+}) {
+  return (
+    <Card style={{ width: '100%' }}>
+      <Text h4>{label}</Text>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem' }}>
+          <Avatar text="Nutod" scale={2} />
+          <Link
+            href={`https://github.com/${username}`}
+            target="_blank"
+            block
+            icon
+          >
+            {username}
+          </Link>
+        </div>
+        <Button auto onClick={onReset}>
+          Reset
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
 function BattlesForm() {
   const [playerOne, setPlayerOne] = React.useState<null | string>(null)
-  
+  const [playerTwo, setPlayerTwo] = React.useState<null | string>(null)
+
   return (
     <div className={classes.battlesWrapper}>
       <Text h3 style={{ textAlign: 'center' }}>
@@ -107,17 +140,39 @@ function BattlesForm() {
         style={{ marginBlockStart: '1rem' }}
       >
         <Grid xs={24} sm={12}>
-          <PlayerForm
-            label="Player One"
-            onSubmit={player => setPlayerOne(player)}
-          />
+          {!playerOne ? (
+            <PlayerForm
+              label="Player One"
+              onSubmit={player => setPlayerOne(player)}
+            />
+          ) : (
+            <PlayerPreview
+              username={playerOne}
+              label="Player One"
+              onReset={() => setPlayerOne(null)}
+            />
+          )}
         </Grid>
         <Grid xs={24} sm={12}>
-          <Card style={{ width: '100%' }}>
-            <Text h3>Battle</Text>
-          </Card>
+          {!playerTwo ? (
+            <PlayerForm
+              label="Player Two"
+              onSubmit={player => setPlayerTwo(player)}
+            />
+          ) : (
+            <PlayerPreview
+              username={playerTwo}
+              label="Player Two"
+              onReset={() => setPlayerTwo(null)}
+            />
+          )}
         </Grid>
       </Grid.Container>
+      {playerOne && playerTwo && (
+        <div style={{ marginBlockStart: '1rem', textAlign: 'center' }}>
+          <Button>Battle</Button>
+        </div>
+      )}
     </div>
   )
 }
