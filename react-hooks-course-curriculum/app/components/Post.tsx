@@ -1,12 +1,12 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchItem, fetchComments } from '../utils/api'
+import { fetchItem, fetchComments } from '@utils/api'
 import Loading from './Loading'
 import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-import { IPost } from '../types/Post'
+import { IPost } from '../types/IPost'
 
 export default function Post({ location }: { location: { search: string } }) {
   const [post, setPost] = React.useState<null | IPost>(null)

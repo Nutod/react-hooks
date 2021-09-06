@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./app/components/*"],
+      "@context/*": ["./app/contexts/*"],
+      "@hooks/*": ["./app/hooks/*"],
+      "@utils/*": ["./app/utils/*"]
+    },
     "target": "es5",
     "module": "commonjs",
     "lib": ["DOM", "ESNext"],

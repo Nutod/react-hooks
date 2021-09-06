@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { formatDate } from '../utils/helpers'
-import { useThemeContext } from '../contexts/theme'
+import { formatDate } from '@utils/helpers'
+import { useThemeContext } from '@context/theme'
 
 export default function PostMetaInfo({
   by,

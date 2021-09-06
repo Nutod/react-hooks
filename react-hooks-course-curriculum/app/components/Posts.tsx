@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fetchMainPosts } from '../utils/api'
+import { fetchMainPosts } from '@utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
 
-import { IPost } from '../types/Post'
+import { IPost } from '../types/IPost'
 
 export default function Posts({ type }: { type: 'top' | 'new' }) {
   const [posts, setPosts] = React.useState<null | IPost[]>(null)

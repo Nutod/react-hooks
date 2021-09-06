@@ -1,12 +1,12 @@
 import React from 'react'
 import queryString from 'query-string'
-import { fetchUser, fetchPosts } from '../utils/api'
+import { fetchUser, fetchPosts } from '@utils/api'
+import { formatDate } from '@utils/helpers'
 import Loading from './Loading'
-import { formatDate } from '../utils/helpers'
 import PostsList from './PostsList'
 
-import { IUser } from '../types/User'
-import { IPost } from '../types/Post'
+import { IUser } from '../types/IUser'
+import { IPost } from '../types/IPost'
 
 export default function User({ location }: { location: { search: string } }) {
   const [user, setUser] = React.useState<null | IUser>(null)

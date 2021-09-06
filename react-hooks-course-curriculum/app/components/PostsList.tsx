@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 
-import { IPost } from '../types/Post'
+import { IPost } from '../types/IPost'
 
 export default function PostsList({ posts }: { posts: IPost[] }) {
   if (posts.length === 0) {

@@ -1,5 +1,5 @@
-import { IPost } from '../types/Post'
-import { IUser } from '../types/User'
+import { IPost } from '../types/IPost'
+import { IUser } from '../types/IUser'
 
 const api = `https://hacker-news.firebaseio.com/v0`
 const json = '.json?print=pretty'
