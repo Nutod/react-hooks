@@ -3,4 +3,5 @@ export interface IUser {
   created: number
   about: string
   karma: number
+  submitted: string[]
 }

@@ -29,7 +29,7 @@ export default function Post({ location }: { location: { search: string } }) {
       })
       .then(comments => {
         setComments(comments)
-        setLoadingComments(comments)
+        setLoadingComments(false)
       })
       .catch(({ message }) => {
         setError(message)
