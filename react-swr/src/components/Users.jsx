@@ -1,5 +1,6 @@
 import React from 'react'
 import useSWR from 'swr'
+import Error from './Error'
 
 // Step 1
 const fetcher = (...args) => fetch(...args).then(res => res.json())
@@ -7,10 +8,8 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 // How do we get to do data transformations?
 
 export function useUsers() {
-  const { data, error } = useSWR(
-    'https://jsonplaceholder.typicode.com/users',
-    fetcher
-  )
+  // we can treat the useSWR hook as the primitive and build off of that
+  const { data, error } = useSWR('https://jsonplaceholder.typicode.com/users')
 
   return {
     users: data,
@@ -22,8 +21,7 @@ export function useUsers() {
 
 function useUser(id) {
   const { data, error } = useSWR(
-    `https://jsonplaceholder.typicode.com/users/${id}`,
-    fetcher
+    `https://jsonplaceholder.typicode.com/users/${id}`
   )
 
   return {
@@ -38,14 +36,10 @@ export default function Users() {
   // Step 2
   const { users, isLoading, isError } = useUsers()
 
-  console.log(users)
+  //   console.log(users)
 
   if (isError) {
-    return (
-      <p className="zi-note error">
-        <span className="zi-note-type">ERROR:</span> Data was not fetched
-      </p>
-    )
+    return <Error />
   }
 
   if (isLoading) {
