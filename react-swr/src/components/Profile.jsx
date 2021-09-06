@@ -1,8 +1,13 @@
 import React from 'react'
+import Loading from './Loading'
 import { useUsers } from './Users'
 
 export default function Profile() {
-  const { users } = useUsers()
+  const { users, isLoading, isError } = useUsers()
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <div>
