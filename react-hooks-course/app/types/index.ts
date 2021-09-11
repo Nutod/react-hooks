@@ -11,3 +11,19 @@ export interface IRepo {
   forks: number
   open_issues: number
 }
+
+export interface IProfile {
+  name: string
+  location: string
+  company: string
+  following: number
+  followers: number
+  login: string
+  avatar_url: string
+  html_url: string
+}
+
+export interface IPlayer {
+  score: number
+  profile: IProfile
+}
