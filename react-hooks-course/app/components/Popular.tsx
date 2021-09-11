@@ -10,7 +10,7 @@ import {
 import Card from './Card'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
-import { Language } from '../types'
+import { IRepo, Language } from '../types'
 
 function LangaugesNav({
   selected,
@@ -52,7 +52,7 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-function ReposGrid({ repos }) {
+function ReposGrid({ repos }: {repos: IRepo[]}) {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
