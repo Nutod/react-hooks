@@ -1,7 +1,6 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import Hover from './Hover'
-import { ReactNode } from 'react'
 
 const styles = {
   container: {
