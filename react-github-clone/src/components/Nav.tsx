@@ -36,7 +36,10 @@ export default function Nav() {
           <Link to="battle">Battle</Link>
         </li>
       </ul>
-      <a>Light</a>
+      <div>
+        <button className="zi-btn small">Light</button>
+        <button className="zi-btn small">Dark</button>
+      </div>
     </nav>
   )
 }
