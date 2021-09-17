@@ -227,6 +227,23 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
+"@geist-ui/style@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@geist-ui/style/-/style-2.0.0.tgz#5a1127d35b702acacd542c6218eff2aa9c70e93c"
+  integrity sha512-42FIVfbulNYz2SuA4zC3gPbyP5bhSwPvvFUPXgmDrAacFDDZo0lx3ZuXMUK7Z2UfIQNQc3RipX9bLXrmxmosKw==
+  dependencies:
+    "@geist-ui/themes" "^1.1.0"
+
+"@geist-ui/themes@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@geist-ui/themes/-/themes-1.1.0.tgz#3644195ae699eb904ccf29677e8ab51b050d74d1"
+  integrity sha512-N13wlIOeEU8QkOu4mxg5AcF7DpfLNBcZhW/YDMRVEch0ehPl8Y+g4/JW1A4uT6E5W3USSybslmhjFZ7HH8T2LA==
+
+"@mantine/hooks@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-2.5.1.tgz#b36e5c9802d732ae7c5b814aa9d5ca9b845224fc"
+  integrity sha512-Jfjl7Df2KsTMdzOiMuuZ+E/+RpEdy7v3QnK6Ae6XI4Dsfq+4flTbUEN0+lSn8UUqqMH9CifJtGK/cARl5VSy3g==
+
 "@rollup/pluginutils@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.1.1.tgz#1d4da86dd4eded15656a57d933fda2b9a08d47ec"
