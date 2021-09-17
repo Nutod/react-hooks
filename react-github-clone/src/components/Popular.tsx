@@ -1,8 +1,8 @@
+import React from 'react'
 import { useDocumentTitle } from '@mantine/hooks'
 import { css } from 'linaria'
-import React from 'react'
 import useFetch from '../hooks/use-fetch'
-import { fetchPopularRepos } from '../utils/api'
+import { IRepo } from '../types'
 import { buildPopularRepoURL } from '../utils/build-url'
 
 const classes = {
@@ -18,6 +18,12 @@ const classes = {
     &::before {
       display: none;
     }
+  `,
+  grid: css`
+    margin-block-start: var(--size-5);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: var(--size-4);
   `,
 }
 
@@ -44,6 +50,7 @@ function SelectionNav({
       {languages.map(language => (
         <li
           className={classes.li}
+          key={language}
           style={{
             borderBottom:
               selected === language
@@ -59,14 +66,33 @@ function SelectionNav({
   )
 }
 
+function RepoList({ repos }: { repos: IRepo[] }) {
+  return (
+    <div className={classes.grid}>
+      {repos.map(repo => (
+        <div className="zi-card" key={repo.id}>
+          <h4>{repo.name}</h4>
+          <img src={repo.owner.avatar_url} alt="Repo Image" />
+          <p>Forks: {repo.forks}</p>
+          <p>Size: {repo.size}</p>
+          <a href={repo.owner.html_url} target="_blank">
+            Link
+          </a>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function Popular() {
   useDocumentTitle('Github - Popular Repos')
-  
+
   const [selected, setSelected] = React.useState<Language>('All')
 
-  const { data, error } = useFetch(buildPopularRepoURL(selected))
-
-  console.log(data, error)
+  const { data, error } = useFetch(buildPopularRepoURL(selected)) as {
+    data: undefined | { items: IRepo[] }
+    error: undefined | { message: string }
+  }
 
   const getSelectionNavProps = () => ({
     selected,
@@ -86,7 +112,7 @@ export default function Popular() {
         </div>
       )}
 
-      {!data && (
+      {!data && !error && (
         <div style={{ textAlign: 'center', marginBlockStart: 'var(--size-8)' }}>
           <button className="zi-btn loading">
             <span className="zi-loading-shim">
@@ -97,6 +123,8 @@ export default function Popular() {
           </button>
         </div>
       )}
+
+      {data?.items && <RepoList repos={data.items} />}
     </div>
   )
 }
