@@ -3,7 +3,7 @@ import { css } from 'linaria'
 
 const classes = {
   container: css`
-    max-width: 50rem;
+    max-width: var(--width-2xl);
     margin-inline: auto;
   `,
 }
