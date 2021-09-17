@@ -1,7 +1,9 @@
 import { useDocumentTitle } from '@mantine/hooks'
 import { css } from 'linaria'
 import React from 'react'
+import useFetch from '../hooks/use-fetch'
 import { fetchPopularRepos } from '../utils/api'
+import { buildPopularRepoURL } from '../utils/build-url'
 
 const classes = {
   ul: css`
@@ -59,15 +61,12 @@ function SelectionNav({
 
 export default function Popular() {
   useDocumentTitle('Github - Popular Repos')
+  
   const [selected, setSelected] = React.useState<Language>('All')
 
-  
+  const { data, error } = useFetch(buildPopularRepoURL(selected))
 
-  // React.useEffect(() => {
-  //   fetchPopularRepos(selected)
-  //     .then(data => console.log(data))
-  //     .catch(err => console.error(err))
-  // }, [selected])
+  console.log(data, error)
 
   const getSelectionNavProps = () => ({
     selected,
@@ -77,6 +76,27 @@ export default function Popular() {
   return (
     <div>
       <SelectionNav {...getSelectionNavProps()} />
+
+      {error && (
+        <div style={{ textAlign: 'center', marginBlockStart: 'var(--size-8)' }}>
+          <p className="zi-note error">
+            <span className="zi-note-type">ERROR:</span> Data could not be
+            fetched
+          </p>
+        </div>
+      )}
+
+      {!data && (
+        <div style={{ textAlign: 'center', marginBlockStart: 'var(--size-8)' }}>
+          <button className="zi-btn loading">
+            <span className="zi-loading-shim">
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   )
 }

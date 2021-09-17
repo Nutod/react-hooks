@@ -49,6 +49,7 @@ function useFetch<T = unknown>(url?: string, options?: RequestInit): State<T> {
 
       // If a cache exists for this url, return it
       if (cache.current[url]) {
+        console.log('Returning from Cache')
         dispatch({ type: 'fetched', payload: cache.current[url] })
         return
       }
