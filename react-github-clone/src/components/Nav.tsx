@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from 'linaria'
 import { Link } from 'react-router-dom'
+import { useTheme } from '../context/theme'
 
 const classes = {
   nav: css`
@@ -26,6 +27,8 @@ const classes = {
 }
 
 export default function Nav() {
+  const { theme, toggleTheme } = useTheme()
+
   return (
     <nav className={classes.nav}>
       <ul className={classes.ul}>
@@ -37,8 +40,15 @@ export default function Nav() {
         </li>
       </ul>
       <div>
-        <button className="zi-btn small">Light</button>
-        <button className="zi-btn small">Dark</button>
+        {theme === 'light' ? (
+          <button className="zi-btn small" onClick={toggleTheme}>
+            Dark
+          </button>
+        ) : (
+          <button className="zi-btn small" onClick={toggleTheme}>
+            Light
+          </button>
+        )}
       </div>
     </nav>
   )
