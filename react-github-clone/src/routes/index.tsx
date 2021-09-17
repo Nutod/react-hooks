@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
 import Battle from '../components/Battle'
+import Nav from '../components/Nav'
 import Popular from '../components/Popular'
 import Result from '../components/Result'
 
@@ -11,5 +12,10 @@ export const AppRoutes = () => {
     { path: 'battle/result', element: <Result /> },
   ])
 
-  return <>{element}</>
+  return (
+    <>
+      <Nav />
+      {element}
+    </>
+  )
 }
