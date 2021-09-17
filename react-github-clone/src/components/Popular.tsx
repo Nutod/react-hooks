@@ -1,6 +1,7 @@
 import { useDocumentTitle } from '@mantine/hooks'
 import { css } from 'linaria'
 import React from 'react'
+import { fetchPopularRepos } from '../utils/api'
 
 const classes = {
   ul: css`
@@ -60,6 +61,14 @@ export default function Popular() {
   useDocumentTitle('Github - Popular Repos')
   const [selected, setSelected] = React.useState<Language>('All')
 
+  
+
+  // React.useEffect(() => {
+  //   fetchPopularRepos(selected)
+  //     .then(data => console.log(data))
+  //     .catch(err => console.error(err))
+  // }, [selected])
+
   const getSelectionNavProps = () => ({
     selected,
     setSelected,
@@ -68,8 +77,6 @@ export default function Popular() {
   return (
     <div>
       <SelectionNav {...getSelectionNavProps()} />
-
-      {/* Results */}
     </div>
   )
 }
