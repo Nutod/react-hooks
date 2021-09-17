@@ -1,8 +1,13 @@
 import React from 'react'
+import AppProvider from './providers/app-provider'
+import { AppRoutes } from './routes'
+
 import '@geist-ui/style'
 
-function App() {
-  return <h1>Heading One</h1>
+export default function App() {
+  return (
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
+  )
 }
-
-export default App
