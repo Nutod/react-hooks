@@ -35,7 +35,9 @@ function LangaugesNav({
         <li key={language}>
           <button
             className="btn-clear nav-link"
-            style={language === selected ? { color: 'rgb(187, 46, 31)' } : null}
+            style={
+              language === selected ? { color: 'rgb(187, 46, 31)' } : undefined
+            }
             onClick={() => onUpdateLanguage(language)}
           >
             {language}
@@ -99,63 +101,51 @@ ReposGrid.propTypes = {
   repos: PropTypes.array.isRequired,
 }
 
-export default class Popular extends React.Component {
-  state = {
-    selectedLanguage: 'All',
-    repos: {},
-    error: null,
-  }
-  componentDidMount() {
-    this.updateLanguage(this.state.selectedLanguage)
-  }
-  updateLanguage = selectedLanguage => {
-    this.setState({
-      selectedLanguage,
-      error: null,
-    })
+export default function Popular() {
+  const [selectedLanguage, setSelectedLanguage] =
+    React.useState<Language>('All')
+  const [repos, setRepos] = React.useState({} as Record<Language, IRepo[]>)
+  const [error, setError] = React.useState<null | string>(null)
 
-    if (!this.state.repos[selectedLanguage]) {
+  React.useEffect(() => {
+    updateLanguage(selectedLanguage)
+  }, [])
+  const updateLanguage = (selectedLanguage: Language) => {
+    setSelectedLanguage(selectedLanguage)
+    setError(null)
+
+    if (!repos[selectedLanguage]) {
       fetchPopularRepos(selectedLanguage)
         .then(data => {
-          this.setState(({ repos }) => ({
-            repos: {
-              ...repos,
-              [selectedLanguage]: data,
-            },
+          setRepos(repos => ({
+            ...repos,
+            [selectedLanguage]: data,
           }))
         })
         .catch(() => {
           console.warn('Error fetching repos: ', error)
 
-          this.setState({
-            error: `There was an error fetching the repositories.`,
-          })
+          setError(`There was an error fetching the repositories.`)
         })
     }
   }
-  isLoading = () => {
-    const { selectedLanguage, repos, error } = this.state
 
+  const isLoading = () => {
     return !repos[selectedLanguage] && error === null
   }
-  render() {
-    const { selectedLanguage, repos, error } = this.state
 
-    return (
-      <React.Fragment>
-        <LangaugesNav
-          selected={selectedLanguage}
-          onUpdateLanguage={this.updateLanguage}
-        />
+  return (
+    <React.Fragment>
+      <LangaugesNav
+        selected={selectedLanguage}
+        onUpdateLanguage={updateLanguage}
+      />
 
-        {this.isLoading() && <Loading text="Fetching Repos" />}
+      {isLoading() && <Loading text="Fetching Repos" />}
 
-        {error && <p className="center-text error">{error}</p>}
+      {error && <p className="center-text error">{error}</p>}
 
-        {repos[selectedLanguage] && (
-          <ReposGrid repos={repos[selectedLanguage]} />
-        )}
-      </React.Fragment>
-    )
-  }
+      {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
+    </React.Fragment>
+  )
 }
