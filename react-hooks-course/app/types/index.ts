@@ -14,3 +14,11 @@ export interface IRepo {
   forks: number
   open_issues: number
 }
+
+export interface IProfile {
+  name: string
+  location: string
+  company: string
+  following: number
+  followers: number
+}
