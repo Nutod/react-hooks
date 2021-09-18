@@ -15,10 +15,15 @@ export interface IRepo {
   open_issues: number
 }
 
-export interface IProfile {
+export interface IProfile extends IOwner {
   name: string
   location: string
   company: string
   following: number
   followers: number
+}
+
+export interface IPlayer {
+  score: number
+  profile: IProfile
 }
