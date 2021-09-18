@@ -1,6 +1,6 @@
-import React from 'react'
 import { useDocumentTitle } from '@mantine/hooks'
 import { css } from 'linaria'
+import React from 'react'
 import useFetch from '../hooks/use-fetch'
 import { IRepo } from '../types'
 import { buildPopularRepoURL } from '../utils/build-url'
