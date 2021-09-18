@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-import { IProfile } from '../types'
+import { IPlayer, IProfile } from '../types'
 
 function ProfileList({ profile }: { profile: IProfile }) {
   return (
@@ -61,28 +61,24 @@ export default function Results({
 }: {
   location: { search: string }
 }) {
-  const [winner, setWinner] = React.useState(null)
-  const [loser, setLoser] = React.useState(null)
-  const [error, setError] = React.useState(null)
-  const [loading, setLoading] = React.useState(null)
+  const [winner, setWinner] = React.useState<null | IPlayer>(null)
+  const [loser, setLoser] = React.useState<null | IPlayer>(null)
+  const [error, setError] = React.useState<null | string>(null)
+  const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     const { playerOne, playerTwo } = queryString.parse(location.search)
 
     battle([playerOne, playerTwo])
       .then(players => {
-        this.setState({
-          winner: players[0],
-          loser: players[1],
-          error: null,
-          loading: false,
-        })
+        setWinner(players[0])
+        setLoser(players[1])
+        setError(null)
+        setLoading(false)
       })
       .catch(({ message }) => {
-        this.setState({
-          error: message,
-          loading: false,
-        })
+        setError(message)
+        setLoading(false)
       })
   }, [])
 
@@ -92,6 +88,10 @@ export default function Results({
 
   if (error) {
     return <p className="center-text error">{error}</p>
+  }
+
+  if (!winner || !loser) {
+    return <p className="center-text error">Data is not complete</p>
   }
 
   return (
