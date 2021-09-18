@@ -67,7 +67,9 @@ export default function Results({
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
-    const { playerOne, playerTwo } = queryString.parse(location.search)
+    const { playerOne, playerTwo } = queryString.parse(location.search) as {
+      [id: string]: string
+    }
 
     battle([playerOne, playerTwo])
       .then(players => {
