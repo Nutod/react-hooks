@@ -7,6 +7,10 @@ export interface IPost {
   text: string
   descendants: number
   comment?: boolean
+  dead: boolean
+  deleted: boolean
+  type: 'comment' | 'story'
+  kids: string[]
 }
 
 export interface IUser {
@@ -14,4 +18,5 @@ export interface IUser {
   created: number
   karma: number
   about: string
+  submitted: string[]
 }
