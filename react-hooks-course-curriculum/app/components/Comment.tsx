@@ -1,10 +1,16 @@
 import React from 'react'
+import { IPost } from '../types'
 import PostMetaInfo from './PostMetaInfo'
 
 export default function Comment({
   comment,
 }: {
-  comment: { by: string; time: number; id: number; text: string }
+  comment: {
+    by: string
+    time: number
+    id: number
+    text: string
+  }
 }) {
   return (
     <div className="comment">

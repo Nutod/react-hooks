@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { formatDate } from '../utils/helpers'
 import { ThemeConsumer, useThemeContext } from '../contexts/theme'
+import { IPost } from '../types'
 
 export default function PostMetaInfo({
   by,
   time,
   id,
   descendants,
-}: {
-  by: string
-}) {
+  comment,
+}: IPost) {
   const { theme } = useThemeContext()
 
   return (
