@@ -8,3 +8,10 @@ export interface IPost {
   descendants: number
   comment?: boolean
 }
+
+export interface IUser {
+  id: number
+  created: number
+  karma: number
+  about: string
+}
