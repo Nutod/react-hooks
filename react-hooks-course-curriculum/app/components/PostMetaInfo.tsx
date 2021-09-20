@@ -11,7 +11,13 @@ export default function PostMetaInfo({
   id,
   descendants,
   comment,
-}: IPost) {
+}: {
+  by: string
+  time: number
+  id: number
+  descendants?: number
+  comment?: boolean
+}) {
   const { theme } = useThemeContext()
 
   return (
