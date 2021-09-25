@@ -21,3 +21,8 @@ export interface IProfile {
   following: number
   followers: number
 }
+
+export interface IPlayer {
+  score: number
+  prfile: IProfile
+}
