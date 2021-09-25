@@ -11,7 +11,7 @@ const Battle = React.lazy(() => import('./components/Battle'))
 const Results = React.lazy(() => import('./components/Results'))
 
 function App() {
-  const { mode: theme } = useDarkMode()
+  const { theme } = useDarkMode()
 
   return (
     <Router>

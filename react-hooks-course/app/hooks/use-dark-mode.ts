@@ -5,8 +5,8 @@ import useLocalStorage from './use-local-storage'
 const COLOR_SCHEME_QUERY = '(prefers-color-scheme: dark)'
 
 interface UseDarkModeOutput {
-  mode: 'light' | 'dark'
-  toggle: () => void
+  theme: 'light' | 'dark'
+  toggleTheme: () => void
   enable: () => void
   disable: () => void
 }
@@ -40,8 +40,8 @@ function useDarkMode(defaultValue?: boolean): UseDarkModeOutput {
   }, [])
 
   return {
-    mode: isDarkMode ? 'dark' : 'light',
-    toggle: () => setDarkMode(prev => !prev),
+    theme: isDarkMode ? 'dark' : 'light',
+    toggleTheme: () => setDarkMode(prev => !prev),
     enable: () => setDarkMode(true),
     disable: () => setDarkMode(false),
   }
