@@ -12,9 +12,10 @@ export interface IRepo {
 export interface IOwner {
   login: string
   avatar_url: string
+  html_url: string
 }
 
-export interface IProfile {
+export interface IProfile extends IOwner {
   name: string
   company: string
   location: string
@@ -24,5 +25,5 @@ export interface IProfile {
 
 export interface IPlayer {
   score: number
-  prfile: IProfile
+  profile: IProfile
 }

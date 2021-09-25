@@ -15,7 +15,7 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-import { IProfile } from '../types'
+import { IPlayer, IProfile } from '../types'
 
 function ProfileList({ profile }: { profile: IProfile }) {
   return (
@@ -61,8 +61,8 @@ export default function Results({
 }: {
   location: { search: string }
 }) {
-  const [winner, setWinner] = React.useState(null)
-  const [loser, setLoser] = React.useState(null)
+  const [winner, setWinner] = React.useState<null | IPlayer>(null)
+  const [loser, setLoser] = React.useState<null | IPlayer>(null)
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(true)
 
@@ -90,6 +90,10 @@ export default function Results({
 
   if (error) {
     return <p className="center-text error">{error}</p>
+  }
+
+  if (!winner || !loser) {
+    return <p className="center-text error">Data is not complete</p>
   }
 
   return (
