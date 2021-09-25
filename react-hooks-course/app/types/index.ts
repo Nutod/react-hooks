@@ -13,3 +13,11 @@ export interface IOwner {
   login: string
   avatar_url: string
 }
+
+export interface IProfile {
+  name: string
+  company: string
+  location: string
+  following: number
+  followers: number
+}
