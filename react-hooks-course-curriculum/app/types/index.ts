@@ -3,4 +3,7 @@ export interface IPost {
   time: number
   id: number
   text: string
+  url: string
+  title: string
+  descendants: number
 }
