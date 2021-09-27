@@ -7,3 +7,10 @@ export interface IPost {
   title: string
   descendants: number
 }
+
+export interface IUser {
+  id: number
+  created: number
+  karma: number
+  about: string
+}
