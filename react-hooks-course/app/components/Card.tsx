@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
-import useDarkMode from '../hooks/use-dark-mode'
-import { ReactNode } from 'react'
+import { useThemeContext } from '../contexts/theme'
 
 export default function Card({
   header,
@@ -18,7 +17,7 @@ export default function Card({
   name: string
   children: ReactNode
 }) {
-  const { theme } = useDarkMode()
+  const { theme } = useThemeContext()
 
   return (
     <div className={`card bg-${theme}`}>

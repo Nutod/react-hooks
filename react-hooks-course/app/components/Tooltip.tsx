@@ -1,4 +1,4 @@
-import React, { ReactNode, CSSProperties } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import Hover from './Hover'
 

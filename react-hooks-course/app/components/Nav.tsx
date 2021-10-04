@@ -1,13 +1,13 @@
 import React from 'react'
+import { useThemeContext } from '../contexts/theme'
 import { NavLink } from 'react-router-dom'
-import useDarkMode from '../hooks/use-dark-mode'
 
 const activeStyle = {
   color: 'rgb(187, 46, 31)',
 }
 
 export default function Nav() {
-  const { theme, toggleTheme } = useDarkMode()
+  const { theme, toggleTheme } = useThemeContext()
 
   return (
     <nav className="row space-between">
@@ -26,7 +26,7 @@ export default function Nav() {
       <button
         style={{ fontSize: 30 }}
         className="btn-clear"
-        onClick={toggleTheme}
+        onClick={() => toggleTheme()}
       >
         {theme === 'light' ? '🔦' : '💡'}
       </button>

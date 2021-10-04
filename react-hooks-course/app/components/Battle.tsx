@@ -6,12 +6,11 @@ import {
   FaTimesCircle,
 } from 'react-icons/fa'
 import PropTypes from 'prop-types'
+import { ThemeConsumer, useThemeContext } from '../contexts/theme'
 import { Link } from 'react-router-dom'
-import useDarkMode from '../hooks/use-dark-mode'
-import { useInput } from '../hooks/use-input'
 
 function Instructions() {
-  const { theme } = useDarkMode()
+  const { theme } = useThemeContext()
 
   return (
     <div className="instructions-container">
@@ -43,19 +42,19 @@ function Instructions() {
 }
 
 function PlayerInput({
-  label,
   onSubmit,
+  label,
 }: {
-  label: string
   onSubmit: (param: string) => void
+  label: string
 }) {
-  const { theme } = useDarkMode()
-  const { value, bind } = useInput('')
+  const { theme } = useThemeContext()
+  const [username, setUsername] = React.useState('')
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    onSubmit(value)
+    onSubmit(username)
   }
 
   return (
@@ -70,12 +69,13 @@ function PlayerInput({
           className={`input-${theme}`}
           placeholder="github username"
           autoComplete="off"
-          {...bind}
+          value={username}
+          onChange={e => setUsername(e.target.value)}
         />
         <button
           className={`btn ${theme === 'dark' ? 'light-btn' : 'dark-btn'}`}
           type="submit"
-          disabled={!value}
+          disabled={!username}
         >
           Submit
         </button>
@@ -98,7 +98,7 @@ function PlayerPreview({
   onReset: () => void
   label: string
 }) {
-  const { theme } = useDarkMode()
+  const { theme } = useThemeContext()
 
   return (
     <div className="column player">

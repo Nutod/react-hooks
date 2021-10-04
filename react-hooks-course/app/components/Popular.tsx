@@ -11,7 +11,7 @@ import Card from './Card'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
 
-import { IRepo, Language } from '../types'
+type Language = 'All' | 'JavaScript' | 'Ruby' | 'Java' | 'CSS' | 'Python'
 
 function LangaugesNav({
   selected,
@@ -53,6 +53,17 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
+export interface IRepo {
+  name: string
+  owner: {
+    login: string
+    avatar_url: string
+  }
+  html_url: string
+  stargazers_count: number
+  forks: number
+  open_issues: number
+}
 function ReposGrid({ repos }: { repos: IRepo[] }) {
   return (
     <ul className="grid space-around">
@@ -118,15 +129,12 @@ export default function Popular() {
     if (!repos[selectedLanguage]) {
       fetchPopularRepos(selectedLanguage)
         .then(data => {
-          setRepos(repos => ({
-            ...repos,
-            [selectedLanguage]: data,
-          }))
+          setRepos(repos => ({ ...repos, [selectedLanguage]: data }))
         })
         .catch(() => {
           console.warn('Error fetching repos: ', error)
 
-          setError(`There was an error fetching the repositories.`)
+          setError('There was an error fetching the repositories.')
         })
     }
   }

@@ -14,10 +14,7 @@ const styles = {
 }
 
 export default class Loading extends React.Component<
-  {
-    text: string
-    speed: number
-  },
+  { text: string; speed: number },
   { content: string }
 > {
   interval: number | undefined

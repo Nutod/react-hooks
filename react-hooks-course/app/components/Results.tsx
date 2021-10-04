@@ -15,7 +15,16 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-import { IPlayer, IProfile } from '../types'
+export interface IProfile {
+  name: string
+  location: string
+  company: string
+  followers: number
+  following: number
+  login: string
+  avatar_url: string
+  html_url: string
+}
 
 function ProfileList({ profile }: { profile: IProfile }) {
   return (
@@ -56,6 +65,11 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
+export interface IPlayer {
+  score: number
+  profile: IProfile
+}
+
 export default function Results({
   location,
 }: {
@@ -63,7 +77,7 @@ export default function Results({
 }) {
   const [winner, setWinner] = React.useState<null | IPlayer>(null)
   const [loser, setLoser] = React.useState<null | IPlayer>(null)
-  const [error, setError] = React.useState(null)
+  const [error, setError] = React.useState<null | string>(null)
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
