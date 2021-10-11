@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSProperties } from 'react'
 
 const styles = {
   content: {
@@ -10,22 +9,12 @@ const styles = {
     right: '0',
     marginTop: '20px',
     textAlign: 'center',
-  } as CSSProperties,
+  }
 }
 
-export default class Loading extends React.Component<
-  { text: string; speed: number },
-  { content: string }
-> {
-  interval: number | undefined
+export default class Loading extends React.Component {
   state = { content: this.props.text }
-  static propTypes: {
-    text: PropTypes.Validator<string>
-    speed: PropTypes.Validator<number>
-  }
-  static defaultProps: { text: string; speed: number }
-
-  componentDidMount() {
+  componentDidMount () {
     const { speed, text } = this.props
 
     this.interval = window.setInterval(() => {
@@ -34,13 +23,15 @@ export default class Loading extends React.Component<
         : this.setState(({ content }) => ({ content: content + '.' }))
     }, speed)
   }
-
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.clearInterval(this.interval)
   }
-
   render() {
-    return <p style={styles.content}>{this.state.content}</p>
+    return (
+      <p style={styles.content}>
+        {this.state.content}
+      </p>
+    )
   }
 }
 
@@ -51,5 +42,5 @@ Loading.propTypes = {
 
 Loading.defaultProps = {
   text: 'Loading',
-  speed: 300,
+  speed: 300
 }
