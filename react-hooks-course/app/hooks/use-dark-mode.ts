@@ -5,7 +5,8 @@ interface UseDarkModeOutput {
   toggleTheme: () => void
 }
 
-function useDarkMode(defaultValue?: boolean): UseDarkModeOutput {
+// Classic case of React as a State Management Library
+function useDarkMode(): UseDarkModeOutput {
   const [theme, setTheme] = React.useState<'dark' | 'light'>('light')
 
   const toggleTheme = React.useCallback(() => {
