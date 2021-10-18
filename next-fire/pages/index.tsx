@@ -9,6 +9,8 @@ import { Page, Text, Display, Button, Grid } from '@geist-ui/react'
 // We'll route to profile based on the username
 // username, users, profile
 
+// Going over the Technical overview of the project again and again
+
 export default function Home() {
   const gh = 'https://github.com/geist-org/react'
   const docs = 'https://react.geist-ui.dev'
