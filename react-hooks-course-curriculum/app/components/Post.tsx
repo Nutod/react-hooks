@@ -12,7 +12,7 @@ type PostProps = {
   }
 }
 
-interface IPost {
+export interface IPost {
   by: string
   time: number
   id: number
