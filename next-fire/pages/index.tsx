@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Page, Text, Display, Button, Grid } from '@geist-ui/react'
 import Nav from '../components/Nav'
 import Layout from '../components/Layout'
+import { useSigninCheck } from 'reactfire'
 
 // Similar to DevTo
 
@@ -15,6 +16,10 @@ import Layout from '../components/Layout'
 // use firebase hooks to manage the authentication state
 
 export default function Home() {
+  const { status, data } = useSigninCheck()
+
+  console.log({ status, data })
+
   return (
     <Layout>
       <Text h2>Home Component</Text>
