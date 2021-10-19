@@ -1,8 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
+import { Divider } from '@geist-ui/react'
+import { AuthProvider, useFirebaseApp } from 'reactfire'
+import { getAuth } from '@firebase/auth'
 import { styled } from '@linaria/react'
 import Nav from './Nav'
-import { Divider } from '@geist-ui/react'
 
 const LayoutWrapper = styled.div`
   min-height: 100vh;
@@ -17,18 +19,23 @@ type LayoutProps = {
 // Add other meta tags here
 
 export default function Layout({ children, title }: LayoutProps) {
+  const app = useFirebaseApp()
+  const auth = getAuth(app)
+
   return (
-    <LayoutWrapper>
-      <Head>
-        <title>{title ? title : 'DevTo with NextJS'}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <AuthProvider sdk={auth}>
+      <LayoutWrapper>
+        <Head>
+          <title>{title ? title : 'DevTo with NextJS'}</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <Nav />
+        <Nav />
 
-      <Divider />
+        <Divider />
 
-      <main>{children}</main>
-    </LayoutWrapper>
+        <main>{children}</main>
+      </LayoutWrapper>
+    </AuthProvider>
   )
 }
