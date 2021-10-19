@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Page, Text, Display, Button, Grid } from '@geist-ui/react'
 import Nav from '../components/Nav'
+import Layout from '../components/Layout'
 
 // Similar to DevTo
 
@@ -15,11 +16,8 @@ import Nav from '../components/Nav'
 
 export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>DevTo with NextJS</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-    </div>
+    <Layout>
+      <Text h2>Home Component</Text>
+    </Layout>
   )
 }

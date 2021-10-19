@@ -2,8 +2,12 @@ import React from 'react'
 import Head from 'next/head'
 import { styled } from '@linaria/react'
 import Nav from './Nav'
+import { Divider } from '@geist-ui/react'
 
-const LayoutWrapper = styled.div``
+const LayoutWrapper = styled.div`
+  min-height: 100vh;
+  padding: 2rem;
+`
 
 type LayoutProps = {
   children: React.ReactNode
@@ -21,6 +25,8 @@ export default function Layout({ children, title }: LayoutProps) {
       </Head>
 
       <Nav />
+
+      <Divider />
 
       <main>{children}</main>
     </LayoutWrapper>
