@@ -10,6 +10,7 @@ import { Page, Text, Display, Button, Grid } from '@geist-ui/react'
 // username, users, profile
 
 // Going over the Technical overview of the project again and again
+// use firebase hooks to manage the authentication state
 
 export default function Home() {
   const gh = 'https://github.com/geist-org/react'
@@ -21,7 +22,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Geist UI with NextJS</title>
+        <title>DevTo with NextJS</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Page dotBackdrop width="800px" padding={0}>
