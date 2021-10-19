@@ -3,11 +3,11 @@ import { styled } from 'linaria/react'
 import Logo from './Logo'
 import { Button } from '@geist-ui/react'
 
-// nav with a logo
-// sign in with google button
+// the firestore information will be here
 
 const NavWrapper = styled.nav`
   display: flex;
+  justify-content: space-between;
 `
 
 export default function Nav() {
