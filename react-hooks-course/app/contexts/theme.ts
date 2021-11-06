@@ -14,7 +14,7 @@ function useTheme() {
     setTheme(theme => (theme === 'light' ? 'dark' : 'light'))
   }, [])
 
-  return { theme, setTheme }
+  return { theme, toggleTheme }
 }
 
 export const [ThemeContextProvider, useThemeContext] = generateContext(useTheme)
