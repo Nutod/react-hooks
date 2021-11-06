@@ -2,8 +2,7 @@ import React from 'react'
 import { styled } from 'linaria/react'
 import Logo from './Logo'
 import { Button } from '@geist-ui/react'
-
-// the firestore information will be here
+import { useUser } from 'reactfire'
 
 const NavWrapper = styled.nav`
   display: flex;
@@ -11,6 +10,10 @@ const NavWrapper = styled.nav`
 `
 
 export default function Nav() {
+  const { status, data } = useUser()
+
+  // handle the states you need to handle from here
+
   return (
     <NavWrapper>
       <Logo />
