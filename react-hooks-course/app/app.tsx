@@ -10,7 +10,10 @@ const Battle = React.lazy(() => import('./components/Battle'))
 const Results = React.lazy(() => import('./components/Results'))
 
 export default function App() {
-  const { theme } = useThemeContext()
+  const { theme } = useThemeContext() as {
+    theme: 'light' | 'dark'
+    toggleTheme: () => void
+  }
 
   return (
     <Router>
