@@ -1,4 +1,5 @@
 import React from 'react'
+import generateContext from 'react-generate-context'
 
 const { Consumer, Provider } = React.createContext({})
 
@@ -16,9 +17,10 @@ type ThemeContextProviderProps = {
   children: React.ReactNode
 }
 
-function useThemeFn() {
+function useThemeContextValue() {
   const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
 
+  // if we had multiple handlers?
   const toggleTheme = React.useCallback(() => {
     setTheme(theme => (theme === 'light' ? 'dark' : 'light'))
   }, [])
@@ -27,7 +29,7 @@ function useThemeFn() {
 }
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
-  const { theme, toggleTheme } = useThemeFn()
+  const { theme, toggleTheme } = useThemeContextValue()
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -43,3 +45,6 @@ export function useThemeContext() {
 
   return context
 }
+
+export const [GeneratedThemeContextProvider, generatedUseThemeContext] =
+  generateContext(useThemeContextValue)
