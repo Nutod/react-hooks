@@ -5,13 +5,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Loading from './components/Loading'
 
 import './index.css'
+import { useStore } from './store'
 
 const Popular = React.lazy(() => import('./components/Popular'))
 const Battle = React.lazy(() => import('./components/Battle'))
 const Results = React.lazy(() => import('./components/Results'))
 
 export default function App() {
-  const { theme } = useThemeContext()
+  const { theme } = useStore()
 
   return (
     <Router>
