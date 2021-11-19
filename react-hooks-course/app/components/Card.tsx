@@ -4,7 +4,7 @@ import { useThemeContext } from '../contexts/theme'
 
 type CardProps = {
   header: string
-  subheader: string
+  subheader?: string
   avatar: string
   href: string
   name: string
