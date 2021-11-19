@@ -46,5 +46,5 @@ export function useThemeContext() {
   return context
 }
 
-export const [GeneratedThemeContextProvider, generatedUseThemeContext] =
+export const [GeneratedThemeContextProvider, useGeneratedThemeContext] =
   generateContext(useThemeContextValue)
