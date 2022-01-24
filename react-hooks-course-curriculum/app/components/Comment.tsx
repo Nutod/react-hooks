@@ -1,17 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import PostMetaInfo from './PostMetaInfo'
 
-export default function Comment({
-  comment,
-}: {
+type CommentProps = {
   comment: {
     by: string
     time: number
     id: number
     text: string
   }
-}) {
+}
+
+export default function Comment({ comment }: CommentProps) {
   return (
     <div className="comment">
       <PostMetaInfo

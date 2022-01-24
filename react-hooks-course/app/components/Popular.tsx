@@ -7,17 +7,16 @@ import {
   FaCodeBranch,
   FaExclamationTriangle,
 } from 'react-icons/fa'
-import { Tooltip } from '@mantine/core'
 import Card from './Card'
 import Loading from './Loading'
+import Tooltip from './Tooltip'
 
-function LangaugesNav({
-  selected,
-  onUpdateLanguage,
-}: {
+type LangaugesNavType = {
   selected: string
   onUpdateLanguage: (param: string) => void
-}) {
+}
+
+function LangaugesNav({ selected, onUpdateLanguage }: LangaugesNavType) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
 
   return (
@@ -44,7 +43,7 @@ LangaugesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 }
 
-export interface IRepo {
+interface IRepo {
   name: string
   owner: {
     login: string
@@ -56,7 +55,11 @@ export interface IRepo {
   open_issues: number
 }
 
-function ReposGrid({ repos }: { repos: IRepo[] }) {
+type ReposGridType = {
+  repos: IRepo[]
+}
+
+function ReposGrid({ repos }: ReposGridType) {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
@@ -74,7 +77,7 @@ function ReposGrid({ repos }: { repos: IRepo[] }) {
             >
               <ul className="card-list">
                 <li>
-                  <Tooltip label="Github username" withArrow>
+                  <Tooltip text="Github username">
                     <FaUser color="rgb(255, 191, 116)" size={22} />
                     <a href={`https://github.com/${login}`}>{login}</a>
                   </Tooltip>
@@ -128,12 +131,11 @@ export default function Popular() {
         .catch(() => {
           console.warn('Error fetching repos: ', error)
 
-          setError('There was an error fetching the repositories.')
+          setError(`There was an error fetching the repositories.`)
         })
     }
   }
 
-  // You know why we need this yeah?
   const isLoading = () => {
     return !repos[selectedLanguage] && error === null
   }

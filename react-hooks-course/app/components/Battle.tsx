@@ -6,13 +6,12 @@ import {
   FaTimesCircle,
 } from 'react-icons/fa'
 import PropTypes from 'prop-types'
-import { ThemeConsumer } from '../contexts/theme'
+import Results from './Results'
+import { useThemeContext } from '../contexts/theme'
 import { Link } from 'react-router-dom'
-import { useSnapshot } from 'valtio'
-import { ThemeContext } from '../store/store'
 
 function Instructions() {
-  const { theme } = useSnapshot(ThemeContext)
+  const { theme } = useThemeContext()
 
   return (
     <div className="instructions-container">
@@ -43,24 +42,18 @@ function Instructions() {
   )
 }
 
-function PlayerInput({
-  label,
-  onSubmit,
-}: {
+type PlayerInputPropType = {
   label: string
   onSubmit: (param: string) => void
-}) {
+}
+function PlayerInput({ label, onSubmit }: PlayerInputPropType) {
   const [username, setUsername] = React.useState('')
-  const { theme } = useSnapshot(ThemeContext)
+  const { theme } = useThemeContext()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     onSubmit(username)
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value)
   }
 
   return (
@@ -76,7 +69,7 @@ function PlayerInput({
           placeholder="github username"
           autoComplete="off"
           value={username}
-          onChange={handleChange}
+          onChange={e => setUsername(e.target.value)}
         />
         <button
           className={`btn ${theme === 'dark' ? 'light-btn' : 'dark-btn'}`}
@@ -95,16 +88,14 @@ PlayerInput.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-function PlayerPreview({
-  username,
-  onReset,
-  label,
-}: {
+type PlayerReviewPropType = {
   username: string
   onReset: () => void
   label: string
-}) {
-  const { theme } = useSnapshot(ThemeContext)
+}
+
+function PlayerPreview({ username, onReset, label }: PlayerReviewPropType) {
+  const { theme } = useThemeContext()
 
   return (
     <div className="column player">

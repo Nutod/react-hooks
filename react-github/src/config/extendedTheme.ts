@@ -1,0 +1,53 @@
+export const extendedTheme = {
+  colors: {
+    'gray-000': '#ffffff',
+    'gray-100': '#f8f9fa',
+    'gray-200': '#f1f3f5',
+    'gray-300': '#e9ecef',
+    'gray-400': '#dee2e6',
+    'gray-500': '#ced4da',
+    'gray-600': '#adb5bd',
+    'gray-700': '#868e96',
+    'gray-800': '#495057',
+    'gray-900': '#343a40',
+
+    'color-primary': '#ff8ba7',
+    'color-primary-glare': '#faeee7',
+    'color-secondary': '#ffc6c7',
+    'color-tertiary': '#c3f0ca',
+  },
+  // spacing
+  space: {
+    '100': '0.75rem',
+    '200': '1rem',
+    '300': '1.33rem',
+    '400': '1.77rem',
+    '500': '2.36rem',
+    '600': '3.15rem',
+    '700': '4.2rem',
+    '800': '5.6rem',
+    '900': '6.9rem',
+  },
+  fonts: {
+    display: 'Inter, sans-serif',
+    primary: 'Work Sans, sans-serif',
+  },
+  radii: {
+    'radius-2xs': '0.1875rem',
+    'radius-xs': '0.25rem',
+    'radius-sm': '0.375rem',
+    'radius-md': '0.5rem',
+    'radius-lg': '0.75rem',
+    'radius-xl': '1rem',
+    'radius-2xl': '1.5rem',
+  },
+  shadows: {
+    'shadow-2xs': '0 1px 2px rgba(134, 144, 162, 0.1)',
+    'shadow-xs': '0 2px 4px rgba(134, 144, 162, 0.15)',
+    'shadow-sm': '0 3px 6px rgba(134, 144, 162, 0.2)',
+    'shadow-md': '0 4px 8px rgba(134, 144, 162, 0.25)',
+    'shadow-lg': '0 6px 12px rgba(134, 144, 162, 0.3)',
+    'shadow-xl': '0 12px 24px rgba(134, 144, 162, 0.35)',
+    'shadow-2xl': '0 24px 48px rgba(134, 144, 162, 0.4)',
+  },
+}

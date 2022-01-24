@@ -4,24 +4,31 @@ import { fetchUser, fetchPosts } from '../utils/api'
 import Loading from './Loading'
 import { formatDate } from '../utils/helpers'
 import PostsList from './PostsList'
+
 import { IPost } from './Post'
 
-export interface IUser {
-  id: string
-  karma: number
+type UserProps = {
+  location: {
+    search: string
+  }
+}
+
+interface IUser {
+  id: number
   created: number
+  karma: number
   about: string
 }
 
-export default function User({ location }: { location: { search: string } }) {
-  const [user, setUser] = React.useState<IUser | null>(null)
+export default function User({ location }: UserProps) {
+  const [user, setUser] = React.useState<null | IUser>(null)
   const [loadingUser, setLoadingUser] = React.useState(true)
   const [posts, setPosts] = React.useState<null | IPost[]>(null)
   const [loadingPosts, setLoadingPosts] = React.useState(true)
-  const [error, setError] = React.useState(null)
+  const [error, setError] = React.useState<null | string>(null)
 
   React.useEffect(() => {
-    const { id } = queryString.parse(location.search) as { id: string }
+    const { id } = queryString.parse(location.search)
 
     fetchUser(id)
       .then(user => {
@@ -37,8 +44,8 @@ export default function User({ location }: { location: { search: string } }) {
       })
       .catch(({ message }) => {
         setError(message)
-        setLoadingPosts(false)
         setLoadingUser(false)
+        setLoadingPosts(false)
       })
   }, [])
 

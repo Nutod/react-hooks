@@ -37,17 +37,11 @@ const RepoObj = {
     id: 9892522,
     node_id: 'MDEyOk9yZ2FuaXphdGlvbjk4OTI1MjI=',
     avatar_url: 'https://avatars.githubusercontent.com/u/9892522?v=4',
-    gravatar_id: '',
     url: 'https://api.github.com/users/freeCodeCamp',
     html_url: 'https://github.com/freeCodeCamp',
     followers_url: 'https://api.github.com/users/freeCodeCamp/followers',
     following_url:
       'https://api.github.com/users/freeCodeCamp/following{/other_user}',
-    repos_url: 'https://api.github.com/users/freeCodeCamp/repos',
-    events_url: 'https://api.github.com/users/freeCodeCamp/events{/privacy}',
-    received_events_url:
-      'https://api.github.com/users/freeCodeCamp/received_events',
-    type: 'Organization',
   },
   html_url: 'https://github.com/freeCodeCamp/freeCodeCamp',
   description:

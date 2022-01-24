@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const styles = {
@@ -9,7 +9,7 @@ const styles = {
     right: '0',
     marginTop: '20px',
     textAlign: 'center',
-  } as CSSProperties,
+  } as React.CSSProperties,
 }
 
 export default function Loading({ text = 'Loading', speed = 300 }) {
@@ -24,7 +24,7 @@ export default function Loading({ text = 'Loading', speed = 300 }) {
     }, speed)
 
     return () => window.clearInterval(intervalId.current)
-  }, [content])
+  }, [])
 
   return <p style={styles.content}>{content}</p>
 }

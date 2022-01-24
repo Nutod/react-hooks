@@ -1,8 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSnapshot } from 'valtio'
-import { ThemeContext } from '../store/store'
-import { ReactNode } from 'react'
+import { useThemeContext } from '../contexts/theme'
+
+type CardPropType = {
+  header: string
+  subheader?: string
+  avatar: string
+  href: string
+  name: string
+  children: React.ReactNode
+}
 
 export default function Card({
   header,
@@ -11,15 +18,8 @@ export default function Card({
   href,
   name,
   children,
-}: {
-  header: string
-  subheader?: string
-  avatar: string
-  href: string
-  name: string
-  children: ReactNode
-}) {
-  const { theme } = useSnapshot(ThemeContext)
+}: CardPropType) {
+  const { theme } = useThemeContext()
 
   return (
     <div className={`card bg-${theme}`}>

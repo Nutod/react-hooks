@@ -3,16 +3,15 @@ import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
 import Loading from './Loading'
 import PostsList from './PostsList'
-import { IPost } from './Post'
 
-export default function Posts({ type }: { type: string }) {
-  const [posts, setPosts] = React.useState<null | IPost[]>(null)
+export default function Posts({ type }: { type: 'top' | 'new' }) {
+  const [posts, setPosts] = React.useState(null)
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     handleFetch()
-  }, [type])
+  }, [])
 
   const handleFetch = () => {
     setPosts(null)
@@ -31,15 +30,13 @@ export default function Posts({ type }: { type: string }) {
       })
   }
 
-  if (loading === true || !posts) {
+  if (loading === true) {
     return <Loading />
   }
 
   if (error) {
     return <p className="center-text error">{error}</p>
   }
-
-  // handle the empty state
 
   return <PostsList posts={posts} />
 }

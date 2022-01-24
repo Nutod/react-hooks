@@ -6,29 +6,31 @@ import PostMetaInfo from './PostMetaInfo'
 import Title from './Title'
 import Comment from './Comment'
 
-export interface IPost {
-  url: string
-  title: string
-  id: number
-  by: string
-  time: number
-  text: string
-  descendants: number
-  dead: boolean
-  deleted: boolean
-  type: 'comment' | 'story'
-  kids: number
+type PostProps = {
+  location: {
+    search: string
+  }
 }
 
-export default function Post({ location }: { location: { search: string } }) {
+export interface IPost {
+  by: string
+  time: number
+  id: number
+  text: string
+  url: string
+  title: string
+  descendants: number
+}
+
+export default function Post({ location }: PostProps) {
   const [post, setPost] = React.useState<null | IPost>(null)
   const [loadingPost, setLoadingPost] = React.useState(true)
   const [comments, setComments] = React.useState<null | IPost[]>(null)
   const [loadingComments, setLoadingComments] = React.useState(true)
-  const [error, setError] = React.useState(null)
+  const [error, setError] = React.useState<null | string>(null)
 
   React.useEffect(() => {
-    const { id } = queryString.parse(location.search) as { id: string }
+    const { id } = queryString.parse(location.search)
 
     fetchItem(id)
       .then(post => {

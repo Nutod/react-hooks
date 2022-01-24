@@ -15,18 +15,22 @@ import Tooltip from './Tooltip'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 
-export interface IProfile {
+interface IProfile {
   name: string
   location: string
   company: string
-  followers: number
   following: number
+  followers: number
   avatar_url: string
   html_url: string
   login: string
 }
 
-function ProfileList({ profile }: { profile: IProfile }) {
+type ProfileListType = {
+  profile: IProfile
+}
+
+function ProfileList({ profile }: ProfileListType) {
   return (
     <ul className="card-list">
       <li>
@@ -65,59 +69,16 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-export interface IPlayer {
+type PlayerType = {
   score: number
   profile: IProfile
 }
 
-interface IState {
-  winner: null | IPlayer
-  loser: null | IPlayer
-  error: null | string
-  loading: boolean
-}
-
-interface IError {
-  type: 'error'
-  message: string
-}
-
-interface IResults {
-  type: 'results'
-  players: IPlayer[]
-}
-
-type ActionType = IError | IResults
-
-export default function Results({
-  location,
-}: {
-  location: { search: string }
-}) {
-  const [{ winner, loser, error, loading }, dispatch] = React.useReducer(
-    (state: IState, action: ActionType): IState => {
-      switch (action.type) {
-        case 'results':
-          return {
-            ...state,
-            winner: action.players[0],
-            loser: action.players[1],
-            error: null,
-            loading: false,
-          }
-        case 'error':
-          return { ...state, error: action.message, loading: false }
-        default:
-          return state
-      }
-    },
-    {
-      winner: null,
-      loser: null,
-      error: null,
-      loading: true,
-    }
-  )
+export default function Results() {
+  const [winner, setWinner] = React.useState<null | PlayerType>(null)
+  const [loser, setLoser] = React.useState<null | PlayerType>(null)
+  const [error, setError] = React.useState<null | string>(null)
+  const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     const { playerOne, playerTwo } = queryString.parse(location.search) as {
@@ -126,23 +87,23 @@ export default function Results({
 
     battle([playerOne, playerTwo])
       .then(players => {
-        dispatch({ type: 'results', players })
+        setWinner(players[0])
+        setLoser(players[1])
+        setError(null)
+        setLoading(false)
       })
       .catch(({ message }) => {
-        dispatch({ type: 'error', message })
+        setError(message)
+        setLoading(false)
       })
   }, [])
 
-  if (loading === true) {
+  if (loading === true || !winner || !loser) {
     return <Loading text="Battling" />
   }
 
   if (error) {
     return <p className="center-text error">{error}</p>
-  }
-
-  if (!winner || !loser) {
-    return <p className="center-text">Something is werid</p>
   }
 
   return (

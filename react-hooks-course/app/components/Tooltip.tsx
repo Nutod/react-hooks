@@ -1,13 +1,12 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Hover from './Hover'
-import { CSSProperties } from 'react'
 
 const styles = {
   container: {
     position: 'relative',
     display: 'flex',
-  } as CSSProperties,
+  } as React.CSSProperties,
   tooltip: {
     boxSizing: 'border-box',
     position: 'absolute',
@@ -22,7 +21,7 @@ const styles = {
     color: '#fff',
     textAlign: 'center',
     fontSize: '14px',
-  } as CSSProperties,
+  } as React.CSSProperties,
 }
 
 export default function Tooltip({
@@ -30,7 +29,7 @@ export default function Tooltip({
   children,
 }: {
   text: string
-  children: ReactNode
+  children: React.ReactNode
 }) {
   return (
     <Hover>

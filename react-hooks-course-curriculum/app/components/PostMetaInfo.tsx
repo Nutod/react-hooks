@@ -2,21 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { formatDate } from '../utils/helpers'
-import { ThemeConsumer, useThemeContext } from '../contexts/theme'
+import { useThemeContext } from '../contexts/theme'
+
+type PostMetaInfoProps = {
+  by: string
+  time: number
+  id: number
+  descendants?: number
+  comment?: boolean
+}
 
 export default function PostMetaInfo({
   by,
   time,
   id,
   descendants,
-  comment,
-}: {
-  by: string
-  time: number
-  id: number
-  descendants?: number
-  comment?: boolean
-}) {
+}: PostMetaInfoProps) {
   const { theme } = useThemeContext()
 
   return (

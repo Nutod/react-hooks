@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const styles = {
@@ -9,44 +9,24 @@ const styles = {
     right: '0',
     marginTop: '20px',
     textAlign: 'center',
-  } as CSSProperties,
+  } as React.CSSProperties,
 }
 
-export default class Loading extends React.Component<
-  {
-    text: string
-    speed: number
-  },
-  {
-    content: string
-  }
-> {
-  interval: number | undefined
-  static defaultProps: { text: string; speed: number }
-  static propTypes: {
-    text: PropTypes.Validator<string>
-    speed: PropTypes.Validator<number>
-  }
+export default function Loading({ text = 'Loading', speed = 300 }) {
+  const [content, setContent] = React.useState(text)
+  const intervalRef = React.useRef<number>()
 
-  state = { content: this.props.text }
-
-  componentDidMount() {
-    const { speed, text } = this.props
-
-    this.interval = window.setInterval(() => {
-      this.state.content === text + '...'
-        ? this.setState({ content: text })
-        : this.setState(({ content }) => ({ content: content + '.' }))
+  React.useEffect(() => {
+    intervalRef.current = window.setInterval(() => {
+      content === text + '...'
+        ? setContent(text)
+        : setContent(content => content + '.')
     }, speed)
-  }
 
-  componentWillUnmount() {
-    window.clearInterval(this.interval)
-  }
+    return () => window.clearInterval(intervalRef.current)
+  }, [content])
 
-  render() {
-    return <p style={styles.content}>{this.state.content}</p>
-  }
+  return <p style={styles.content}>{content}</p>
 }
 
 Loading.propTypes = {

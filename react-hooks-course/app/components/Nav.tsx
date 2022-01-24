@@ -1,14 +1,13 @@
 import React from 'react'
+import {  useThemeContext } from '../contexts/theme'
 import { NavLink } from 'react-router-dom'
-import { useSnapshot } from 'valtio'
-import { ThemeContext, toggleTheme } from '../store/store'
 
 const activeStyle = {
   color: 'rgb(187, 46, 31)',
 }
 
 export default function Nav() {
-  const { theme } = useSnapshot(ThemeContext)
+  const { theme, toggleTheme } = useThemeContext()
 
   return (
     <nav className="row space-between">
